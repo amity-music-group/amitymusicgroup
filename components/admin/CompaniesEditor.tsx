@@ -26,6 +26,24 @@ function blankCompany(): Company {
   };
 }
 
+// Categories a company can be given, chosen from a drop-down in the
+// editor instead of free text, so the /labels tiles stay consistent.
+// "Strategic Partner" is for Iron Stage Touring; the rest follow
+// Amity's own focus areas (Recorded Music, Publishing, Distribution,
+// Management, International, Live, Creative & Media), plus Record
+// Label for labels such as Melted Mindz and Dial.
+export const COMPANY_CATEGORIES = [
+  "Record Label",
+  "Recorded Music",
+  "Music Publishing",
+  "Distribution",
+  "Artist Management",
+  "International Music",
+  "Live Music",
+  "Creative & Media",
+  "Strategic Partner",
+] as const;
+
 export default function CompaniesEditor({
   initial,
 }: {
@@ -236,12 +254,28 @@ export default function CompaniesEditor({
                 />
               </Field>
               <Field label="Category">
-                <input
+                <select
                   className={inputClass}
                   value={company.category}
                   onChange={(e) => update(company.id, { category: e.target.value })}
-                  placeholder="e.g. Recorded Music, Publishing"
-                />
+                >
+                  <option value="">Choose a category…</option>
+                  {COMPANY_CATEGORIES.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                  {/* A category saved before the drop-down existed is
+                      kept visible so it is never silently lost. */}
+                  {company.category &&
+                  !COMPANY_CATEGORIES.includes(
+                    company.category as (typeof COMPANY_CATEGORIES)[number],
+                  ) ? (
+                    <option value={company.category}>
+                      {company.category} (existing)
+                    </option>
+                  ) : null}
+                </select>
               </Field>
               <Field label="Website">
                 <input
