@@ -58,9 +58,9 @@ img {
 }
 
 /* Companies logo strip — a continuous leftward marquee at
-   UMG's measured ~44 px/s (duration is set inline on the strip
-   from its item count). Linear, infinite, no pause on hover.
-   Motion stops under prefers-reduced-motion. */
+   ~67 px/s, faster than UMG's measured ~44 px/s (duration is set
+   inline on the strip from its item count). Linear, infinite, no
+   pause on hover. Motion stops under prefers-reduced-motion. */
 @keyframes hero-marquee {
   from {
     transform: translateX(0);
