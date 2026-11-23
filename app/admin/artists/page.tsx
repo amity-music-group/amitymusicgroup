@@ -1,5 +1,6 @@
 import { requireAdmin } from "@/lib/admin-session";
 import { getAllArtists } from "@/lib/content";
+import { getAllReleases } from "@/lib/admin-data";
 import ArtistsEditor from "@/components/admin/ArtistsEditor";
 
 export const metadata = {
@@ -9,7 +10,10 @@ export const metadata = {
 
 export default async function AdminArtistsPage() {
   await requireAdmin("/admin/artists");
-  const artists = await getAllArtists();
+  const [artists, releases] = await Promise.all([
+    getAllArtists(),
+    getAllReleases(),
+  ]);
 
   return (
     <div>
@@ -21,7 +25,7 @@ export default async function AdminArtistsPage() {
         so they can be edited or shown again — hiding never deletes.
       </p>
       <div className="mt-8">
-        <ArtistsEditor initial={artists} />
+        <ArtistsEditor initial={artists} initialReleases={releases} />
       </div>
     </div>
   );

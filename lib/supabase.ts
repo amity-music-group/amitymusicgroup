@@ -2,6 +2,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type {
   Artist,
   Company,
+  Release,
   ServiceItem,
   SiteSettings,
   Territory,
@@ -154,6 +155,13 @@ export function companyFromRow(row: Row): Company {
     description: str(row.description),
     website: optStr(row.website),
     image: optStr(row.image),
+    foundedYear:
+      typeof row.founded_year === "number" ? row.founded_year : null,
+    location: str(row.location),
+    instagram: optStr(row.instagram),
+    facebook: optStr(row.facebook),
+    tiktok: optStr(row.tiktok),
+    youtube: optStr(row.youtube),
     visible: bool(row.visible, true),
     sortOrder: num(row.sort_order),
   };
@@ -169,7 +177,40 @@ export function companyToRow(company: Company, sortOrder: number): Row {
     description: company.description,
     website: company.website ?? null,
     image: company.image ?? null,
+    founded_year: company.foundedYear ?? null,
+    location: company.location,
+    instagram: company.instagram ?? null,
+    facebook: company.facebook ?? null,
+    tiktok: company.tiktok ?? null,
+    youtube: company.youtube ?? null,
     visible: company.visible,
+    sort_order: sortOrder,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function releaseFromRow(row: Row): Release {
+  return {
+    id: str(row.id),
+    artistId: str(row.artist_id),
+    title: str(row.title),
+    type: str(row.type),
+    releaseDate: str(row.release_date),
+    link: str(row.link),
+    visible: bool(row.visible, true),
+    sortOrder: num(row.sort_order),
+  };
+}
+
+export function releaseToRow(release: Release, sortOrder: number): Row {
+  return {
+    id: release.id,
+    artist_id: release.artistId,
+    title: release.title,
+    type: release.type,
+    release_date: release.releaseDate === "" ? null : release.releaseDate,
+    link: release.link === "" ? null : release.link,
+    visible: release.visible,
     sort_order: sortOrder,
     updated_at: new Date().toISOString(),
   };
@@ -247,6 +288,8 @@ export function siteFromRow(row: Row): SiteSettings {
     facebook: str(row.facebook),
     tiktok: str(row.tiktok),
     youtube: str(row.youtube),
+    seoTitle: str(row.seo_title),
+    seoDescription: str(row.seo_description),
   };
 }
 
@@ -269,6 +312,8 @@ export function siteToRow(site: SiteSettings): Row {
     facebook: site.facebook,
     tiktok: site.tiktok,
     youtube: site.youtube,
+    seo_title: site.seoTitle,
+    seo_description: site.seoDescription,
     updated_at: new Date().toISOString(),
   };
 }

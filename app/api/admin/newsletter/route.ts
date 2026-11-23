@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/activity";
 import { sendBlast } from "@/lib/email";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
@@ -42,6 +43,12 @@ export async function POST(request: NextRequest) {
     if (result.error) {
       return NextResponse.json({ error: result.error }, { status: 503 });
     }
+    await logAdminAction(
+      "send",
+      "email_log",
+      "",
+      `Blast "${subject}" sent to ${result.sent} subscriber${result.sent === 1 ? "" : "s"}`,
+    );
     return NextResponse.json({
       ok: true,
       sent: result.sent,
@@ -74,6 +81,12 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+    await logAdminAction(
+      "delete",
+      "newsletter_subscribers",
+      id,
+      "Removed a newsletter subscriber",
+    );
     return NextResponse.json({ ok: true });
   }
 

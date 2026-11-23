@@ -9,9 +9,12 @@ const LINKS = [
   { href: "/admin/companies", label: "Companies" },
   { href: "/admin/territories", label: "Territories" },
   { href: "/admin/services", label: "Services" },
+  { href: "/admin/media", label: "Media" },
   { href: "/admin/settings", label: "Site Settings" },
   { href: "/admin/inbox", label: "Inbox" },
   { href: "/admin/newsletter", label: "Newsletter" },
+  { href: "/admin/email-history", label: "Email History" },
+  { href: "/admin/activity", label: "Activity" },
 ];
 
 export default function AdminNav({ sessionName }: { sessionName: string }) {

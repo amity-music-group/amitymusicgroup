@@ -33,8 +33,61 @@ export interface Company {
   description: string;
   website?: string;
   image?: string;
+  foundedYear: number | null;
+  location: string;
+  instagram?: string;
+  facebook?: string;
+  tiktok?: string;
+  youtube?: string;
   visible: boolean;
   sortOrder: number;
+}
+
+export interface Release {
+  id: string;
+  artistId: string;
+  title: string;
+  type: string;
+  releaseDate: string;
+  link: string;
+  visible: boolean;
+  sortOrder: number;
+}
+
+export interface ActivityLogEntry {
+  id: string;
+  action: string;
+  recordType: string;
+  recordId: string;
+  detail: string;
+  createdAt: string;
+}
+
+export interface MediaFile {
+  name: string;
+  path: string;
+  size: number;
+  updatedAt: string;
+  url: string;
+}
+
+export interface AdminStats {
+  artists: number;
+  companies: number;
+  services: number;
+  territories: number;
+  releases: number;
+  subscribers: number;
+  unreadMessages: number;
+  emailSends: number;
+}
+
+export interface RecentActivityItem {
+  id: string;
+  kind: "edit" | "message" | "subscriber";
+  label: string;
+  detail: string;
+  createdAt: string;
 }
 
 export interface ServiceItem {
@@ -76,6 +129,8 @@ export interface SiteSettings {
   facebook: string;
   tiktok: string;
   youtube: string;
+  seoTitle: string;
+  seoDescription: string;
 }
 
 export interface ContactSubmission {
