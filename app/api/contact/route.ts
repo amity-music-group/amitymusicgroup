@@ -1,6 +1,7 @@
 
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -61,6 +62,18 @@ export async function POST(request: Request) {
         { error: "Email delivery failed." },
         { status: 502 }
       );
+    }
+
+    // Store the message in the admin inbox. Best-effort only: the
+    // email already sent, so a missing table or unconfigured Supabase
+    // must never fail the submission.
+    try {
+      const admin = getSupabaseAdmin();
+      await admin
+        .from("contact_submissions")
+        .insert({ name, email, subject, message });
+    } catch (e) {
+      console.warn("[contact] inbox insert skipped:", e);
     }
 
     return NextResponse.json({ success: true });

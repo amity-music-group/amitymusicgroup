@@ -1,50 +1,7 @@
 
 import Link from "next/link";
-
-const focusAreas = [
-  {
-    number: "01",
-    title: "Recorded Music",
-    description:
-      "Developing artists, releasing music, and building catalogs for the long term.",
-    href: "/services",
-  },
-  {
-    number: "02",
-    title: "Music Publishing",
-    description:
-      "Supporting songwriters, compositions, copyrights, and music catalogs.",
-    href: "/services",
-  },
-  {
-    number: "03",
-    title: "Distribution",
-    description:
-      "Connecting music with digital platforms and audiences around the world.",
-    href: "/services",
-  },
-  {
-    number: "04",
-    title: "Artist Management",
-    description:
-      "Helping artists develop sustainable careers through strategy and representation.",
-    href: "/services",
-  },
-  {
-    number: "05",
-    title: "International Music",
-    description:
-      "Building relationships and opportunities across international music markets.",
-    href: "/services",
-  },
-  {
-    number: "06",
-    title: "Live Music",
-    description:
-      "Supporting touring, booking, talent, and live performance opportunities.",
-    href: "/services",
-  },
-];
+import NewsletterSignup from "@/components/NewsletterSignup";
+import { getHomeFocus, getSiteSettings } from "@/lib/content";
 
 const principles = [
   {
@@ -75,7 +32,14 @@ const principles = [
 
 const LOGO = "/amity-logo.jpg";
 
-export default function Home() {
+export default async function Home() {
+  // Content comes from Supabase when configured; the static copy in
+  // lib/content.ts is the fallback (the site's current words).
+  const [site, focusAreas] = await Promise.all([
+    getSiteSettings(),
+    getHomeFocus(),
+  ]);
+
   return (
     <main
       id="top"
@@ -108,9 +72,7 @@ export default function Home() {
               </h1>
 
               <p className="mt-8 max-w-xl text-base leading-8 text-white/85 sm:text-lg">
-                A connected music organization built around artists, recorded
-                music, publishing, distribution, management, and the future of
-                the music industry.
+                {site.heroSubcopy}
               </p>
 
               <div className="mt-9 flex flex-wrap gap-4">
@@ -205,20 +167,18 @@ export default function Home() {
 
           <div className="max-w-3xl">
             <p className="text-2xl font-medium leading-relaxed tracking-tight sm:text-3xl">
-              Amity Music Group exists to build and support businesses around
-              music while creating opportunities for artists and creators.
+              {site.aboutIntro}
             </p>
-            <p className="mt-7 text-base leading-8 text-white/70">
-              The group brings together different areas of the music industry,
-              allowing each part of the ecosystem to focus on its own expertise
-              while contributing to a larger music organization.
-            </p>
-            <p className="mt-5 text-base leading-8 text-white/70">
-              From music creation and release to publishing, distribution,
-              management, international operations, and live music, Amity is
-              focused on building an ecosystem designed for the people who
-              make music possible.
-            </p>
+            {site.aboutBody.split("\n\n").map((paragraph, index) => (
+              <p
+                key={paragraph.slice(0, 24)}
+                className={`text-base leading-8 text-white/70 ${
+                  index === 0 ? "mt-7" : "mt-5"
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
 
             <Link
               href="/about"
@@ -254,7 +214,7 @@ export default function Home() {
             {focusAreas.map((area, index) => (
               <Link
                 key={area.number}
-                href={area.href}
+                href="/services"
                 className="group relative block overflow-hidden border border-white/15 bg-[#160D2C] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#D7FF38]/70 sm:p-9"
               >
                 <div
@@ -432,9 +392,7 @@ export default function Home() {
                   <span className="text-[#D7FF38]">music.</span>
                 </h2>
                 <p className="mt-6 max-w-xl text-base leading-8 text-white/75">
-                  For business inquiries, music opportunities, publishing,
-                  distribution, management, partnerships, or other
-                  music-related matters, contact Amity Music Group.
+                  {site.contactIntro}
                 </p>
               </div>
 
@@ -464,11 +422,15 @@ export default function Home() {
               </span>
             </Link>
             <p className="mt-3 text-xs leading-6 text-white/55">
-              A music-focused organization and connected music ecosystem.
+              {site.footerText}
             </p>
             <p className="mt-2 text-xs font-semibold text-[#D7FF38]">
-              Independent Culture. Major Sound.
+              {site.tagline}
             </p>
+          </div>
+
+          <div className="max-w-sm">
+            <NewsletterSignup />
           </div>
 
           <nav

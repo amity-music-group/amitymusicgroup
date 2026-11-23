@@ -1,5 +1,7 @@
 ﻿
 import Link from "next/link";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import { getSiteSettings } from "@/lib/content";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -41,7 +43,11 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  // Copy comes from Supabase when configured; the static copy in
+  // lib/content.ts is the fallback (the site's current words).
+  const site = await getSiteSettings();
+
   return (
     <main className="min-h-screen overflow-hidden bg-[#160D2C] text-white">
       {/* Navigation */}
@@ -131,9 +137,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="mt-8 max-w-xl text-base leading-8 text-white/70 sm:text-lg">
-              Amity Music Group is a music-focused creative organization built
-              around artistry, collaboration, and the opportunities that emerge
-              when music and business move in the same direction.
+              {site.aboutPageIntro}
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -200,23 +204,9 @@ export default function AboutPage() {
         </div>
 
         <div className="space-y-6 text-base leading-8 text-white/70 sm:text-lg">
-          <p>
-            Amity Music Group brings together a broader vision for music and
-            creative business. We see potential in connecting artistic
-            development with thoughtful strategy, effective operations, and
-            opportunities for collaboration.
-          </p>
-          <p>
-            Our approach is designed to recognize that every artist, project,
-            and creative business has its own identity. We aim to create an
-            environment where those identities can develop while benefiting
-            from a connected creative ecosystem.
-          </p>
-          <p>
-            Our guiding idea is straightforward: protect what makes the work
-            original, build the right foundations around it, and keep moving
-            forward with purpose.
-          </p>
+          {site.aboutPageBody.split("\n\n").map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
         </div>
       </section>
 
@@ -228,14 +218,12 @@ export default function AboutPage() {
               Our Mission
             </p>
             <h2 className="mt-5 max-w-xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-              Give creativity room to become something greater.
+              {site.missionTitle}
             </h2>
           </div>
           <div>
             <p className="text-lg leading-8 text-white/85">
-              We aim to connect music, creative thinking, and business strategy
-              in ways that help artists and creative ventures pursue their
-              ambitions with clarity, individuality, and long-term purpose.
+              {site.missionBody}
             </p>
             <Link
               href="/services"
@@ -337,8 +325,12 @@ export default function AboutPage() {
             </nav>
           </div>
 
+          <div className="border-t border-white/10 pt-6">
+            <NewsletterSignup />
+          </div>
+
           <div className="flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
-            <p>Independent Culture. Major Sound.</p>
+            <p>{site.tagline}</p>
             <p>© {new Date().getFullYear()} Amity Music Group. All rights reserved.</p>
           </div>
         </div>
