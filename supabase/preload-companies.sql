@@ -1,22 +1,27 @@
 -- ---------------------------------------------------------------------------
--- PRELOAD — Amity Music Group companies: Iron Stage Touring, Arden Row,
--- Amity Christian Music Group
+-- PRELOAD — Companies under Amity Music Group (100)
 --
--- Run this file in the Supabase SQL Editor. It adds the three companies
--- that appear in the /labels logo strip but are not in the companies
--- table yet, so they show as tiles on /labels as well as in the strip.
--- Melted Mindz Records and Dial Recordings America are already in the
--- table and are NOT touched here.
+-- Run this file in the Supabase SQL Editor. It adds the Amity Music
+-- Group subsidiaries that are not in the companies table yet, so they
+-- show as tiles on /labels.
 --
--- Iron Stage Touring is a strategic partner, so its category is set
--- to "Strategic Partner". Arden Row and Amity Christian Music Group
--- are preloaded with a blank category — choose one for each in
--- /admin (Companies), where Category is now a drop-down.
+-- Under Amity Music Group (from the corporate directory):
+--   150 – Amity Music Records
+--   200 – Amity Music Publishing
+--   250 – Melted Mindz Records (already in the table, not touched)
+--   300 – Melted Mindz Publishing
+--   350 – M3A International
+--   900 – DIAL Distribution (application-only distribution platform)
+--   901 – DIAL Recordings America LLC (already in the table as
+--          Dial Recordings America, not touched)
+--
+-- NOT included here: Iron Stage Touring, Arden Row and Amity Christian
+-- Music Group — they are not under Amity Music Group (Iron Stage is a
+-- strategic partner, Arden Row is 550, Amity Christian is 400).
+--
 -- Taglines and descriptions are left blank on purpose — nothing is
--- invented. Fill them in in /admin when ready.
---
--- Images use the black transparent logos already on the site
--- (/logos/*.png), which render on the pale-grey tiles.
+-- invented. Fill them in in /admin when ready. Companies with no logo
+-- yet show their name as a text tile.
 -- Safe to re-run: rows are only inserted when their slug is missing.
 -- ---------------------------------------------------------------------------
 
@@ -25,16 +30,24 @@ insert into public.companies
    founded_year, location, instagram, facebook, tiktok, youtube,
    visible, sort_order)
 values
-  ('iron-stage-touring', 'Iron Stage Touring', '', 'Strategic Partner',
-   '', null, '/logos/is-logo.png',
+  ('amity-music-records', 'Amity Music Records', '', 'Record Label',
+   '', null, null,
    null, '', null, null, null, null,
    true, 0),
-  ('arden-row', 'Arden Row', '', '',
-   '', null, '/logos/ar-logo.png',
+  ('amity-music-publishing', 'Amity Music Publishing', '', 'Music Publishing',
+   '', null, null,
    null, '', null, null, null, null,
    true, 1),
-  ('amity-christian-music-group', 'Amity Christian Music Group', '', '',
-   '', null, '/logos/a-cross-logo.png',
+  ('melted-mindz-publishing', 'Melted Mindz Publishing', '', 'Music Publishing',
+   '', null, null,
    null, '', null, null, null, null,
-   true, 2)
+   true, 2),
+  ('m3a-international', 'M3A International', '', 'International Music',
+   '', null, null,
+   null, '', null, null, null, null,
+   true, 3),
+  ('dial-distribution', 'DIAL Distribution', '', 'Distribution',
+   '', null, null,
+   null, '', null, null, null, null,
+   true, 4)
 on conflict (slug) do nothing;
