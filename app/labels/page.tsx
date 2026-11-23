@@ -78,13 +78,13 @@ export default async function CompaniesPage() {
   // logos (STRIP_ITEMS above), not driven by the companies table,
   // exactly like UMG's fixed set of label logos. Each half of the
   // marquee holds at least ten items so it is always wider than
-  // the viewport and the loop stays seamless. Speed is set to
-  // match UMG's measured 44–45 px/s, leftward, continuous, with
+  // the viewport and the loop stays seamless. Speed is faster than
+  // UMG's measured 44–45 px/s, leftward, continuous, with
   // no pause on hover: each item's pitch is roughly 268 px on
   // average (logo widths at their strip heights — IS ~90 px,
   // AR ~70 px, A-cross ~123 px, Dial ~159 px, Melted ~95 px —
-  // plus 160 px of mx-20 gap), so 6 s per item gives
-  // ~268 / 6 ≈ 44.6 px/s. The duration below is per duplicated
+  // plus 160 px of mx-20 gap), so 4 s per item gives
+  // ~268 / 4 ≈ 67 px/s. The duration below is per duplicated
   // half, which is what the -50% translate in app/globals.css
   // moves across.
   const repeatsPerHalf = Math.max(
@@ -118,7 +118,7 @@ export default async function CompaniesPage() {
         <div aria-hidden="true" className="mt-12 overflow-hidden py-6 sm:mt-24">
           <div
             className="hero-marquee flex w-max items-center"
-            style={{ animationDuration: `${stripHalf.length * 6}s` }}
+            style={{ animationDuration: `${stripHalf.length * 4}s` }}
           >
             {[0, 1].map((half) => (
               <div key={half} className="flex items-center">
