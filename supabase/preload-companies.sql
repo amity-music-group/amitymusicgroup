@@ -11,9 +11,11 @@
 --   250 – Melted Mindz Records (already in the table, not touched)
 --   300 – Melted Mindz Publishing
 --   350 – M3A International
---   900 – DIAL Distribution (application-only distribution platform)
+--   900 – DIAL Distribution (application-only distribution platform,
+--          owned by DIAL Recordings America)
 --   901 – DIAL Recordings America LLC (already in the table as
---          Dial Recordings America, not touched)
+--          Dial Recordings America, not touched; it is under Amity
+--          Music Group and is the parent company of DIAL Distribution)
 --
 -- NOT included here: Iron Stage Touring, Arden Row and Amity Christian
 -- Music Group — they are not under Amity Music Group (Iron Stage is a
