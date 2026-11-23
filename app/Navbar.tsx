@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-6 z-50">
-      <div className="mx-auto flex w-[calc(100%-2rem)] max-w-7xl items-center justify-between gap-4 rounded-2xl bg-[#e8e8e8]/95 px-6 py-3 shadow-[0_2px_16px_rgba(0,0,0,0.06)] backdrop-blur lg:px-8">
+      <div className="mx-auto flex w-[calc(100%-2rem)] max-w-7xl items-center justify-between gap-4 rounded-2xl bg-[#e8e8e8]/95 px-6 py-3 backdrop-blur lg:px-8">
         <Link
           href="/"
           aria-label="Amity Music Group home"
@@ -34,7 +34,7 @@ export default function Navbar() {
 
         <nav
           aria-label="Main navigation"
-          className="flex items-center gap-5 overflow-x-auto whitespace-nowrap lg:gap-7"
+          className="flex items-center gap-1 overflow-x-auto whitespace-nowrap lg:gap-2"
         >
           {navLinks.map((item) => {
             const active =
@@ -48,8 +48,8 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`shrink-0 text-[15px] transition-colors hover:text-black ${
-                  active ? "font-medium text-black" : "text-black/60"
+                className={`shrink-0 rounded-full px-3 py-1.5 text-[15px] transition-colors hover:text-black ${
+                  active ? "bg-white font-medium text-black" : "text-black/60"
                 }`}
               >
                 {item.label}
