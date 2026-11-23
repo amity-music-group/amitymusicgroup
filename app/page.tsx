@@ -1,6 +1,5 @@
-
 import Link from "next/link";
-import NewsletterSignup from "@/components/NewsletterSignup";
+import Footer from "@/components/Footer";
 import { getHomeFocus, getSiteSettings } from "@/lib/content";
 
 const principles = [
@@ -43,25 +42,34 @@ export default async function Home() {
   return (
     <main
       id="top"
-      className="min-h-screen overflow-hidden bg-[#4922EB] text-white"
+      className="min-h-screen overflow-hidden bg-[#050505] text-white"
     >
       {/* Hero */}
-      <section className="relative flex min-h-[calc(100vh-80px)] items-center border-b border-white/20">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -right-24 top-28 h-96 w-96 rounded-full bg-[#D7FF38]/15 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-96 w-96 rounded-full bg-[#F32991]/20 blur-3xl" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#160D2C]/30" />
-        </div>
-
+      <section className="relative flex min-h-[calc(100vh-61px)] items-center border-b border-white/10">
+        {site.heroImage ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={site.heroImage}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-black/70"
+            />
+          </>
+        ) : null}
         <div className="relative mx-auto w-full max-w-7xl px-6 py-20 lg:px-8">
           <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className="mb-7 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.35em] text-[#D7FF38]">
-                <span className="h-2 w-2 rounded-full bg-[#F32991]" />
+              <p className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
+                <span className="h-2 w-2 bg-[#F32991]" />
                 Amity Music Group
               </p>
 
-              <h1 className="text-5xl font-black leading-[0.92] tracking-[-0.055em] sm:text-7xl lg:text-8xl">
+              <h1 className="font-display text-6xl uppercase leading-[0.9] tracking-[0.01em] sm:text-8xl lg:text-9xl">
                 THE MUSIC
                 <br />
                 <span className="text-[#D7FF38]">GROUP</span>
@@ -71,21 +79,21 @@ export default async function Home() {
                 THE MUSIC.
               </h1>
 
-              <p className="mt-8 max-w-xl text-base leading-8 text-white/85 sm:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-8 text-white/60 sm:text-lg">
                 {site.heroSubcopy}
               </p>
 
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+                  className="inline-flex items-center justify-center bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
                 >
                   Discover Amity <span className="ml-3 text-base">↗</span>
                 </Link>
 
                 <Link
                   href="/companies"
-                  className="inline-flex items-center justify-center border border-white/40 px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+                  className="inline-flex items-center justify-center border border-white/20 px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
                 >
                   Explore our companies
                 </Link>
@@ -94,56 +102,56 @@ export default async function Home() {
 
             {/* Main brand logo */}
             <div className="mx-auto w-full max-w-md">
-              <div className="relative rounded-[2rem] border border-white/15 bg-[#160D2C] p-7 shadow-2xl sm:p-10">
-                <div className="absolute right-6 top-6 h-3 w-3 rounded-full bg-[#F32991]" />
+              <div className="relative border border-white/10 bg-[#111111] p-7 sm:p-10">
+                <div className="absolute right-6 top-6 h-3 w-3 bg-[#F32991]" />
 
                 <div className="relative flex flex-col items-center py-6 text-center">
                   <img
                     src={LOGO}
                     alt="Amity Music Group brand emblem"
-                    className="aspect-square w-4/5 max-w-72 rounded-3xl object-contain"
+                    className="aspect-square w-4/5 max-w-72 object-contain"
                   />
 
-                  <p className="mt-8 text-xs font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
+                  <p className="mt-8 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                     Independent Culture.
                   </p>
-                  <p className="mt-2 text-xs font-bold uppercase tracking-[0.3em] text-white">
+                  <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.3em] text-white">
                     Major Sound.
                   </p>
                 </div>
 
-                <div className="mt-5 flex items-center justify-between border-t border-white/15 pt-5">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/55">
+                <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-5">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/50">
                     Music · Culture · Creativity
                   </span>
-                  <span className="h-2 w-8 bg-[#F32991]" />
+                  <span className="h-[3px] w-8 bg-[#F32991]" />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-20 grid gap-4 border-t border-white/20 pt-7 sm:grid-cols-3">
+          <div className="mt-20 grid gap-4 border-t border-white/10 pt-7 sm:grid-cols-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D7FF38]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                 Our focus
               </p>
-              <p className="mt-2 text-sm text-white/80">
+              <p className="mt-2 text-sm text-white/60">
                 Artist and catalog development
               </p>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D7FF38]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                 Our model
               </p>
-              <p className="mt-2 text-sm text-white/80">
+              <p className="mt-2 text-sm text-white/60">
                 A connected music ecosystem
               </p>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D7FF38]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                 Our vision
               </p>
-              <p className="mt-2 text-sm text-white/80">
+              <p className="mt-2 text-sm text-white/60">
                 Building for the future of music
               </p>
             </div>
@@ -152,13 +160,13 @@ export default async function Home() {
       </section>
 
       {/* About preview */}
-      <section className="border-b border-white/10 bg-[#160D2C] py-24 sm:py-32">
+      <section className="border-b border-white/10 bg-[#111111] py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#F32991]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
               01 — About
             </p>
-            <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-6xl">
+            <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
               Music is the
               <br />
               <span className="text-[#D7FF38]">center.</span>
@@ -172,7 +180,7 @@ export default async function Home() {
             {site.aboutBody.split("\n\n").map((paragraph, index) => (
               <p
                 key={paragraph.slice(0, 24)}
-                className={`text-base leading-8 text-white/70 ${
+                className={`text-base leading-8 text-white/60 ${
                   index === 0 ? "mt-7" : "mt-5"
                 }`}
               >
@@ -182,62 +190,58 @@ export default async function Home() {
 
             <Link
               href="/about"
-              className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-[#F32991]"
+              className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-white"
             >
               More about Amity <span aria-hidden="true">↗</span>
             </Link>
 
-            <div className="mt-9 h-1 w-24 bg-[#D7FF38]" />
+            <div className="mt-9 h-[3px] w-24 bg-[#D7FF38]" />
           </div>
         </div>
       </section>
 
       {/* What we do preview */}
-      <section className="border-b border-white/15 py-24 sm:py-32">
+      <section className="border-b border-white/10 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-14 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#D7FF38]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
               02 — What We Do
             </p>
-            <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-6xl">
+            <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
               Everything
               <br />
               <span className="text-[#D7FF38]">music.</span>
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/80">
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/60">
               Amity Music Group operates across the key areas that make up the
               modern music business.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {focusAreas.map((area, index) => (
+            {focusAreas.map((area) => (
               <Link
                 key={area.number}
                 href="/services"
-                className="group relative block overflow-hidden border border-white/15 bg-[#160D2C] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#D7FF38]/70 sm:p-9"
+                className="group relative block overflow-hidden border border-white/10 bg-[#111111] p-7 transition duration-300 hover:border-white/40 sm:p-9"
               >
-                <div
-                  className={`absolute right-0 top-0 h-1 w-16 transition-all duration-300 group-hover:w-full ${
-                    index % 2 === 0 ? "bg-[#D7FF38]" : "bg-[#F32991]"
-                  }`}
-                />
+                <div className="absolute right-0 top-0 h-[3px] w-16 bg-[#D7FF38] transition-all duration-300 group-hover:w-full" />
                 <span className="text-xs font-bold tracking-[0.25em] text-[#D7FF38]">
                   {area.number}
                 </span>
-                <h3 className="mt-12 text-xl font-bold tracking-tight sm:text-2xl">
+                <h3 className="mt-12 font-display text-2xl uppercase tracking-[0.01em] sm:text-3xl">
                   {area.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-white/70">
+                <p className="mt-4 text-sm leading-7 text-white/60">
                   {area.description}
                 </p>
                 <div className="mt-8 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/45">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/40">
                     Explore services
                   </span>
                   <span
                     aria-hidden="true"
-                    className="text-xl text-[#D7FF38] transition group-hover:translate-x-1 group-hover:text-[#F32991]"
+                    className="text-xl text-[#D7FF38] transition group-hover:translate-x-1"
                   >
                     →
                   </span>
@@ -248,7 +252,7 @@ export default async function Home() {
 
           <Link
             href="/services"
-            className="mt-10 inline-flex items-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+            className="mt-10 inline-flex items-center gap-3 bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
           >
             Explore all services <span aria-hidden="true">↗</span>
           </Link>
@@ -256,44 +260,44 @@ export default async function Home() {
       </section>
 
       {/* Company ecosystem */}
-      <section className="border-b border-white/10 bg-[#160D2C] py-24 sm:py-32">
+      <section className="border-b border-white/10 bg-[#111111] py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#F32991]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
                 The Amity Ecosystem
               </p>
-              <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-6xl">
+              <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
                 Different companies.
                 <br />
                 <span className="text-[#D7FF38]">One music ecosystem.</span>
               </h2>
-              <p className="mt-7 max-w-2xl text-base leading-8 text-white/70">
+              <p className="mt-7 max-w-2xl text-base leading-8 text-white/60">
                 Amity Music Group brings together specialized companies and
                 organizations across recorded music, publishing, distribution,
                 management, international music, and live music.
               </p>
               <Link
                 href="/companies"
-                className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-[#F32991]"
+                className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-white"
               >
                 Explore our companies <span aria-hidden="true">↗</span>
               </Link>
             </div>
 
             <div className="relative mx-auto w-full max-w-sm">
-              <div className="absolute inset-0 translate-x-3 translate-y-3 border border-[#F32991]/60" />
-              <div className="relative border border-[#D7FF38]/40 bg-[#4922EB] p-8 sm:p-10">
+              <div className="absolute inset-0 translate-x-3 translate-y-3 border border-white/10" />
+              <div className="relative border border-white/10 bg-[#050505] p-8 sm:p-10">
                 <img
                   src={LOGO}
                   alt="Amity Music Group logo"
-                  className="mx-auto w-44 rounded-2xl object-contain"
+                  className="mx-auto w-44 object-contain"
                 />
                 <div className="mt-7 text-center">
-                  <p className="text-sm font-black tracking-[0.2em]">
-                    AMITY MUSIC GROUP
+                  <p className="font-display text-sm uppercase tracking-[0.2em]">
+                    Amity Music Group
                   </p>
-                  <p className="mt-3 text-xs leading-6 text-white/75">
+                  <p className="mt-3 text-xs leading-6 text-white/60">
                     One connected vision.
                     <br />
                     Multiple areas of expertise.
@@ -306,50 +310,44 @@ export default async function Home() {
       </section>
 
       {/* Our approach preview */}
-      <section className="border-b border-white/15 py-24 sm:py-32">
+      <section className="border-b border-white/10 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#D7FF38]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                 03 — Our Approach
               </p>
-              <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-6xl">
+              <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
                 Built for
                 <br />
                 <span className="text-[#D7FF38]">what&apos;s next.</span>
               </h2>
-              <p className="mt-7 max-w-md text-base leading-8 text-white/80">
+              <p className="mt-7 max-w-md text-base leading-8 text-white/60">
                 The music industry continues to evolve. Our approach is built
                 around adapting with it while keeping artists and music at the
                 center.
               </p>
               <Link
                 href="/approach"
-                className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-[#F32991]"
+                className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#D7FF38] transition hover:text-white"
               >
                 Discover our approach <span aria-hidden="true">↗</span>
               </Link>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              {principles.map((principle, index) => (
+              {principles.map((principle) => (
                 <article
                   key={principle.number}
-                  className="border border-white/15 bg-[#160D2C] p-7 transition hover:border-[#D7FF38]/70 sm:p-9"
+                  className="border border-white/10 bg-[#111111] p-7 transition hover:border-white/40 sm:p-9"
                 >
-                  <span
-                    className={`text-xs font-bold tracking-[0.25em] ${
-                      index % 2 === 0
-                        ? "text-[#D7FF38]"
-                        : "text-[#F32991]"
-                    }`}
-                  >
+                  <span className="text-xs font-bold tracking-[0.25em] text-[#D7FF38]">
                     {principle.number}
                   </span>
-                  <h3 className="mt-10 text-xl font-bold">
+                  <h3 className="mt-10 font-display text-2xl uppercase tracking-[0.01em]">
                     {principle.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-7 text-white/70">
+                  <p className="mt-4 text-sm leading-7 text-white/60">
                     {principle.description}
                   </p>
                 </article>
@@ -360,45 +358,42 @@ export default async function Home() {
       </section>
 
       {/* Brand statement */}
-      <section className="border-b border-white/15 bg-[#160D2C] py-24 sm:py-36">
+      <section className="border-b border-white/10 bg-[#111111] py-24 sm:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="max-w-6xl text-3xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">
+          <p className="max-w-6xl font-display text-4xl uppercase leading-[0.95] sm:text-6xl lg:text-7xl">
             We build around music.
-            <span className="text-white/45">
+            <span className="text-white/40">
               {" "}
               We develop the infrastructure, businesses, and relationships that
               help it move further.
             </span>
           </p>
-          <div className="mt-10 h-1 w-28 bg-[#F32991]" />
+          <div className="mt-10 h-[3px] w-28 bg-[#F32991]" />
         </div>
       </section>
 
       {/* Contact preview */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative overflow-hidden border border-white/20 bg-[#160D2C] p-8 sm:p-12 lg:p-16">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#4922EB]/60 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-[#F32991]/15 blur-3xl" />
-
+          <div className="relative overflow-hidden border border-white/10 bg-[#111111] p-8 sm:p-12 lg:p-16">
             <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.35em] text-[#D7FF38]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
                   04 — Contact
                 </p>
-                <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-6xl">
+                <h2 className="mt-6 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
                   Let&apos;s talk
                   <br />
                   <span className="text-[#D7FF38]">music.</span>
                 </h2>
-                <p className="mt-6 max-w-xl text-base leading-8 text-white/75">
+                <p className="mt-6 max-w-xl text-base leading-8 text-white/60">
                   {site.contactIntro}
                 </p>
               </div>
 
               <Link
                 href="/contact"
-                className="relative inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+                className="relative inline-flex items-center justify-center gap-3 bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
               >
                 Contact Amity <span aria-hidden="true">↗</span>
               </Link>
@@ -407,63 +402,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/20 bg-[#160D2C]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div>
-            <Link href="/" className="flex items-center gap-3">
-              <img
-                src={LOGO}
-                alt="Amity Music Group logo"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <span className="text-sm font-bold tracking-[0.2em]">
-                AMITY MUSIC GROUP
-              </span>
-            </Link>
-            <p className="mt-3 text-xs leading-6 text-white/55">
-              {site.footerText}
-            </p>
-            <p className="mt-2 text-xs font-semibold text-[#D7FF38]">
-              {site.tagline}
-            </p>
-          </div>
-
-          <div className="max-w-sm">
-            <NewsletterSignup />
-          </div>
-
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-wrap gap-x-6 gap-y-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/65"
-          >
-            <Link href="/about" className="transition hover:text-[#D7FF38]">
-              About
-            </Link>
-            <Link href="/services" className="transition hover:text-[#D7FF38]">
-              What We Do
-            </Link>
-            <Link href="/companies" className="transition hover:text-[#D7FF38]">
-              Companies
-            </Link>
-            <Link href="/approach" className="transition hover:text-[#D7FF38]">
-              Our Approach
-            </Link>
-            <Link href="/artists" className="transition hover:text-[#D7FF38]">
-              Artists
-            </Link>
-            <Link href="/contact" className="transition hover:text-[#D7FF38]">
-              Contact
-            </Link>
-          </nav>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 pb-8 lg:px-8">
-          <p className="text-xs text-white/45">
-            © 2026 Amity Music Group. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer footerText={site.footerText} tagline={site.tagline} />
     </main>
   );
 }

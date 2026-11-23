@@ -206,6 +206,7 @@ export function serviceToRow(service: ServiceItem, sortOrder: number): Row {
 export function siteFromRow(row: Row): SiteSettings {
   return {
     tagline: str(row.tagline),
+    heroImage: str(row.hero_image),
     heroSubcopy: str(row.hero_subcopy),
     aboutIntro: str(row.about_intro),
     aboutBody: str(row.about_body),
@@ -227,6 +228,7 @@ export function siteToRow(site: SiteSettings): Row {
   return {
     id: 1,
     tagline: site.tagline,
+    hero_image: site.heroImage,
     hero_subcopy: site.heroSubcopy,
     about_intro: site.aboutIntro,
     about_body: site.aboutBody,

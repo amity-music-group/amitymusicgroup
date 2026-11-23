@@ -40,7 +40,7 @@ export default function NewsletterSignup() {
 
   return (
     <div>
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D7FF38]">
+      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
         Stay connected
       </p>
       <p className="mt-2 max-w-sm text-sm leading-6 text-white/60">
@@ -59,12 +59,12 @@ export default function NewsletterSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full rounded-md border border-white/20 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]"
+          className="w-full border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="shrink-0 rounded-md bg-[#D7FF38] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          className="shrink-0 bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-black transition hover:bg-white/85 disabled:opacity-50"
         >
           {status === "loading" ? "…" : "Sign up"}
         </button>

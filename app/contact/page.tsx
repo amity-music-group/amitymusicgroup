@@ -3,6 +3,7 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
+import Footer from "@/components/Footer";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -41,10 +42,10 @@ export default function ContactPage() {
   }
 
   const inputClass =
-    "w-full rounded-md border border-white/20 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-white focus:ring-1 focus:ring-white";
+    "w-full border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]";
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-[#050505] text-white">
       <section className="mx-auto max-w-7xl px-6 pb-20 pt-16 sm:px-10 sm:pt-24 lg:px-16">
         <Link
           href="/"
@@ -55,11 +56,11 @@ export default function ContactPage() {
 
         <div className="mt-16 grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
               Amity Music Group
             </p>
 
-            <h1 className="mt-5 text-5xl font-semibold tracking-tight sm:text-6xl">
+            <h1 className="mt-5 font-display text-6xl uppercase leading-[0.9] tracking-[0.01em] sm:text-7xl">
               Let&apos;s talk.
             </h1>
 
@@ -68,7 +69,7 @@ export default function ContactPage() {
               other company-related matters, send our team a message.
             </p>
 
-            <div className="mt-12 border-t border-white/15 pt-6">
+            <div className="mt-12 border-t border-white/10 pt-6">
               <p className="text-xs uppercase tracking-[0.2em] text-white/45">
                 Email
               </p>
@@ -80,7 +81,7 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="mt-8 border-t border-white/15 pt-6">
+            <div className="mt-8 border-t border-white/10 pt-6">
               <p className="text-xs uppercase tracking-[0.2em] text-white/45">
                 Company
               </p>
@@ -90,8 +91,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/15 bg-white/[0.025] p-6 sm:p-9">
-            <h2 className="text-xl font-medium">Send an inquiry</h2>
+          <div className="border border-white/10 bg-[#111111] p-6 sm:p-9">
+            <h2 className="font-display text-2xl uppercase tracking-[0.01em]">Send an inquiry</h2>
             <p className="mt-2 text-sm leading-6 text-white/55">
               Complete the form below. All fields are required.
             </p>
@@ -173,7 +174,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="flex w-full items-center justify-center rounded-md bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-white/85 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full items-center justify-center bg-white px-6 py-3.5 text-sm font-semibold text-black transition hover:bg-white/85 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "loading" ? "Sending..." : "Send Message"}
               </button>
@@ -203,14 +204,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-7 sm:px-10 lg:px-16">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Amity Music Group. All rights reserved.</p>
-          <Link href="/" className="transition hover:text-white">
-            Amity Music Group
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
