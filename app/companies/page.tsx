@@ -29,14 +29,17 @@ export default async function CompaniesPage() {
     else regions.push({ name: region, items: [territory] });
   }
 
-  // The rolling logos strip is always present and always rolling —
+  // The rolling wordmark strip is always present and always rolling —
   // UMG's Labels page leads with it. With only two companies in the
-  // database, the two logos repeat until more companies are added
-  // in /admin; no logos are invented. Each half of the marquee holds
+  // database, the two names repeat until more companies are added
+  // in /admin; no companies are invented. Each half of the marquee holds
   // at least ten items so it is always wider than the viewport and
-  // the loop stays seamless. The strip moves left at about 23 px/s:
-  // each item is roughly 290 px of pitch, so the duration is 13 s
-  // per item in a half.
+  // the loop stays seamless. Speed is set to match UMG's measured
+  // 44–45 px/s, leftward, continuous, with no pause on hover:
+  // each item's pitch is roughly 530 px (a ~370 px wordmark plus
+  // 160 px of mx-20 gap), so 12 s per item gives ~530 / 12 ≈ 44 px/s.
+  // The duration below is per duplicated half, which is what the
+  // -50% translate in app/globals.css moves across.
   const repeatsPerHalf =
     companies.length === 0
       ? 0
@@ -48,8 +51,12 @@ export default async function CompaniesPage() {
   return (
     <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero — UMG's Labels layout: eyebrow, headline, large
-          statement line, thin black rule, then the rolling logos
-          strip at the bottom of the hero. */}
+          statement line, then the rolling wordmark strip, then the
+          thin black rule below the strip. No images in the strip:
+          UMG's strip is black transparent wordmarks on white, and
+          Amity's company image files are solid black squares, so
+          the strip renders each company name as a black text
+          wordmark instead. */}
       <section>
         <div className="mx-auto max-w-7xl px-6 pt-36 lg:px-8 lg:pt-44">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
@@ -61,13 +68,12 @@ export default async function CompaniesPage() {
             organizations across recorded music, publishing, distribution,
             management, international music, and live music.
           </p>
-          <div className="mt-12 h-px w-full bg-black" />
         </div>
         {companies.length > 0 ? (
-          <div aria-hidden="true" className="overflow-hidden py-6">
+          <div aria-hidden="true" className="mt-24 overflow-hidden py-6">
             <div
               className="hero-marquee flex w-max items-center"
-              style={{ animationDuration: `${stripHalf.length * 13}s` }}
+              style={{ animationDuration: `${stripHalf.length * 12}s` }}
             >
               {[0, 1].map((half) => (
                 <div key={half} className="flex items-center">
@@ -76,18 +82,9 @@ export default async function CompaniesPage() {
                       key={`${company.slug}-${index}`}
                       className="mx-20 flex shrink-0 items-center"
                     >
-                      {isImageUrl(company.image) ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={company.image}
-                          alt=""
-                          className="h-[90px] w-auto max-w-[170px] object-contain"
-                        />
-                      ) : (
-                        <span className="whitespace-nowrap text-2xl font-light tracking-tight text-neutral-600">
-                          {company.name}
-                        </span>
-                      )}
+                      <span className="whitespace-nowrap text-[40px] font-light leading-none tracking-tight text-black">
+                        {company.name}
+                      </span>
                     </span>
                   ))}
                 </div>
@@ -95,6 +92,9 @@ export default async function CompaniesPage() {
             </div>
           </div>
         ) : null}
+        <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
+          <div className="h-px w-full bg-black" />
+        </div>
       </section>
 
       {/* Company tiles — UMG's Labels grid under a second heading:
