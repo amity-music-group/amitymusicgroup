@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import ServiceAccordion from "@/components/ServiceAccordion";
 import { getServices } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -11,25 +12,21 @@ export const metadata: Metadata = {
 
 const process = [
   {
-    number: "01",
     title: "Understand",
     description:
       "Identify the artist, project, objectives, and opportunities before defining a direction.",
   },
   {
-    number: "02",
     title: "Develop",
     description:
       "Establish a practical strategy that aligns creative goals with business priorities.",
   },
   {
-    number: "03",
     title: "Coordinate",
     description:
       "Connect the relevant people, resources, and activities around the project.",
   },
   {
-    number: "04",
     title: "Build",
     description:
       "Focus on sustainable progress, stronger relationships, and long-term development.",
@@ -41,182 +38,98 @@ export default async function ServicesPage() {
   // lib/content.ts is the fallback (the site's current copy).
   const services = await getServices();
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
+    <main className="min-h-screen bg-white text-[#111111]">
       {/* Page hero */}
-      <section className="relative border-b border-white/10">
-        <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
-          <p className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-            <span className="h-2 w-2 bg-[#F32991]" />
-            Amity Music Group / Services
-          </p>
+      <section className="border-b border-black/10">
+        <div className="mx-auto max-w-7xl px-6 pb-28 pt-36 sm:pt-44 lg:px-8">
+          <p className="text-lg text-neutral-500">Services</p>
 
-          <h1 className="mt-8 max-w-5xl font-display text-6xl uppercase leading-[0.9] tracking-[0.01em] sm:text-7xl lg:text-8xl">
-            MORE THAN
-            <br />
-            <span className="text-[#D7FF38]">MUSIC.</span>
-            <br />
-            A CONNECTED
-            <br />
-            INDUSTRY.
+          <h1 className="mt-5 max-w-5xl text-[56px] font-light leading-[1.05] tracking-tight sm:text-7xl">
+            More than music. A connected industry.
           </h1>
 
           <div className="mt-9 grid gap-8 lg:grid-cols-[1fr_0.6fr] lg:items-end">
-            <p className="max-w-2xl text-base leading-8 text-white/60 sm:text-lg">
+            <p className="max-w-2xl text-lg leading-8 text-neutral-600">
               Amity Music Group brings together specialized areas of the music
               business to support artists, recorded music, songwriting,
               distribution, management, creative projects, and live
               opportunities.
             </p>
 
-            <div className="border-l-2 border-[#F32991] pl-5">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/50">
-                Our philosophy
-              </p>
-              <p className="mt-3 font-display text-xl uppercase leading-relaxed tracking-[0.01em]">
-                Independent Culture.
+            <div className="border-l-2 border-black pl-5">
+              <p className="text-sm text-neutral-500">Our philosophy</p>
+              <p className="mt-3 text-xl font-light leading-relaxed text-black">
+                Independent culture.
                 <br />
-                <span className="text-[#D7FF38]">Major Sound.</span>
+                Major sound.
               </p>
             </div>
           </div>
 
-          <div className="mt-12 flex flex-wrap gap-4">
+          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3">
             <a
               href="#services"
-              className="inline-flex items-center justify-center bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+              className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
-              Explore our services <span className="ml-3">↓</span>
+              Explore our services <span aria-hidden="true">↓</span>
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center border border-white/40 bg-white/[0.05] px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:border-[#D7FF38] hover:bg-white/[0.08] hover:text-[#D7FF38]"
+              className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
-              Discuss an opportunity <span className="ml-3">↗</span>
+              Discuss an opportunity <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Services grid */}
+      {/* Services — UMG-style accordion rows, not cards. */}
       <section
         id="services"
-        className="scroll-mt-28 border-b border-white/10 py-24 sm:py-32"
+        className="scroll-mt-28 border-b border-black/10 py-28 sm:py-36"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-                Our capabilities
-              </p>
-              <h2 className="mt-5 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
-                Areas of
-                <br />
-                <span className="text-white/40">expertise.</span>
+              <p className="text-lg text-neutral-500">Our capabilities</p>
+              <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+                Areas of expertise.
               </h2>
             </div>
 
-            <p className="max-w-md text-sm leading-7 text-white/60">
+            <p className="max-w-md text-base leading-7 text-neutral-600">
               Explore the areas that make up the Amity Music Group ecosystem.
               The scope of any specific service depends on the company,
               project, and applicable agreement.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {services.map((service) => (
-              <article
-                key={service.number}
-                className="group relative overflow-hidden border border-white/10 bg-[#111111] p-7 transition duration-300 hover:border-white/40 sm:p-9"
-              >
-                <div className="absolute left-0 top-0 h-[3px] w-16 bg-[#D7FF38] transition-all duration-300 group-hover:w-full" />
-
-                <div className="flex items-start justify-between gap-4">
-                  <span className="text-xs font-bold tracking-[0.25em] text-[#D7FF38]">
-                    {service.number}
-                  </span>
-                  <span className="text-right text-[9px] font-bold uppercase tracking-[0.2em] text-white/40 sm:text-[10px]">
-                    {service.subtitle}
-                  </span>
-                </div>
-
-                <h3 className="mt-8 font-display text-2xl uppercase tracking-[0.01em] sm:text-3xl">
-                  {service.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-7 text-white/60">
-                  {service.description}
-                </p>
-
-                <div className="mt-7 border-t border-white/10 pt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/40">
-                    Areas of focus
-                  </p>
-
-                  <ul className="mt-4 space-y-3">
-                    {service.offerings.map((offering) => (
-                      <li
-                        key={offering}
-                        className="flex items-start gap-3 text-sm text-white/85"
-                      >
-                        <span className="mt-1 text-[#D7FF38]">↗</span>
-                        <span>{offering}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Link
-                  href="/contact"
-                  className="mt-8 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:text-[#D7FF38]"
-                >
-                  Make an inquiry <span>↗</span>
-                </Link>
-              </article>
-            ))}
-          </div>
+          <ServiceAccordion services={services} />
         </div>
       </section>
 
       {/* How we work */}
-      <section className="border-b border-white/10 bg-[#111111] py-24 sm:py-32">
+      <section className="border-b border-black/10 py-28 sm:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
-              How we work
-            </p>
-            <h2 className="mt-5 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
-              Strategy meets
-              <br />
-              <span className="text-[#D7FF38]">execution.</span>
+            <p className="text-lg text-neutral-500">How we work</p>
+            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              Strategy meets execution.
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/60">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
               Every artist and project has different needs. Our approach
               begins with understanding the opportunity and identifying the
               right next steps.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-0 border-y border-white/10 sm:grid-cols-2 lg:grid-cols-4">
-            {process.map((step, index) => (
-              <article
-                key={step.number}
-                className={`py-8 sm:px-6 sm:py-10 ${
-                  index > 0 ? "border-t border-white/10 sm:border-l" : ""
-                } ${
-                  index === 2
-                    ? "lg:border-l"
-                    : index === 3
-                      ? "lg:border-l"
-                      : ""
-                }`}
-              >
-                <p className="text-xs font-bold tracking-[0.25em] text-[#D7FF38]">
-                  STEP {step.number}
-                </p>
-                <h3 className="mt-7 font-display text-2xl uppercase tracking-[0.01em]">
+          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {process.map((step) => (
+              <article key={step.title} className="border-t border-black/10 pt-7">
+                <h3 className="text-2xl font-light text-black">
                   {step.title}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-white/60">
+                <p className="mt-4 text-base leading-7 text-neutral-600">
                   {step.description}
                 </p>
               </article>
@@ -226,48 +139,40 @@ export default async function ServicesPage() {
       </section>
 
       {/* Ecosystem banner */}
-      <section className="border-b border-white/10 py-24 sm:py-28">
+      <section className="border-b border-black/10 py-28 sm:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-10 border border-white/10 bg-[#111111] p-8 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-center lg:p-16">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
-                One connected ecosystem
-              </p>
-              <h2 className="mt-5 font-display text-3xl uppercase leading-[0.95] sm:text-5xl">
-                Discover the companies
-                <br />
-                <span className="text-[#D7FF38]">behind the vision.</span>
-              </h2>
-              <p className="mt-6 max-w-2xl text-sm leading-7 text-white/60">
-                Learn how the companies and divisions within the group
-                contribute to its broader music and creative objectives.
-              </p>
-            </div>
-
+          <div className="max-w-3xl">
+            <p className="text-lg text-neutral-500">
+              One connected ecosystem
+            </p>
+            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              Discover the companies behind the vision.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+              Learn how the companies and divisions within the group
+              contribute to its broader music and creative objectives.
+            </p>
             <Link
               href="/companies"
-              className="inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+              className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
-              Explore companies <span>↗</span>
+              Explore companies <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Contact CTA */}
-      <section className="py-24 sm:py-32">
+      <section className="py-28 sm:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-            Start a conversation
-          </p>
+          <p className="text-lg text-neutral-500">Start a conversation</p>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h2 className="max-w-4xl font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
-                Have a project in mind?
-                <br />
-                <span className="text-white/40">Let&apos;s connect.</span>
+              <h2 className="max-w-4xl text-[56px] font-light leading-[1.05] tracking-tight">
+                Have a project in mind?{" "}
+                <span className="text-neutral-400">Let&apos;s connect.</span>
               </h2>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-white/60">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
                 Reach out to discuss a business inquiry, artist opportunity,
                 partnership, or music-related project.
               </p>
@@ -275,9 +180,9 @@ export default async function ServicesPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-8 py-5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+              className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
-              Contact Amity <span>↗</span>
+              Contact Amity <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>

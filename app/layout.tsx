@@ -66,7 +66,7 @@ export default function RootLayout({
       lang="en"
       className={`${anton.variable} ${inter.variable} antialiased`}
     >
-      <body className="min-h-screen bg-[#050505] font-sans text-white">
+      <body className="min-h-screen bg-white font-sans text-[#111111]">
         <Navbar />
         {children}
       </body>

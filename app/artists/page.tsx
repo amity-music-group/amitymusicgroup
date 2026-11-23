@@ -1,33 +1,37 @@
 import Footer from "@/components/Footer";
 import { getArtists } from "@/lib/content";
 
+// A photo is only a photo when the image field holds an actual image
+// URL. A website address is not a picture and is never rendered as
+// one — those artists show their name as a text mark instead.
+function isImageUrl(url: string | null | undefined): url is string {
+  if (!url) return false;
+  const clean = url.split("?")[0].split("#")[0].toLowerCase();
+  if (clean.includes("/storage/v1/object/public/")) return true;
+  return /\.(jpg|jpeg|png|webp|gif|avif|svg)$/.test(clean);
+}
+
 export default async function ArtistsPage() {
   const artists = await getArtists();
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-          Amity Music Group
-        </p>
-        <h1 className="font-display text-5xl uppercase leading-[0.9] md:text-7xl">
-          Artists &amp; Releases
+    <main className="min-h-screen bg-white text-[#111111]">
+      <div className="mx-auto max-w-7xl px-6 pb-28 pt-36 lg:px-8 lg:pt-44">
+        <p className="text-lg text-neutral-500">Amity Music Group</p>
+        <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          Artists &amp; releases
         </h1>
-        <div className="mt-8 h-[3px] w-24 bg-[#F32991]" />
-        <p className="mt-6 text-lg text-white/60">
-          Independent Culture. Major Sound.
+        <div className="mt-8 h-px w-24 bg-black" />
+        <p className="mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
+          Artists and releases from across the Amity ecosystem.
         </p>
 
         {artists.length > 0 ? (
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {artists.map((artist) => (
-              <article
-                key={artist.slug}
-                className="group relative overflow-hidden border border-white/10 bg-[#111111] transition duration-300 hover:border-white/40"
-              >
-                <div className="absolute left-0 top-0 z-10 h-[3px] w-16 bg-[#D7FF38] transition-all duration-300 group-hover:w-full" />
-                {artist.image ? (
-                  <div className="overflow-hidden">
+              <article key={artist.slug} className="group">
+                {isImageUrl(artist.image) ? (
+                  <div className="overflow-hidden rounded-xl bg-[#eee]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={artist.image}
@@ -35,34 +39,40 @@ export default async function ArtistsPage() {
                       className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>
-                ) : null}
-                <div className="p-7">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
+                ) : (
+                  <div className="flex aspect-square items-center justify-center rounded-xl bg-[#eee] p-8">
+                    <span className="text-center text-2xl font-light leading-snug text-black">
+                      {artist.name}
+                    </span>
+                  </div>
+                )}
+                <div className="mt-4">
+                  <p className="text-sm text-neutral-500">
                     {artist.genre || "Artist"}
                   </p>
-                  <h2 className="mt-3 font-display text-2xl uppercase tracking-[0.01em]">
+                  <h2 className="mt-2 text-2xl font-light text-black">
                     {artist.name}
                   </h2>
                   {artist.location ? (
-                    <p className="mt-1 text-sm text-white/50">{artist.location}</p>
+                    <p className="mt-1 text-sm text-neutral-500">{artist.location}</p>
                   ) : null}
                   {artist.description ? (
-                    <p className="mt-4 text-sm leading-7 text-white/60">
+                    <p className="mt-4 text-base leading-7 text-neutral-600">
                       {artist.description}
                     </p>
                   ) : null}
                   {artist.bio ? (
-                    <p className="mt-4 text-sm leading-7 text-white/60">
+                    <p className="mt-4 text-base leading-7 text-neutral-600">
                       {artist.bio}
                     </p>
                   ) : null}
-                  <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-[0.16em]">
+                  <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-base font-medium">
                     {artist.website ? (
                       <a
                         href={artist.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-white transition hover:text-[#D7FF38]"
+                        className="text-black transition hover:text-neutral-500"
                       >
                         Website ↗
                       </a>
@@ -72,7 +82,7 @@ export default async function ArtistsPage() {
                         href={artist.instagram}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-white transition hover:text-[#D7FF38]"
+                        className="text-black transition hover:text-neutral-500"
                       >
                         Instagram ↗
                       </a>
@@ -82,7 +92,7 @@ export default async function ArtistsPage() {
                         href={artist.spotify}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-white transition hover:text-[#D7FF38]"
+                        className="text-black transition hover:text-neutral-500"
                       >
                         Spotify ↗
                       </a>
@@ -92,7 +102,7 @@ export default async function ArtistsPage() {
                         href={artist.youtube}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-white transition hover:text-[#D7FF38]"
+                        className="text-black transition hover:text-neutral-500"
                       >
                         YouTube ↗
                       </a>
@@ -102,7 +112,11 @@ export default async function ArtistsPage() {
               </article>
             ))}
           </div>
-        ) : null}
+        ) : (
+          <p className="mt-14 text-lg text-neutral-500">
+            No artists published yet.
+          </p>
+        )}
       </div>
 
       <Footer />

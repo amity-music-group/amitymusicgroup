@@ -4,32 +4,24 @@ import { getSiteSettings } from "@/lib/content";
 
 const values = [
   {
-    number: "01",
     title: "Artist First",
     description:
       "We believe that the artist's identity, creative vision, and long-term development should remain central to the work we do.",
-    color: "#D7FF38",
   },
   {
-    number: "02",
     title: "Independent Culture",
     description:
       "We champion individuality, independent thinking, and the creative communities that move music and culture forward.",
-    color: "#F32991",
   },
   {
-    number: "03",
     title: "Built for Growth",
     description:
       "We bring creative ideas, strategic thinking, and connected music-industry capabilities together to support sustainable progress.",
-    color: "#D7FF38",
   },
   {
-    number: "04",
     title: "Creative Collaboration",
     description:
       "We believe meaningful work happens when artists, creators, and industry professionals can work together toward a shared vision.",
-    color: "#F32991",
   },
 ];
 
@@ -39,74 +31,51 @@ export default async function AboutPage() {
   const site = await getSiteSettings();
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
+    <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero */}
-      <section className="relative isolate border-b border-white/10">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:py-32 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-10 lg:py-36">
+      <section className="border-b border-black/10">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-28 pt-36 md:pb-36 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8 lg:pt-44">
           <div>
-            <div className="mb-7 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#D7FF38]" />
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-                About Amity
-              </p>
-            </div>
+            <p className="text-lg text-neutral-500">About</p>
 
-            <h1 className="max-w-4xl font-display text-6xl uppercase leading-[0.9] tracking-[0.01em] sm:text-7xl lg:text-8xl">
-              Independent
-              <br />
-              culture.
-              <br />
-              <span className="text-[#D7FF38]">Major sound.</span>
+            <h1 className="mt-5 max-w-4xl text-[56px] font-light leading-[1.05] tracking-tight sm:text-7xl">
+              Independent culture. Major sound.
             </h1>
 
-            <p className="mt-8 max-w-xl text-base leading-8 text-white/60 sm:text-lg">
+            <p className="mt-8 max-w-xl text-lg leading-8 text-neutral-600">
               {site.aboutPageIntro}
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
               <Link
                 href="/companies"
-                className="inline-flex items-center justify-center bg-[#D7FF38] px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
+                className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
               >
-                Explore Our Companies <span aria-hidden="true">↗</span>
+                Explore our companies <span aria-hidden="true">→</span>
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center border border-white/40 bg-white/[0.05] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:border-[#D7FF38] hover:bg-white/[0.08] hover:text-[#D7FF38]"
+                className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
               >
-                What We Do
+                What we do <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="relative overflow-hidden border border-white/10 bg-[#111111] p-7 sm:p-10">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/50">
-                  Our Philosophy
-                </span>
-                <span className="h-2.5 w-2.5 bg-[#D7FF38]" />
-              </div>
-
-              <div className="my-12">
-                <p className="font-display text-3xl uppercase leading-[0.95] tracking-[0.01em] sm:text-4xl">
-                  Different voices.
-                  <br />
-                  <span className="text-[#F32991]">Shared ambition.</span>
-                  <br />
-                  One creative future.
-                </p>
-              </div>
-
-              <div className="h-px bg-white/10" />
-
-              <div className="mt-6 flex items-end justify-between gap-4">
-                <p className="max-w-xs text-sm leading-6 text-white/60">
-                  A connected approach to music, creativity, and building what
-                  comes next.
-                </p>
-                <span className="font-display text-4xl text-[#D7FF38]">A.</span>
-              </div>
+          <div className="mx-auto w-full max-w-lg rounded-2xl bg-[#eee] p-8 sm:p-10">
+            <p className="text-sm text-neutral-500">Our philosophy</p>
+            <p className="mt-10 text-3xl font-light leading-[1.2] tracking-tight text-black sm:text-4xl">
+              Different voices.
+              <br />
+              Shared ambition.
+              <br />
+              One creative future.
+            </p>
+            <div className="mt-10 border-t border-black/10 pt-6">
+              <p className="max-w-xs text-base leading-7 text-neutral-600">
+                A connected approach to music, creativity, and building what
+                comes next.
+              </p>
             </div>
           </div>
         </div>
@@ -114,17 +83,13 @@ export default async function AboutPage() {
 
       {/* Who we are — UMG's About is a single flowing statement, so the
           paragraphs lead in one column instead of a side-heading grid. */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
-        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
-          Who We Are
-        </p>
-        <h2 className="mt-5 max-w-3xl font-display text-5xl uppercase leading-[0.9] sm:text-6xl">
-          More than a name.
-          <br />
-          <span className="text-white/40">A bigger picture.</span>
+      <section className="mx-auto max-w-7xl px-6 py-28 sm:py-36 lg:px-8">
+        <p className="text-lg text-neutral-500">Who we are</p>
+        <h2 className="mt-5 max-w-3xl text-[56px] font-light leading-[1.05] tracking-tight">
+          More than a name. <span className="text-neutral-400">A bigger picture.</span>
         </h2>
 
-        <div className="mt-10 max-w-3xl space-y-6 text-xl leading-9 text-white/70">
+        <div className="mt-10 max-w-3xl space-y-6 text-xl font-light leading-9 text-neutral-600">
           {site.aboutPageBody.split("\n\n").map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
@@ -132,23 +97,21 @@ export default async function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="border-y border-white/10 bg-[#111111]">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:py-20 lg:grid-cols-2 lg:items-center lg:px-10">
+      <section className="border-y border-black/10">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 md:py-28 lg:grid-cols-2 lg:items-center lg:px-8">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-              Our Mission
-            </p>
-            <h2 className="mt-5 max-w-xl font-display text-4xl uppercase leading-[0.95] tracking-[0.01em] sm:text-6xl">
+            <p className="text-lg text-neutral-500">Our mission</p>
+            <h2 className="mt-5 max-w-xl text-5xl font-light leading-[1.05] tracking-tight sm:text-6xl">
               {site.missionTitle}
             </h2>
           </div>
           <div>
-            <p className="text-lg leading-8 text-white/60">
+            <p className="text-lg leading-8 text-neutral-600">
               {site.missionBody}
             </p>
             <Link
               href="/services"
-              className="mt-8 inline-flex items-center gap-3 text-sm font-bold text-[#D7FF38] transition hover:text-white"
+              className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
               Discover our approach <span aria-hidden="true">→</span>
             </Link>
@@ -157,39 +120,25 @@ export default async function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
+      <section className="mx-auto max-w-7xl px-6 py-28 sm:py-36 lg:px-8">
         <div className="max-w-2xl">
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-            What Guides Us
-          </p>
-          <h2 className="mt-5 font-display text-5xl uppercase leading-[0.9] sm:text-7xl">
+          <p className="text-lg text-neutral-500">What guides us</p>
+          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
             Principles over promises.
           </h2>
-          <p className="mt-5 leading-7 text-white/60">
+          <p className="mt-6 text-lg leading-8 text-neutral-600">
             The ideas that shape how we approach creativity, relationships, and
             the work ahead.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {values.map((value) => (
-            <article
-              key={value.number}
-              className="bg-[#111111] p-7 transition-colors hover:bg-[#141414] sm:p-9"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-white/40">
-                  {value.number}
-                </span>
-                <span
-                  className="h-2.5 w-2.5"
-                  style={{ backgroundColor: value.color }}
-                />
-              </div>
-              <h3 className="mt-9 font-display text-2xl uppercase tracking-[0.01em]">
+            <article key={value.title} className="rounded-xl bg-[#eee] p-8 sm:p-9">
+              <h3 className="text-2xl font-light text-black">
                 {value.title}
               </h3>
-              <p className="mt-4 leading-7 text-white/60">
+              <p className="mt-4 text-base leading-7 text-neutral-600">
                 {value.description}
               </p>
             </article>
@@ -198,28 +147,22 @@ export default async function AboutPage() {
       </section>
 
       {/* Ecosystem CTA */}
-      <section className="px-6 pb-20 md:pb-28 lg:px-10">
-        <div className="relative mx-auto max-w-7xl overflow-hidden border border-white/10 bg-[#111111] px-7 py-12 sm:px-12 sm:py-16">
-          <div className="relative flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <div className="max-w-2xl">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
-                The Amity Ecosystem
-              </p>
-              <h2 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl">
-                Discover what we&apos;re building.
-              </h2>
-              <p className="mt-5 max-w-xl leading-7 text-white/60">
-                Explore the companies, capabilities, and creative directions
-                that make up the Amity vision.
-              </p>
-            </div>
-            <Link
-              href="/companies"
-              className="inline-flex shrink-0 items-center justify-center gap-3 bg-[#D7FF38] px-6 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
-            >
-              Explore Our Companies <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
+      <section className="mx-auto max-w-7xl px-6 pb-28 sm:pb-36 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="text-lg text-neutral-500">The Amity ecosystem</p>
+          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            Discover what we&apos;re building.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+            Explore the companies, capabilities, and creative directions
+            that make up the Amity vision.
+          </p>
+          <Link
+            href="/companies"
+            className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
+          >
+            Explore our companies <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 

@@ -1,4 +1,3 @@
-﻿
 "use client";
 
 import { FormEvent, useState } from "react";
@@ -42,64 +41,58 @@ export default function ContactPage() {
   }
 
   const inputClass =
-    "w-full border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]";
+    "w-full rounded-md border border-black/15 bg-white px-4 py-3 text-sm text-black placeholder:text-black/35 outline-none transition focus:border-black";
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
-      <section className="mx-auto max-w-7xl px-6 pb-20 pt-16 sm:px-10 sm:pt-24 lg:px-16">
+    <main className="min-h-screen bg-white text-[#111111]">
+      <section className="mx-auto max-w-7xl px-6 pb-28 pt-36 sm:px-8 sm:pt-44 lg:px-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-white"
+          className="inline-flex items-center gap-2 text-base text-neutral-600 transition hover:text-black"
         >
           <span aria-hidden="true">←</span> Back to Home
         </Link>
 
         <div className="mt-16 grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-              Amity Music Group
-            </p>
+            <p className="text-lg text-neutral-500">Contact</p>
 
-            <h1 className="mt-5 font-display text-6xl uppercase leading-[0.9] tracking-[0.01em] sm:text-7xl">
+            <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
               Let&apos;s talk.
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-7 text-white/60">
+            <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
               For general inquiries, business opportunities, partnerships, and
               other company-related matters, send our team a message.
             </p>
 
-            <div className="mt-12 border-t border-white/10 pt-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/45">
-                Email
-              </p>
+            <div className="mt-12 border-t border-black/10 pt-6">
+              <p className="text-sm text-neutral-500">Email</p>
               <a
                 href="mailto:info@amitymusicgroup.com"
-                className="mt-3 inline-block text-lg transition hover:text-white/65"
+                className="mt-3 inline-block text-lg text-black transition hover:text-neutral-500"
               >
                 info@amitymusicgroup.com
               </a>
             </div>
 
-            <div className="mt-8 border-t border-white/10 pt-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/45">
-                Company
-              </p>
-              <p className="mt-3 text-sm text-white/70">
+            <div className="mt-8 border-t border-black/10 pt-6">
+              <p className="text-sm text-neutral-500">Company</p>
+              <p className="mt-3 text-base text-black">
                 Amity Music Group
               </p>
             </div>
           </div>
 
-          <div className="border border-white/10 bg-[#111111] p-6 sm:p-9">
-            <h2 className="font-display text-2xl uppercase tracking-[0.01em]">Send an inquiry</h2>
-            <p className="mt-2 text-sm leading-6 text-white/55">
+          <div className="rounded-2xl border border-black/10 bg-white p-6 sm:p-9">
+            <h2 className="text-2xl font-light text-black">Send an inquiry</h2>
+            <p className="mt-2 text-sm leading-6 text-neutral-500">
               Complete the form below. All fields are required.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-5">
               <div>
-                <label htmlFor="name" className="mb-2 block text-sm text-white/80">
+                <label htmlFor="name" className="mb-2 block text-sm text-neutral-700">
                   Full name
                 </label>
                 <input
@@ -115,7 +108,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-2 block text-sm text-white/80">
+                <label htmlFor="email" className="mb-2 block text-sm text-neutral-700">
                   Email address
                 </label>
                 <input
@@ -131,7 +124,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="mb-2 block text-sm text-white/80">
+                <label htmlFor="subject" className="mb-2 block text-sm text-neutral-700">
                   Subject
                 </label>
                 <input
@@ -146,7 +139,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-2 block text-sm text-white/80">
+                <label htmlFor="message" className="mb-2 block text-sm text-neutral-700">
                   Message
                 </label>
                 <textarea
@@ -174,28 +167,28 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="flex w-full items-center justify-center bg-[#D7FF38] px-6 py-3.5 text-sm font-semibold text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex w-full items-center justify-center rounded-full bg-black px-6 py-4 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "loading" ? "Sending..." : "Send Message"}
               </button>
 
               <div aria-live="polite" role="status">
                 {status === "success" && (
-                  <p className="text-sm text-white/80">
+                  <p className="text-sm text-neutral-700">
                     Your message has been sent successfully. Thank you for
                     contacting Amity Music Group.
                   </p>
                 )}
 
                 {status === "error" && (
-                  <p className="text-sm text-red-400">
+                  <p className="text-sm text-red-600">
                     We couldn&apos;t send your message. Please try again or
                     email info@amitymusicgroup.com directly.
                   </p>
                 )}
               </div>
 
-              <p className="text-xs leading-5 text-white/40">
+              <p className="text-xs leading-5 text-neutral-500">
                 Please do not include passwords, payment details, or other
                 sensitive information in your message.
               </p>
