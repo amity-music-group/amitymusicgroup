@@ -51,6 +51,7 @@ export interface ServiceItem {
 
 export interface SiteSettings {
   tagline: string;
+  heroImage: string;
   heroSubcopy: string;
   aboutIntro: string;
   aboutBody: string;

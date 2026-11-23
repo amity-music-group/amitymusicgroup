@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Artist } from "@/lib/types";
+import ImageUpload from "./ImageUpload";
 import { Field, Toggle, inputClass, newId, slugify } from "./ui";
 
 function blankArtist(): Artist {
@@ -190,6 +191,17 @@ export default function ArtistsEditor({
                   placeholder="https://… (leave blank for no image)"
                 />
               </Field>
+              <div>
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                  Upload photo
+                </span>
+                <ImageUpload
+                  value={artist.image}
+                  onChange={(image) => update(artist.id, { image })}
+                  kind="artists"
+                  slug={artist.slug || slugify(artist.name)}
+                />
+              </div>
               <Field label="Website">
                 <input
                   className={inputClass}

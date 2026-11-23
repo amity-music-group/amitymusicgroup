@@ -94,6 +94,7 @@ export async function getSupabaseStatus(): Promise<SupabaseStatus> {
 
 export const staticSiteSettings: SiteSettings = {
   tagline: "Independent Culture. Major Sound.",
+  heroImage: "",
   heroSubcopy:
     "A connected music organization built around artists, recorded music, publishing, distribution, management, and the future of the music industry.",
   aboutIntro:

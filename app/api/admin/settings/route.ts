@@ -37,6 +37,8 @@ export async function POST(request: NextRequest) {
 
   const full: SiteSettings = {
     tagline: typeof settings.tagline === "string" ? settings.tagline : "",
+    heroImage:
+      typeof settings.heroImage === "string" ? settings.heroImage : "",
     heroSubcopy:
       typeof settings.heroSubcopy === "string" ? settings.heroSubcopy : "",
     aboutIntro:

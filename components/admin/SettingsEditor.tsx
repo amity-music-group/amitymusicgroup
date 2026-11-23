@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { SiteSettings } from "@/lib/types";
+import ImageUpload from "./ImageUpload";
 import { Field, inputClass } from "./ui";
 
 const GROUPS: {
@@ -162,6 +163,23 @@ export default function SettingsEditor({
                 </Field>
               ))}
             </div>
+            {group.title === "Homepage" ? (
+              <div className="mt-4">
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                  Homepage hero image
+                </span>
+                <ImageUpload
+                  value={settings.heroImage}
+                  onChange={(heroImage) => update("heroImage", heroImage)}
+                  kind="site"
+                  slug="hero"
+                />
+                <span className="mt-1 block text-xs leading-5 text-white/40">
+                  Becomes the full-bleed homepage hero background. Leave
+                  blank to keep the current hero.
+                </span>
+              </div>
+            ) : null}
           </section>
         ))}
       </div>

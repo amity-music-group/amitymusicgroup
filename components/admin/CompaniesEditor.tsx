@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Company } from "@/lib/types";
+import ImageUpload from "./ImageUpload";
 import { Field, Toggle, inputClass, newId, slugify } from "./ui";
 
 function blankCompany(): Company {
@@ -185,6 +186,17 @@ export default function CompaniesEditor({
                   placeholder="https://… (leave blank for no image)"
                 />
               </Field>
+              <div>
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                  Upload logo
+                </span>
+                <ImageUpload
+                  value={company.image ?? ""}
+                  onChange={(image) => update(company.id, { image })}
+                  kind="companies"
+                  slug={company.slug || slugify(company.name)}
+                />
+              </div>
             </div>
 
             <div className="mt-4">
