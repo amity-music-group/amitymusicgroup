@@ -28,17 +28,19 @@ export default async function CompaniesPage() {
     else regions.push({ name: region, items: [territory] });
   }
 
-  // The moving logos strip only runs when there are at least two
-  // companies — a strip must never repeat a single logo.
-  const showStrip = companies.length >= 2;
-  const stripHalf = [
-    ...companies,
-    ...companies,
-    ...companies,
-    ...companies,
-    ...companies,
-    ...companies,
-  ];
+  // The rolling logos strip is always present and always rolling —
+  // UMG's Labels page leads with it. With only one company in the
+  // database, that one logo repeats until more companies are added
+  // in /admin; no logos are invented. Each half of the marquee holds
+  // at least ten items so it is always wider than the viewport and
+  // the loop stays seamless.
+  const repeatsPerHalf =
+    companies.length === 0
+      ? 0
+      : Math.max(6, Math.ceil(10 / companies.length));
+  const stripHalf = Array.from({ length: repeatsPerHalf }).flatMap(
+    () => companies,
+  );
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
@@ -57,7 +59,7 @@ export default async function CompaniesPage() {
             management, international music, and live music.
           </p>
         </div>
-        {showStrip ? (
+        {companies.length > 0 ? (
           <div
             aria-hidden="true"
             className="overflow-hidden border-t border-black/10 py-5"
