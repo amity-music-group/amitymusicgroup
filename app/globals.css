@@ -57,7 +57,7 @@ img {
   color: #ffffff;
 }
 
-/* Companies wordmark strip — a continuous leftward marquee at
+/* Companies logo strip — a continuous leftward marquee at
    UMG's measured ~44 px/s (duration is set inline on the strip
    from its item count). Linear, infinite, no pause on hover.
    Motion stops under prefers-reduced-motion. */
