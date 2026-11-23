@@ -1,10 +1,9 @@
 
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -38,6 +37,20 @@ export async function POST(request: Request) {
       );
     }
 
+    // The Resend client is built inside the handler, not at module
+    // scope: constructing it at import time crashes the build on any
+    // environment without RESEND_API_KEY (e.g. preview deployments).
+    // A missing key fails this send at runtime instead, never the build.
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("Contact email delivery failed: RESEND_API_KEY is not set.");
+      return NextResponse.json(
+        { error: "Email delivery failed." },
+        { status: 502 }
+      );
+    }
+    const resend = new Resend(apiKey);
+
     const { error } = await resend.emails.send({
       from: "Amity Music Group Website <onboarding@resend.dev>",
       to: ["info@amitymusicgroup.com"],
@@ -61,6 +74,18 @@ export async function POST(request: Request) {
         { error: "Email delivery failed." },
         { status: 502 }
       );
+    }
+
+    // Store the message in the admin inbox. Best-effort only: the
+    // email already sent, so a missing table or unconfigured Supabase
+    // must never fail the submission.
+    try {
+      const admin = getSupabaseAdmin();
+      await admin
+        .from("contact_submissions")
+        .insert({ name, email, subject, message });
+    } catch (e) {
+      console.warn("[contact] inbox insert skipped:", e);
     }
 
     return NextResponse.json({ success: true });

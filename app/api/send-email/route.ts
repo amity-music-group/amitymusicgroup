@@ -1,6 +1,22 @@
+import { cookies } from "next/headers";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+
+/**
+ * POST /api/send-email — send a single email via Resend.
+ *
+ * Admin-only: this route used to accept unauthenticated requests with
+ * an arbitrary recipient, which anyone could use as an open relay.
+ * It now requires a valid admin session (the blast tool in /admin
+ * sends through lib/email.ts instead).
+ */
 export async function POST(request: Request) {
+  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
+  if (!getAdminSession(token)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey) {

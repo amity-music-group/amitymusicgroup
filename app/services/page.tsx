@@ -1,119 +1,14 @@
 ﻿
 import type { Metadata } from "next";
 import Link from "next/link";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import { getServices } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "What We Do",
   description:
     "Explore Amity Music Group's music services, including recorded music, artist development, music publishing, distribution, management, international music, and live music.",
 };
-
-const services = [
-  {
-    number: "01",
-    title: "Recorded Music",
-    subtitle: "RECORDS & RELEASES",
-    description:
-      "Supporting the development, release, and long-term growth of recorded music projects. Our recorded-music focus brings artists, releases, and catalog development into a connected music ecosystem.",
-    offerings: [
-      "Recorded music releases",
-      "Artist and project development",
-      "Release planning and coordination",
-      "Catalog development",
-    ],
-  },
-  {
-    number: "02",
-    title: "Artist Development",
-    subtitle: "BUILDING ARTIST CAREERS",
-    description:
-      "Helping artists develop their identity, direction, and long-term career strategy. We focus on building a foundation that connects creative vision with practical business planning.",
-    offerings: [
-      "Artist identity and positioning",
-      "Career planning",
-      "Creative direction",
-      "Long-term development strategy",
-    ],
-  },
-  {
-    number: "03",
-    title: "Music Publishing",
-    subtitle: "SONGWRITERS & COPYRIGHTS",
-    description:
-      "Focused on the business of compositions, songwriting, and music copyrights. Publishing operations can support the organization and development of musical works and songwriter opportunities.",
-    offerings: [
-      "Songwriter and composition development",
-      "Music catalog organization",
-      "Copyright-focused administration planning",
-      "Publishing opportunities",
-    ],
-  },
-  {
-    number: "04",
-    title: "Music Distribution",
-    subtitle: "REACHING DIGITAL AUDIENCES",
-    description:
-      "Supporting the delivery and release coordination of music to digital platforms. Distribution planning is part of helping music reach listeners and supporting organized release operations.",
-    offerings: [
-      "Digital release planning",
-      "Distribution coordination",
-      "Release metadata preparation",
-      "Catalog delivery workflows",
-    ],
-  },
-  {
-    number: "05",
-    title: "Artist Management",
-    subtitle: "STRATEGY & CAREER SUPPORT",
-    description:
-      "Connecting creative priorities with professional planning, communication, and business development. Management needs are shaped around each artist's circumstances and agreed working relationship.",
-    offerings: [
-      "Career and business strategy",
-      "Professional opportunity planning",
-      "Team and project coordination",
-      "Artist brand development",
-    ],
-  },
-  {
-    number: "06",
-    title: "International Music",
-    subtitle: "CROSS-MARKET OPPORTUNITIES",
-    description:
-      "Exploring relationships and opportunities across music markets. International initiatives are intended to help connect creative projects with broader audiences and industry networks.",
-    offerings: [
-      "International relationship development",
-      "Cross-market strategy",
-      "Global audience opportunities",
-      "International project coordination",
-    ],
-  },
-  {
-    number: "07",
-    title: "Live Music",
-    subtitle: "TOURING & LIVE EXPERIENCES",
-    description:
-      "Supporting the business and coordination around live music, performances, and touring opportunities through a connected approach to artists, events, and industry relationships.",
-    offerings: [
-      "Touring and live-event planning",
-      "Booking-related opportunities",
-      "Live music project coordination",
-      "Artist and event partnerships",
-    ],
-  },
-  {
-    number: "08",
-    title: "Creative & Media",
-    subtitle: "CONTENT, CULTURE & BRAND",
-    description:
-      "Connecting music with the wider creative world through content, storytelling, brand development, and media initiatives that help artists and projects communicate with their audiences.",
-    offerings: [
-      "Creative campaign planning",
-      "Content and media strategy",
-      "Artist storytelling",
-      "Brand and partnership concepts",
-    ],
-  },
-];
 
 const process = [
   {
@@ -142,7 +37,10 @@ const process = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  // Services come from Supabase when configured; the static list in
+  // lib/content.ts is the fallback (the site's current copy).
+  const services = await getServices();
   return (
     <main className="min-h-screen overflow-hidden bg-[#4922EB] text-white">
       {/* Page hero */}
@@ -440,7 +338,10 @@ export default function ServicesPage() {
         </div>
 
         <div className="mx-auto max-w-7xl px-6 pb-8 lg:px-8">
-          <p className="text-xs text-white/40">
+          <div className="border-t border-white/10 pt-8">
+            <NewsletterSignup />
+          </div>
+          <p className="mt-8 text-xs text-white/40">
             © 2026 Amity Music Group. All rights reserved.
           </p>
         </div>

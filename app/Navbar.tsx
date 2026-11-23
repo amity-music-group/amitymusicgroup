@@ -1,8 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  // The admin portal has its own navigation — the public menu never
+  // renders there.
+  if (pathname === "/admin" || pathname?.startsWith("/admin/")) {
+    return null;
+  }
+
   return (
     <nav className="w-full bg-[#4922EB] text-white border-b border-white/20">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
