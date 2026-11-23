@@ -66,7 +66,7 @@ export default async function AboutPage() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/companies"
-                className="inline-flex items-center justify-center bg-white px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+                className="inline-flex items-center justify-center bg-[#D7FF38] px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
               >
                 Explore Our Companies <span aria-hidden="true">↗</span>
               </Link>
@@ -112,20 +112,19 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Who we are */}
-      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:py-28 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24 lg:px-10">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
-            Who We Are
-          </p>
-          <h2 className="mt-5 font-display text-5xl uppercase leading-[0.9] sm:text-6xl">
-            More than a name.
-            <br />
-            <span className="text-white/40">A bigger picture.</span>
-          </h2>
-        </div>
+      {/* Who we are — UMG's About is a single flowing statement, so the
+          paragraphs lead in one column instead of a side-heading grid. */}
+      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
+        <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#F32991]">
+          Who We Are
+        </p>
+        <h2 className="mt-5 max-w-3xl font-display text-5xl uppercase leading-[0.9] sm:text-6xl">
+          More than a name.
+          <br />
+          <span className="text-white/40">A bigger picture.</span>
+        </h2>
 
-        <div className="space-y-6 text-base leading-8 text-white/60 sm:text-lg">
+        <div className="mt-10 max-w-3xl space-y-6 text-xl leading-9 text-white/70">
           {site.aboutPageBody.split("\n\n").map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
@@ -216,7 +215,7 @@ export default async function AboutPage() {
             </div>
             <Link
               href="/companies"
-              className="inline-flex shrink-0 items-center justify-center gap-3 bg-white px-6 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+              className="inline-flex shrink-0 items-center justify-center gap-3 bg-[#D7FF38] px-6 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
             >
               Explore Our Companies <span aria-hidden="true">↗</span>
             </Link>
