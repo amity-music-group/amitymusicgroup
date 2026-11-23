@@ -3,9 +3,53 @@ import TerritoryAccordion from "@/components/TerritoryAccordion";
 import { getCompanies, getTerritories } from "@/lib/content";
 import type { Territory } from "@/lib/types";
 
-// A logo is only a logo when the image field holds an actual image URL.
-// A website address is not a picture and is never rendered as one —
-// those companies show their name as a text mark instead.
+// The rolling strip is a fixed list of real graphic logos on
+// transparent backgrounds, like UMG's /labels strip — never the
+// Supabase JPGs, which are white/silver artwork on solid black
+// squares and would bring the black boxes back. Each transparent
+// PNG in public/logos was made from that logo's real artwork
+// (luminance as alpha over black, trimmed, flat black):
+// - Melted Mindz Records: black "MM" mark with star.
+// - Dial Recordings America: black "DIAL RECORDINGS" with play
+//   triangle. Both from their real uploaded Supabase artwork.
+// - IS = Iron Stage Touring, AR = Arden Row, and A-cross =
+//   Amity Christian Music Group: supplied by Theodore as JPGs on
+//   2026-11-23, converted the same way. They have no tiles below
+//   yet — only Melted and Dial are companies in Supabase so far.
+// The files in public/logos are the SMALL versions the user
+// approved (100 px tall, Dial 70 px tall), as used in the strip.
+const STRIP_ITEMS: { src: string; alt: string; className: string }[] = [
+  {
+    src: "/logos/is-logo.png",
+    alt: "Iron Stage Touring",
+    // "IS" in a thin circle, ~90px tall.
+    className: "h-[90px] w-auto max-w-[180px] object-contain",
+  },
+  {
+    src: "/logos/ar-logo.png",
+    alt: "Arden Row",
+    // "AR" with a black underline bar, ~70px tall.
+    className: "h-[70px] w-auto max-w-[180px] object-contain",
+  },
+  {
+    src: "/logos/a-cross-logo.png",
+    alt: "Amity Christian Music Group",
+    // "A" with a cross and swoosh, ~90px tall.
+    className: "h-[90px] w-auto max-w-[180px] object-contain",
+  },
+  {
+    src: "/logos/dial-recordings-america.png",
+    alt: "Dial Recordings America",
+    // Wide, short wordmark, ~60px tall.
+    className: "h-[60px] w-auto max-w-[180px] object-contain",
+  },
+  {
+    src: "/logos/melted-mindz-records.png",
+    alt: "Melted Mindz Records",
+    // Square mark, ~90px tall like UMG's tallest logos.
+    className: "h-[90px] w-auto max-w-[180px] object-contain",
+  },
+];
 function isImageUrl(url: string | null | undefined): url is string {
   if (!url) return false;
   const clean = url.split("?")[0].split("#")[0].toLowerCase();
@@ -29,34 +73,36 @@ export default async function CompaniesPage() {
     else regions.push({ name: region, items: [territory] });
   }
 
-  // The rolling wordmark strip is always present and always rolling —
-  // UMG's Labels page leads with it. With only two companies in the
-  // database, the two names repeat until more companies are added
-  // in /admin; no companies are invented. Each half of the marquee holds
-  // at least ten items so it is always wider than the viewport and
-  // the loop stays seamless. Speed is set to match UMG's measured
-  // 44–45 px/s, leftward, continuous, with no pause on hover:
-  // each item's pitch is roughly 530 px (a ~370 px wordmark plus
-  // 160 px of mx-20 gap), so 12 s per item gives ~530 / 12 ≈ 44 px/s.
-  // The duration below is per duplicated half, which is what the
-  // -50% translate in app/globals.css moves across.
-  const repeatsPerHalf =
-    companies.length === 0
-      ? 0
-      : Math.max(6, Math.ceil(10 / companies.length));
+  // The rolling logo strip is always present and always rolling —
+  // UMG's Labels page leads with it. It is a fixed list of five
+  // logos (STRIP_ITEMS above), not driven by the companies table,
+  // exactly like UMG's fixed set of label logos. Each half of the
+  // marquee holds at least ten items so it is always wider than
+  // the viewport and the loop stays seamless. Speed is set to
+  // match UMG's measured 44–45 px/s, leftward, continuous, with
+  // no pause on hover: each item's pitch is roughly 268 px on
+  // average (logo widths at their strip heights — IS ~90 px,
+  // AR ~70 px, A-cross ~123 px, Dial ~159 px, Melted ~95 px —
+  // plus 160 px of mx-20 gap), so 6 s per item gives
+  // ~268 / 6 ≈ 44.6 px/s. The duration below is per duplicated
+  // half, which is what the -50% translate in app/globals.css
+  // moves across.
+  const repeatsPerHalf = Math.max(
+    2,
+    Math.ceil(10 / STRIP_ITEMS.length),
+  );
   const stripHalf = Array.from({ length: repeatsPerHalf }).flatMap(
-    () => companies,
+    () => STRIP_ITEMS,
   );
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero — UMG's Labels layout: eyebrow, headline, large
-          statement line, then the rolling wordmark strip, then the
-          thin black rule below the strip. No images in the strip:
-          UMG's strip is black transparent wordmarks on white, and
-          Amity's company image files are solid black squares, so
-          the strip renders each company name as a black text
-          wordmark instead. */}
+          statement line, then the rolling logo strip, then the
+          thin black rule below the strip. The strip uses the real
+          graphic logos on transparent backgrounds (public/logos),
+          like UMG's black wordmarks on white — never the Supabase
+          JPGs, which are artwork on solid black squares. */}
       <section>
         <div className="mx-auto max-w-7xl px-6 pt-36 lg:px-8 lg:pt-44">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
@@ -69,29 +115,30 @@ export default async function CompaniesPage() {
             management, international music, and live music.
           </p>
         </div>
-        {companies.length > 0 ? (
-          <div aria-hidden="true" className="mt-24 overflow-hidden py-6">
-            <div
-              className="hero-marquee flex w-max items-center"
-              style={{ animationDuration: `${stripHalf.length * 12}s` }}
-            >
-              {[0, 1].map((half) => (
-                <div key={half} className="flex items-center">
-                  {stripHalf.map((company, index) => (
-                    <span
-                      key={`${company.slug}-${index}`}
-                      className="mx-20 flex shrink-0 items-center"
-                    >
-                      <span className="whitespace-nowrap text-[40px] font-light leading-none tracking-tight text-black">
-                        {company.name}
-                      </span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
+        <div aria-hidden="true" className="mt-24 overflow-hidden py-6">
+          <div
+            className="hero-marquee flex w-max items-center"
+            style={{ animationDuration: `${stripHalf.length * 6}s` }}
+          >
+            {[0, 1].map((half) => (
+              <div key={half} className="flex items-center">
+                {stripHalf.map((item, index) => (
+                  <span
+                    key={`${item.src}-${index}`}
+                    className="mx-20 flex shrink-0 items-center"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className={item.className}
+                    />
+                  </span>
+                ))}
+              </div>
+            ))}
           </div>
-        ) : null}
+        </div>
         <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
           <div className="h-px w-full bg-black" />
         </div>
