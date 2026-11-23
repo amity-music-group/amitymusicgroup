@@ -81,15 +81,17 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Who we are — UMG's About is a single flowing statement, so the
-          paragraphs lead in one column instead of a side-heading grid. */}
-      <section className="mx-auto max-w-7xl px-6 py-28 sm:py-36 lg:px-8">
-        <p className="text-lg text-neutral-500">Who we are</p>
-        <h2 className="mt-5 max-w-3xl text-[56px] font-light leading-[1.05] tracking-tight">
-          More than a name. <span className="text-neutral-400">A bigger picture.</span>
-        </h2>
+      {/* Who we are — UMG sticky-heading pattern: heading stays on the
+          left while the statement flows on the right. */}
+      <section className="mx-auto grid max-w-7xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+        <div className="lg:sticky lg:top-36 lg:self-start">
+          <p className="text-lg text-neutral-500">Who we are</p>
+          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            More than a name. <span className="text-neutral-400">A bigger picture.</span>
+          </h2>
+        </div>
 
-        <div className="mt-10 max-w-3xl space-y-6 text-xl font-light leading-9 text-neutral-600">
+        <div className="max-w-3xl space-y-6 text-xl font-light leading-9 text-neutral-600">
           {site.aboutPageBody.split("\n\n").map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
@@ -98,8 +100,8 @@ export default async function AboutPage() {
 
       {/* Mission */}
       <section className="border-y border-black/10">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 md:py-28 lg:grid-cols-2 lg:items-center lg:px-8">
-          <div>
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 md:py-28 lg:grid-cols-2 lg:items-start lg:px-8">
+          <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Our mission</p>
             <h2 className="mt-5 max-w-xl text-5xl font-light leading-[1.05] tracking-tight sm:text-6xl">
               {site.missionTitle}
@@ -120,19 +122,19 @@ export default async function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="mx-auto max-w-7xl px-6 py-28 sm:py-36 lg:px-8">
-        <div className="max-w-2xl">
+      <section className="mx-auto grid max-w-7xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+        <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">What guides us</p>
           <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
             Principles over promises.
           </h2>
-          <p className="mt-6 text-lg leading-8 text-neutral-600">
+          <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
             The ideas that shape how we approach creativity, relationships, and
             the work ahead.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {values.map((value) => (
             <article key={value.title} className="rounded-xl bg-[#eee] p-8 sm:p-9">
               <h3 className="text-2xl font-light text-black">
@@ -146,14 +148,17 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Ecosystem CTA */}
-      <section className="mx-auto max-w-7xl px-6 pb-28 sm:pb-36 lg:px-8">
-        <div className="max-w-3xl">
+      {/* Ecosystem CTA — the Global Territories call to action: the
+          territories themselves live on /companies. */}
+      <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-28 sm:pb-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+        <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">The Amity ecosystem</p>
           <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
             Discover what we&apos;re building.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+        </div>
+        <div className="max-w-2xl">
+          <p className="text-lg leading-8 text-neutral-600">
             Explore the companies, capabilities, and creative directions
             that make up the Amity vision.
           </p>

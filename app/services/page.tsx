@@ -89,41 +89,43 @@ export default async function ServicesPage() {
         className="scroll-mt-28 border-b border-black/10 py-28 sm:py-36"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+            <div className="lg:sticky lg:top-36 lg:self-start">
               <p className="text-lg text-neutral-500">Our capabilities</p>
               <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
                 Areas of expertise.
               </h2>
             </div>
 
-            <p className="max-w-md text-base leading-7 text-neutral-600">
+            <p className="max-w-md text-base leading-7 text-neutral-600 lg:pt-24">
               Explore the areas that make up the Amity Music Group ecosystem.
               The scope of any specific service depends on the company,
               project, and applicable agreement.
             </p>
           </div>
 
-          <ServiceAccordion services={services} />
+          <div className="mt-14">
+            <ServiceAccordion services={services} />
+          </div>
         </div>
       </section>
 
       {/* How we work */}
       <section className="border-b border-black/10 py-28 sm:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+          <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">How we work</p>
             <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
               Strategy meets execution.
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+            <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
               Every artist and project has different needs. Our approach
               begins with understanding the opportunity and identifying the
               right next steps.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
             {process.map((step) => (
               <article key={step.title} className="border-t border-black/10 pt-7">
                 <h3 className="text-2xl font-light text-black">
@@ -140,15 +142,17 @@ export default async function ServicesPage() {
 
       {/* Ecosystem banner */}
       <section className="border-b border-black/10 py-28 sm:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-3xl">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+          <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">
               One connected ecosystem
             </p>
             <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
               Discover the companies behind the vision.
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-lg leading-8 text-neutral-600">
               Learn how the companies and divisions within the group
               contribute to its broader music and creative objectives.
             </p>
@@ -164,23 +168,22 @@ export default async function ServicesPage() {
 
       {/* Contact CTA */}
       <section className="py-28 sm:py-36">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-lg text-neutral-500">Start a conversation</p>
-          <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <h2 className="max-w-4xl text-[56px] font-light leading-[1.05] tracking-tight">
-                Have a project in mind?{" "}
-                <span className="text-neutral-400">Let&apos;s connect.</span>
-              </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
-                Reach out to discuss a business inquiry, artist opportunity,
-                partnership, or music-related project.
-              </p>
-            </div>
-
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
+          <div className="lg:sticky lg:top-36 lg:self-start">
+            <p className="text-lg text-neutral-500">Start a conversation</p>
+            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              Have a project in mind?{" "}
+              <span className="text-neutral-400">Let&apos;s connect.</span>
+            </h2>
+          </div>
+          <div className="max-w-2xl">
+            <p className="text-lg leading-8 text-neutral-600">
+              Reach out to discuss a business inquiry, artist opportunity,
+              partnership, or music-related project.
+            </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
+              className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
               Contact Amity <span aria-hidden="true">→</span>
             </Link>

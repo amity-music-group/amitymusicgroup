@@ -30,8 +30,10 @@ export default function ServiceAccordion({
               </span>
               <span
                 aria-hidden="true"
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#eee] text-xl text-black transition-transform duration-300 ${
-                  open ? "rotate-45" : ""
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl transition-colors duration-300 ${
+                  open
+                    ? "rotate-45 bg-black text-white"
+                    : "bg-[#eee] text-black"
                 }`}
               >
                 +

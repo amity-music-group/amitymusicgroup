@@ -51,7 +51,7 @@ export default async function CompaniesPage() {
           statement line, thin black rule, then the rolling logos
           strip at the bottom of the hero. */}
       <section>
-        <div className="mx-auto max-w-[1440px] px-6 pt-36 lg:px-8 lg:pt-44">
+        <div className="mx-auto max-w-7xl px-6 pt-36 lg:px-8 lg:pt-44">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
           <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
             Our companies
@@ -101,7 +101,7 @@ export default async function CompaniesPage() {
           light-grey rounded tiles, logo centered, name in small black
           text below the tile, left-aligned, diagonal arrow on linked
           tiles. */}
-      <div className="mx-auto max-w-[1440px] px-6 py-28 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
         <h2 className="text-[40px] font-light leading-tight tracking-tight">
           Our companies
         </h2>
@@ -165,8 +165,8 @@ export default async function CompaniesPage() {
           nothing here is invented. */}
       {regions.length > 0 ? (
         <section className="border-t border-black/10 py-28 sm:py-36">
-          <div className="mx-auto grid max-w-[1440px] gap-16 px-6 lg:grid-cols-2 lg:px-8">
-            <div>
+          <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2 lg:px-8">
+            <div className="lg:sticky lg:top-36 lg:self-start">
               <p className="text-lg text-neutral-500">Where we work</p>
               <h2 className="mt-5 text-[60px] font-light leading-[1.05] tracking-tight">
                 Global

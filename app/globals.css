@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-anton), "Arial Narrow", sans-serif;
   --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
 
   --color-background: #ffffff;

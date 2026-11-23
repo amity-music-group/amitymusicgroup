@@ -41,7 +41,7 @@ export default function ContactPage() {
   }
 
   const inputClass =
-    "w-full rounded-md border border-black/15 bg-white px-4 py-3 text-sm text-black placeholder:text-black/35 outline-none transition focus:border-black";
+    "w-full rounded-xl border border-black/15 bg-white px-4 py-3 text-sm text-black placeholder:text-black/35 outline-none transition focus:border-black";
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
@@ -54,7 +54,7 @@ export default function ContactPage() {
         </Link>
 
         <div className="mt-16 grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-          <div>
+          <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Contact</p>
 
             <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
