@@ -83,7 +83,7 @@ export default async function ServicesPage() {
           <div className="mt-12 flex flex-wrap gap-4">
             <a
               href="#services"
-              className="inline-flex items-center justify-center bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+              className="inline-flex items-center justify-center bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
             >
               Explore our services <span className="ml-3">↓</span>
             </a>
@@ -246,7 +246,7 @@ export default async function ServicesPage() {
 
             <Link
               href="/companies"
-              className="inline-flex items-center justify-center gap-3 bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+              className="inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
             >
               Explore companies <span>↗</span>
             </Link>
@@ -275,7 +275,7 @@ export default async function ServicesPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-3 bg-white px-8 py-5 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+              className="inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-8 py-5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
             >
               Contact Amity <span>↗</span>
             </Link>
