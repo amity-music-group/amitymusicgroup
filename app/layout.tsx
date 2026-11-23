@@ -1,15 +1,7 @@
-
 import type { Metadata } from "next";
-import { Anton, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Navbar";
-
-const anton = Anton({
-  variable: "--font-anton",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -64,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${inter.variable} antialiased`}
+      className={`${inter.variable} antialiased`}
     >
       <body className="min-h-screen bg-white font-sans text-[#111111]">
         <Navbar />
