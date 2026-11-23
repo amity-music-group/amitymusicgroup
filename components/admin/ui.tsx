@@ -1,6 +1,8 @@
 /**
- * Shared form controls for the /admin editors. Amity brand: dark
- * purple surfaces, lime primary actions, pink for danger.
+ * Shared form controls for the /admin editors. UMG monochrome:
+ * white, black, mid-grey, pale grey, hairline borders — no colour
+ * accents. Inputs are at least 48px tall so they are comfortable
+ * touch targets on phones.
  */
 
 export function Field({
@@ -14,12 +16,12 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+      <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
         {label}
       </span>
       {children}
       {hint ? (
-        <span className="mt-1 block text-xs leading-5 text-white/40">
+        <span className="mt-1 block text-xs leading-5 text-neutral-400">
           {hint}
         </span>
       ) : null}
@@ -28,7 +30,7 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-md border border-white/20 bg-white/[0.04] px-3 py-2.5 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]";
+  "w-full rounded-md border border-black/15 bg-white px-3 py-3 text-base text-[#111111] placeholder:text-neutral-400 outline-none transition focus:border-black sm:text-sm";
 
 export function Toggle({
   checked,
@@ -47,7 +49,7 @@ export function Toggle({
       aria-label={label}
       onClick={() => onChange(!checked)}
       className={`relative h-6 w-11 shrink-0 rounded-full transition ${
-        checked ? "bg-[#D7FF38]" : "bg-white/20"
+        checked ? "bg-[#111111]" : "bg-black/20"
       }`}
     >
       <span

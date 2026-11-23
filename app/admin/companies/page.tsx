@@ -14,7 +14,7 @@ export default async function AdminCompaniesPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Companies</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-white/60">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
         The companies of the Amity ecosystem, shown on the public Companies
         page. Hidden companies stay here so they can be edited or shown
         again — hiding never deletes.

@@ -41,10 +41,10 @@ export default async function ServicesPage() {
     <main className="min-h-screen bg-white text-[#111111]">
       {/* Page hero */}
       <section className="border-b border-black/10">
-        <div className="mx-auto max-w-7xl px-6 pb-28 pt-36 sm:pt-44 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 pb-20 pt-28 sm:pb-28 sm:pt-44 lg:px-8">
           <p className="text-lg text-neutral-500">Services</p>
 
-          <h1 className="mt-5 max-w-5xl text-[56px] font-light leading-[1.05] tracking-tight sm:text-7xl">
+          <h1 className="mt-5 max-w-5xl text-[40px] font-light leading-[1.05] tracking-tight sm:text-7xl">
             More than music. A connected industry.
           </h1>
 
@@ -92,7 +92,7 @@ export default async function ServicesPage() {
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <div className="lg:sticky lg:top-36 lg:self-start">
               <p className="text-lg text-neutral-500">Our capabilities</p>
-              <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
                 Areas of expertise.
               </h2>
             </div>
@@ -115,7 +115,7 @@ export default async function ServicesPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">How we work</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Strategy meets execution.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
@@ -147,7 +147,7 @@ export default async function ServicesPage() {
             <p className="text-lg text-neutral-500">
               One connected ecosystem
             </p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Discover the companies behind the vision.
             </h2>
           </div>
@@ -171,7 +171,7 @@ export default async function ServicesPage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Start a conversation</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Have a project in mind?{" "}
               <span className="text-neutral-400">Let&apos;s connect.</span>
             </h2>

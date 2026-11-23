@@ -23,31 +23,31 @@ const STRIP_ITEMS: { src: string; alt: string; className: string }[] = [
     src: "/logos/is-logo.png",
     alt: "Iron Stage Touring",
     // "IS" in a thin circle, ~90px tall.
-    className: "h-[90px] w-auto max-w-[180px] object-contain",
+    className: "h-[64px] w-auto max-w-[160px] object-contain sm:h-[90px] sm:max-w-[180px]",
   },
   {
     src: "/logos/ar-logo.png",
     alt: "Arden Row",
     // "AR" with a black underline bar, ~70px tall.
-    className: "h-[70px] w-auto max-w-[180px] object-contain",
+    className: "h-[52px] w-auto max-w-[160px] object-contain sm:h-[70px] sm:max-w-[180px]",
   },
   {
     src: "/logos/a-cross-logo.png",
     alt: "Amity Christian Music Group",
     // "A" with a cross and swoosh, ~90px tall.
-    className: "h-[90px] w-auto max-w-[180px] object-contain",
+    className: "h-[64px] w-auto max-w-[160px] object-contain sm:h-[90px] sm:max-w-[180px]",
   },
   {
     src: "/logos/dial-recordings-america.png",
     alt: "Dial Recordings America",
     // Wide, short wordmark, ~60px tall.
-    className: "h-[60px] w-auto max-w-[180px] object-contain",
+    className: "h-[44px] w-auto max-w-[160px] object-contain sm:h-[60px] sm:max-w-[180px]",
   },
   {
     src: "/logos/melted-mindz-records.png",
     alt: "Melted Mindz Records",
     // Square mark, ~90px tall like UMG's tallest logos.
-    className: "h-[90px] w-auto max-w-[180px] object-contain",
+    className: "h-[64px] w-auto max-w-[160px] object-contain sm:h-[90px] sm:max-w-[180px]",
   },
 ];
 function isImageUrl(url: string | null | undefined): url is string {
@@ -104,18 +104,18 @@ export default async function CompaniesPage() {
           like UMG's black wordmarks on white — never the Supabase
           JPGs, which are artwork on solid black squares. */}
       <section>
-        <div className="mx-auto max-w-7xl px-6 pt-36 lg:px-8 lg:pt-44">
+        <div className="mx-auto max-w-7xl px-6 pt-28 sm:pt-36 lg:px-8 lg:pt-44">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
-          <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          <h1 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
             Our companies
           </h1>
-          <p className="mt-8 max-w-4xl text-[32px] font-light leading-[1.3] tracking-tight text-black">
+          <p className="mt-8 max-w-4xl text-[26px] font-light sm:text-[32px] leading-[1.3] tracking-tight text-black">
             Amity Music Group brings together specialized companies and
             organizations across recorded music, publishing, distribution,
             management, international music, and live music.
           </p>
         </div>
-        <div aria-hidden="true" className="mt-24 overflow-hidden py-6">
+        <div aria-hidden="true" className="mt-12 overflow-hidden py-6 sm:mt-24">
           <div
             className="hero-marquee flex w-max items-center"
             style={{ animationDuration: `${stripHalf.length * 6}s` }}
@@ -139,7 +139,7 @@ export default async function CompaniesPage() {
             ))}
           </div>
         </div>
-        <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto mt-16 max-w-7xl sm:mt-32 px-6 lg:px-8">
           <div className="h-px w-full bg-black" />
         </div>
       </section>
@@ -148,7 +148,7 @@ export default async function CompaniesPage() {
           light-grey rounded tiles, logo centered, name in small black
           text below the tile, left-aligned, diagonal arrow on linked
           tiles. */}
-      <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-28 lg:px-8">
         <h2 className="text-[40px] font-light leading-tight tracking-tight">
           Our companies
         </h2>

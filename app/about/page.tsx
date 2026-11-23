@@ -34,11 +34,11 @@ export default async function AboutPage() {
     <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero */}
       <section className="border-b border-black/10">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-28 pt-36 md:pb-36 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8 lg:pt-44">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-28 sm:pb-28 sm:pt-36 md:pb-36 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8 lg:pt-44">
           <div>
             <p className="text-lg text-neutral-500">About</p>
 
-            <h1 className="mt-5 max-w-4xl text-[56px] font-light leading-[1.05] tracking-tight sm:text-7xl">
+            <h1 className="mt-5 max-w-4xl text-[40px] font-light leading-[1.05] tracking-tight sm:text-7xl">
               Independent culture. Major sound.
             </h1>
 
@@ -86,7 +86,7 @@ export default async function AboutPage() {
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">Who we are</p>
-          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
             More than a name. <span className="text-neutral-400">A bigger picture.</span>
           </h2>
         </div>
@@ -103,7 +103,7 @@ export default async function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 py-24 md:py-28 lg:grid-cols-2 lg:items-start lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Our mission</p>
-            <h2 className="mt-5 max-w-xl text-5xl font-light leading-[1.05] tracking-tight sm:text-6xl">
+            <h2 className="mt-5 max-w-xl text-4xl font-light sm:text-5xl leading-[1.05] tracking-tight sm:text-6xl">
               {site.missionTitle}
             </h2>
           </div>
@@ -125,7 +125,7 @@ export default async function AboutPage() {
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">What guides us</p>
-          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
             Principles over promises.
           </h2>
           <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
@@ -153,7 +153,7 @@ export default async function AboutPage() {
       <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-28 sm:pb-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">The Amity ecosystem</p>
-          <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
             Discover what we&apos;re building.
           </h2>
         </div>

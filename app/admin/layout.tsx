@@ -23,9 +23,14 @@ export default async function AdminLayout({
   const session = getAdminSession(token);
 
   return (
-    <div className="min-h-screen bg-[#160D2C] text-white">
+    <div className="min-h-screen bg-white text-[#111111]">
       {session ? <AdminNav sessionName={session.name} /> : null}
-      <main className="mx-auto w-full max-w-6xl px-6 py-10">{children}</main>
+      {/* Phone bottom nav is fixed, so the page needs bottom
+          padding on phones (none on desktop) so it never covers
+          content or the save buttons. */}
+      <main className="mx-auto w-full max-w-6xl px-4 pt-6 pb-28 md:px-6 md:py-10 md:pb-10">
+        {children}
+      </main>
     </div>
   );
 }

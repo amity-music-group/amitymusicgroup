@@ -43,7 +43,7 @@ export default function InboxList({
 
   if (messages.length === 0) {
     return (
-      <p className="rounded-xl border border-white/15 bg-[#241443] p-6 text-sm leading-7 text-white/65">
+      <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
         No messages yet. Contact form submissions will appear here as soon
         as someone writes in.
       </p>
@@ -53,7 +53,7 @@ export default function InboxList({
   return (
     <div>
       {error ? (
-        <p role="alert" className="mb-4 text-sm text-[#F32991]">
+        <p role="alert" className="mb-4 text-sm text-[#111111]">
           {error}
         </p>
       ) : null}
@@ -63,8 +63,8 @@ export default function InboxList({
             key={message.id}
             className={`rounded-xl border p-6 ${
               message.read
-                ? "border-white/15 bg-[#241443]"
-                : "border-[#D7FF38]/50 bg-[#241443]"
+                ? "border-black/10 bg-[#f5f5f5]"
+                : "border-black/30 bg-[#f5f5f5]"
             }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -72,16 +72,16 @@ export default function InboxList({
                 <h2 className="text-lg font-bold">
                   {message.subject}{" "}
                   {!message.read ? (
-                    <span className="ml-2 rounded-full bg-[#D7FF38] px-2 py-0.5 text-[10px] font-bold text-[#160D2C]">
+                    <span className="ml-2 rounded-full bg-[#111111] px-2 py-0.5 text-[10px] font-bold text-white">
                       NEW
                     </span>
                   ) : null}
                 </h2>
-                <p className="mt-1 text-sm text-white/55">
+                <p className="mt-1 text-sm text-neutral-500">
                   {message.name} ·{" "}
                   <a
                     href={`mailto:${message.email}`}
-                    className="text-[#D7FF38] hover:underline"
+                    className="text-[#111111] hover:underline"
                   >
                     {message.email}
                   </a>{" "}
@@ -92,20 +92,20 @@ export default function InboxList({
                 <button
                   type="button"
                   onClick={() => act(message.id, message.read ? "unread" : "read")}
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+                  className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black"
                 >
                   {message.read ? "Mark unread" : "Mark read"}
                 </button>
                 <button
                   type="button"
                   onClick={() => act(message.id, "delete")}
-                  className="rounded-md border border-[#F32991]/60 px-3 py-1.5 text-xs font-bold text-[#F32991] transition hover:bg-[#F32991] hover:text-white"
+                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
                 >
                   Delete
                 </button>
               </div>
             </div>
-            <p className="mt-4 whitespace-pre-wrap text-sm leading-7 text-white/80">
+            <p className="mt-4 whitespace-pre-wrap text-sm leading-7 text-[#111111]/80">
               {message.message}
             </p>
           </article>

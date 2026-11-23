@@ -14,7 +14,7 @@ export default async function UnsubscribedPage({
       <div className="flex flex-1 items-center justify-center px-6 py-36">
         <div className="w-full max-w-md text-center">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
-          <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+          <h1 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
             {ok ? "You're unsubscribed." : "That link didn't work."}
           </h1>
           <p className="mt-5 text-lg leading-8 text-neutral-600">

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/activity";
 import { getSupabaseAdmin } from "@/lib/supabase";
 
 /**
@@ -49,6 +50,12 @@ export async function POST(request: NextRequest) {
         { status: 500 },
       );
     }
+    await logAdminAction(
+      "delete",
+      "contact_submissions",
+      id,
+      "Deleted a contact message",
+    );
     return NextResponse.json({ ok: true });
   }
 
@@ -63,5 +70,11 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
+  await logAdminAction(
+    "update",
+    "contact_submissions",
+    id,
+    `Marked a contact message ${action === "read" ? "read" : "unread"}`,
+  );
   return NextResponse.json({ ok: true });
 }

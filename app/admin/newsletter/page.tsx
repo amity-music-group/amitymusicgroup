@@ -17,7 +17,7 @@ export default async function AdminNewsletterPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Newsletter</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-white/60">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
         People who signed up in the site footer, and the email blasts sent
         to them. Blasts send from Amity Music Group via Resend.
       </p>

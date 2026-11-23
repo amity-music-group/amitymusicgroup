@@ -15,6 +15,12 @@ function blankCompany(): Company {
     description: "",
     website: "",
     image: "",
+    foundedYear: null,
+    location: "",
+    instagram: "",
+    facebook: "",
+    tiktok: "",
+    youtube: "",
     visible: true,
     sortOrder: 0,
   };
@@ -30,6 +36,29 @@ export default function CompaniesEditor({
     "idle",
   );
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
+  const [visibility, setVisibility] = useState<"all" | "visible" | "hidden">(
+    "all",
+  );
+  const [sort, setSort] = useState<"manual" | "name">("manual");
+
+  // View-only: search / filter / sort never change the saved order.
+  const needle = query.trim().toLowerCase();
+  const viewRows = rows
+    .filter((company) => {
+      if (visibility === "visible" && !company.visible) return false;
+      if (visibility === "hidden" && company.visible) return false;
+      if (needle === "") return true;
+      return [company.name, company.category, company.tagline, company.location]
+        .join(" ")
+        .toLowerCase()
+        .includes(needle);
+    })
+    .sort((a, b) =>
+      sort === "name"
+        ? a.name.localeCompare(b.name)
+        : 0,
+    );
 
   function update(id: string, patch: Partial<Company>) {
     setRows((current) =>
@@ -78,41 +107,85 @@ export default function CompaniesEditor({
   return (
     <div>
       {rows.length === 0 ? (
-        <p className="rounded-xl border border-white/15 bg-[#241443] p-6 text-sm leading-7 text-white/65">
+        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
           No companies yet. Add the first one below — it will appear on the
           Companies page as soon as you save.
         </p>
       ) : null}
 
+      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-black/10 bg-[#f5f5f5] p-4">
+        <input
+          className={`${inputClass} sm:max-w-xs`}
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search companies…"
+          aria-label="Search companies"
+        />
+        <select
+          className={`${inputClass} w-auto`}
+          value={visibility}
+          onChange={(e) =>
+            setVisibility(e.target.value as "all" | "visible" | "hidden")
+          }
+          aria-label="Filter by visibility"
+        >
+          <option value="all">All</option>
+          <option value="visible">Visible</option>
+          <option value="hidden">Hidden</option>
+        </select>
+        <select
+          className={`${inputClass} w-auto`}
+          value={sort}
+          onChange={(e) => setSort(e.target.value as "manual" | "name")}
+          aria-label="Sort companies"
+        >
+          <option value="manual">Manual order</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+
+      {viewRows.length === 0 && rows.length > 0 ? (
+        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+          No companies match that search or filter.
+        </p>
+      ) : null}
+
       <div className="space-y-4">
-        {rows.map((company, index) => (
+        {viewRows.map((company) => {
+          const index = rows.findIndex((row) => row.id === company.id);
+          return (
           <section
             key={company.id}
-            className="rounded-xl border border-white/15 bg-[#241443] p-6"
+            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-bold">
                 {company.name || "New company"}
               </h2>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => move(company.id, -1)}
-                  disabled={index === 0}
-                  aria-label="Move up"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
-                >
-                  ↑
-                </button>
-                <button
-                  type="button"
-                  onClick={() => move(company.id, 1)}
-                  disabled={index === rows.length - 1}
-                  aria-label="Move down"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
-                >
-                  ↓
-                </button>
+                {sort === "manual" ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => move(company.id, -1)}
+                      disabled={index === 0}
+                      aria-label="Move up"
+                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => move(company.id, 1)}
+                      disabled={index === rows.length - 1}
+                      aria-label="Move down"
+                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                    >
+                      ↓
+                    </button>
+                  </>
+                ) : null}
                 <button
                   type="button"
                   onClick={() =>
@@ -120,7 +193,7 @@ export default function CompaniesEditor({
                       current.filter((row) => row.id !== company.id),
                     )
                   }
-                  className="rounded-md border border-[#F32991]/60 px-3 py-1.5 text-xs font-bold text-[#F32991] transition hover:bg-[#F32991] hover:text-white"
+                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
                 >
                   Delete
                 </button>
@@ -187,7 +260,7 @@ export default function CompaniesEditor({
                 />
               </Field>
               <div>
-                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
                   Upload logo
                 </span>
                 <ImageUpload
@@ -197,6 +270,69 @@ export default function CompaniesEditor({
                   slug={company.slug || slugify(company.name)}
                 />
               </div>
+              <Field label="Founded year">
+                <input
+                  className={inputClass}
+                  type="number"
+                  value={company.foundedYear ?? ""}
+                  onChange={(e) => {
+                    const raw = e.target.value;
+                    const parsed =
+                      raw === "" ? null : Number.parseInt(raw, 10);
+                    update(company.id, {
+                      foundedYear:
+                        parsed === null || Number.isNaN(parsed)
+                          ? null
+                          : parsed,
+                    });
+                  }}
+                  placeholder="e.g. 2018"
+                />
+              </Field>
+              <Field label="Location">
+                <input
+                  className={inputClass}
+                  value={company.location}
+                  onChange={(e) => update(company.id, { location: e.target.value })}
+                  placeholder="City, State"
+                />
+              </Field>
+              <Field label="Instagram">
+                <input
+                  className={inputClass}
+                  type="url"
+                  value={company.instagram ?? ""}
+                  onChange={(e) => update(company.id, { instagram: e.target.value })}
+                  placeholder="https://instagram.com/…"
+                />
+              </Field>
+              <Field label="Facebook">
+                <input
+                  className={inputClass}
+                  type="url"
+                  value={company.facebook ?? ""}
+                  onChange={(e) => update(company.id, { facebook: e.target.value })}
+                  placeholder="https://facebook.com/…"
+                />
+              </Field>
+              <Field label="TikTok">
+                <input
+                  className={inputClass}
+                  type="url"
+                  value={company.tiktok ?? ""}
+                  onChange={(e) => update(company.id, { tiktok: e.target.value })}
+                  placeholder="https://tiktok.com/…"
+                />
+              </Field>
+              <Field label="YouTube">
+                <input
+                  className={inputClass}
+                  type="url"
+                  value={company.youtube ?? ""}
+                  onChange={(e) => update(company.id, { youtube: e.target.value })}
+                  placeholder="https://youtube.com/…"
+                />
+              </Field>
             </div>
 
             <div className="mt-4">
@@ -216,19 +352,20 @@ export default function CompaniesEditor({
                 onChange={(visible) => update(company.id, { visible })}
                 label="Visible on the public site"
               />
-              <span className="text-sm text-white/70">
+              <span className="text-sm text-[#111111]/70">
                 {company.visible ? "Visible on the site" : "Hidden from the site"}
               </span>
             </div>
           </section>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
         <button
           type="button"
           onClick={() => setRows((current) => [...current, blankCompany()])}
-          className="rounded-md border border-white/25 px-5 py-3 text-sm font-bold text-white transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+          className="rounded-md border border-black/20 px-5 py-3 text-sm font-bold text-[#111111] transition hover:border-black hover:text-black"
         >
           + Add company
         </button>
@@ -236,17 +373,17 @@ export default function CompaniesEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#D7FF38] px-6 py-3 text-sm font-bold text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save all companies"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#D7FF38]">
+          <p className="text-sm font-bold text-[#111111]">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#F32991]">
+          <p role="alert" className="text-sm text-[#111111]">
             {error}
           </p>
         ) : null}

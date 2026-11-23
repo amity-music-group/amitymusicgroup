@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
-      <section className="mx-auto max-w-7xl px-6 pb-28 pt-36 sm:px-8 sm:pt-44 lg:px-8">
+      <section className="mx-auto max-w-7xl px-6 pb-20 pt-28 sm:px-8 sm:pb-28 sm:pt-44 lg:px-8">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-base text-neutral-600 transition hover:text-black"
@@ -57,7 +57,7 @@ export default function ContactPage() {
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Contact</p>
 
-            <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h1 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Let&apos;s talk.
             </h1>
 
