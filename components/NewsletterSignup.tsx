@@ -40,13 +40,13 @@ export default function NewsletterSignup() {
 
   return (
     <div>
-      <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-        Stay connected
+      <p className="text-[28px] font-light leading-tight text-white">
+        Subscribe to Amity
       </p>
-      <p className="mt-2 max-w-sm text-sm leading-6 text-white/60">
+      <p className="mt-3 max-w-sm text-sm leading-6 text-white/60">
         News from Amity Music Group, our artists and our companies.
       </p>
-      <form onSubmit={handleSubmit} className="mt-4 flex max-w-sm gap-2">
+      <form onSubmit={handleSubmit} className="mt-5 flex max-w-sm items-center gap-3">
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
         </label>
@@ -59,24 +59,25 @@ export default function NewsletterSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full border border-white/15 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#D7FF38]"
+          className="w-full rounded-full bg-white px-5 py-3 text-sm text-black placeholder:text-black/40 outline-none transition focus:ring-2 focus:ring-white/60"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="shrink-0 bg-[#D7FF38] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          aria-label="Subscribe"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-lg text-black transition hover:bg-white/85 disabled:opacity-50"
         >
-          {status === "loading" ? "…" : "Sign up"}
+          {status === "loading" ? "…" : "→"}
         </button>
       </form>
       <div aria-live="polite" role="status">
         {status === "success" ? (
-          <p className="mt-3 text-sm text-[#D7FF38]">
+          <p className="mt-3 text-sm text-white/80">
             Thanks — you&apos;re signed up.
           </p>
         ) : null}
         {status === "error" ? (
-          <p className="mt-3 text-sm text-[#F32991]">{error}</p>
+          <p className="mt-3 text-sm text-red-300">{error}</p>
         ) : null}
       </div>
     </div>

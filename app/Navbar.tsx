@@ -22,21 +22,14 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/85 text-white backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 lg:px-8">
+    <header className="fixed inset-x-0 top-6 z-50">
+      <div className="mx-auto flex w-[calc(100%-2rem)] max-w-7xl items-center justify-between gap-4 rounded-2xl bg-[#e8e8e8]/95 px-6 py-3 shadow-[0_2px_16px_rgba(0,0,0,0.06)] backdrop-blur lg:px-8">
         <Link
           href="/"
           aria-label="Amity Music Group home"
-          className="flex shrink-0 items-center gap-3"
+          className="shrink-0 text-base font-semibold tracking-tight text-black"
         >
-          <img
-            src="/amity-logo.jpg"
-            alt="Amity Music Group logo"
-            className="h-9 w-9 object-cover"
-          />
-          <span className="whitespace-nowrap font-display text-sm uppercase tracking-[0.18em]">
-            Amity Music Group
-          </span>
+          Amity Music Group
         </Link>
 
         <nav
@@ -55,8 +48,8 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`shrink-0 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors hover:text-white ${
-                  active ? "text-[#D7FF38]" : "text-white/60"
+                className={`shrink-0 text-[15px] transition-colors hover:text-black ${
+                  active ? "font-medium text-black" : "text-black/60"
                 }`}
               >
                 {item.label}

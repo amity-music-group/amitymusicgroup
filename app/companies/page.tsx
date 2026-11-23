@@ -3,9 +3,8 @@ import { getCompanies, getTerritories } from "@/lib/content";
 import type { Territory } from "@/lib/types";
 
 // A logo is only a logo when the image field holds an actual image URL.
-// A website address (the Melted Mindz Records row currently holds its
-// website in the image field) is not a picture and is never rendered as
-// one — those companies show their name as a text mark instead.
+// A website address is not a picture and is never rendered as one —
+// those companies show their name as a text mark instead.
 function isImageUrl(url: string | null | undefined): url is string {
   if (!url) return false;
   const clean = url.split("?")[0].split("#")[0].toLowerCase();
@@ -29,8 +28,9 @@ export default async function CompaniesPage() {
     else regions.push({ name: region, items: [territory] });
   }
 
-  // The moving logos strip repeats the company set so one half of the
-  // loop always fills the strip, even with a single company.
+  // The moving logos strip only runs when there are at least two
+  // companies — a strip must never repeat a single logo.
+  const showStrip = companies.length >= 2;
   const stripHalf = [
     ...companies,
     ...companies,
@@ -41,30 +41,26 @@ export default async function CompaniesPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
-      {/* Header — UMG's Labels page layout: heading + intro line, then
-          the moving strip of logos directly underneath. UMG's page has
-          no big hero image; the moving thing is the logos strip itself,
-          so the Ken Burns hero and wordmark marquee are gone. */}
-      <section className="border-b border-white/10">
-        <div className="mx-auto max-w-7xl px-6 pb-16 pt-24 lg:px-8 lg:pb-20 lg:pt-32">
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-            Amity Music Group
-          </p>
-          <h1 className="font-display text-5xl uppercase leading-[0.9] md:text-7xl">
-            Our Companies
+    <main className="min-h-screen bg-white text-[#111111]">
+      {/* Header — UMG's Labels page layout: eyebrow, headline, thin
+          rule, intro line, then the moving strip of logos. */}
+      <section className="border-b border-black/10">
+        <div className="mx-auto max-w-7xl px-6 pb-16 pt-36 lg:px-8 lg:pb-20 lg:pt-44">
+          <p className="text-lg text-neutral-500">Amity Music Group</p>
+          <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            Our companies
           </h1>
-          <div className="mt-8 h-[3px] w-24 bg-[#F32991]" />
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-white/60">
+          <div className="mt-8 h-px w-24 bg-black" />
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
             Amity Music Group brings together specialized companies and
             organizations across recorded music, publishing, distribution,
             management, international music, and live music.
           </p>
         </div>
-        {companies.length > 0 ? (
+        {showStrip ? (
           <div
             aria-hidden="true"
-            className="overflow-hidden border-t border-white/10 py-5"
+            className="overflow-hidden border-t border-black/10 py-5"
           >
             <div className="hero-marquee flex w-max items-center">
               {[0, 1].map((half) => (
@@ -82,7 +78,7 @@ export default async function CompaniesPage() {
                           className="h-14 w-auto object-contain"
                         />
                       ) : (
-                        <span className="whitespace-nowrap font-display text-2xl uppercase tracking-[0.08em] text-white/70">
+                        <span className="whitespace-nowrap text-2xl font-light tracking-tight text-neutral-600">
                           {company.name}
                         </span>
                       )}
@@ -95,48 +91,39 @@ export default async function CompaniesPage() {
         ) : null}
       </section>
 
-      {/* Company tiles — UMG's Labels grid: logo centered and contained
-          in the tile (never cropped), name + diagonal-arrow mark below,
-          whole tile linking out. */}
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      {/* Company tiles — UMG's Labels grid: a light-grey rounded tile
+          with the logo centered and contained (never cropped), name in
+          small black sans beneath the tile, whole tile linking out. */}
+      <div className="mx-auto max-w-7xl px-6 py-28 lg:px-8">
         {companies.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
             {companies.map((company) => {
               const tile = (
                 <>
-                  <div className="absolute left-0 top-0 z-10 h-[3px] w-16 bg-[#D7FF38] transition-all duration-300 group-hover:w-full" />
-                  {isImageUrl(company.image) ? (
-                    <div className="flex aspect-square items-center justify-center overflow-hidden bg-[#0a0a0a] p-10">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#eee] p-8">
+                    {isImageUrl(company.image) ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={company.image}
                         alt={`${company.name} logo`}
-                        className="max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105"
+                        className="max-h-full max-w-full object-contain"
                       />
-                    </div>
-                  ) : null}
-                  <div
-                    className={`flex items-center justify-between gap-4 p-6 ${
-                      isImageUrl(company.image) ? "" : "min-h-32"
-                    }`}
-                  >
-                    <h2 className="font-display text-2xl uppercase leading-none tracking-[0.01em]">
-                      {company.name}
-                    </h2>
+                    ) : (
+                      <span className="text-center text-lg font-light leading-snug text-black">
+                        {company.name}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3 flex items-center justify-center gap-2 text-center">
+                    <span className="text-sm text-black">{company.name}</span>
                     {company.website ? (
-                      <span
-                        aria-hidden="true"
-                        className="shrink-0 text-xl text-white/50 transition group-hover:text-[#D7FF38]"
-                      >
+                      <span aria-hidden="true" className="text-sm text-neutral-400">
                         ↗
                       </span>
                     ) : null}
                   </div>
                 </>
               );
-
-              const tileClass =
-                "group relative overflow-hidden border border-white/10 bg-[#111111] transition duration-300 hover:border-white/40";
 
               return company.website ? (
                 <a
@@ -145,44 +132,53 @@ export default async function CompaniesPage() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${company.name} — visit website`}
-                  className={`${tileClass} block`}
+                  className="group block"
                 >
                   {tile}
                 </a>
               ) : (
-                <article key={company.slug} className={tileClass}>
-                  {tile}
-                </article>
+                <article key={company.slug}>{tile}</article>
               );
             })}
           </div>
-        ) : null}
+        ) : (
+          <p className="text-lg text-neutral-500">
+            No companies published yet.
+          </p>
+        )}
       </div>
 
       {/* Global Territories — modeled on UMG's Labels page section:
-          region groups with their places as links. Hidden entirely
+          region pills with their places listed beneath. Hidden entirely
           until at least one visible territory is saved in /admin;
           nothing here is invented. */}
       {regions.length > 0 ? (
-        <section className="border-t border-white/10 py-24 sm:py-32">
+        <section className="border-t border-black/10 py-28 sm:py-36">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-              Where we work
-            </p>
-            <h2 className="mt-5 font-display text-5xl uppercase leading-[0.9] sm:text-6xl">
-              Global Territories
+            <p className="text-lg text-neutral-500">Where we work</p>
+            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              Global territories
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-white/60">
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
               The places Amity Music Group works.
             </p>
+
+            <div className="mt-12 flex flex-wrap gap-3">
+              {regions.map((region) => (
+                <span
+                  key={region.name}
+                  className="rounded-full bg-[#eee] px-5 py-2 text-sm text-black"
+                >
+                  {region.name}
+                </span>
+              ))}
+            </div>
 
             <div className="mt-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
               {regions.map((region) => (
                 <div key={region.name}>
-                  <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/40">
-                    {region.name}
-                  </h3>
-                  <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+                  <h3 className="text-sm text-neutral-500">{region.name}</h3>
+                  <ul className="mt-5 space-y-3">
                     {region.items.map((territory) =>
                       territory.website ? (
                         <li key={territory.slug}>
@@ -190,16 +186,13 @@ export default async function CompaniesPage() {
                             href={territory.website}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-sm font-semibold text-white/70 transition hover:text-[#D7FF38]"
+                            className="text-base font-medium text-black transition hover:text-neutral-500"
                           >
                             {territory.name} ↗
                           </a>
                         </li>
                       ) : (
-                        <li
-                          key={territory.slug}
-                          className="text-sm font-semibold text-white/70"
-                        >
+                        <li key={territory.slug} className="text-base text-black">
                           {territory.name}
                         </li>
                       ),

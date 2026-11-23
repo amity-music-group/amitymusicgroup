@@ -1,16 +1,20 @@
 import Link from "next/link";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
-const footerLinks = [
-  { label: "Home", href: "/" },
-  { label: "Artists", href: "/artists" },
-  { label: "Companies", href: "/companies" },
-  { label: "Services", href: "/services" },
+const companyLinks = [
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Companies", href: "/companies" },
+  { label: "Artists", href: "/artists" },
 ];
 
-/** Shared public footer — logo, wordmark, tagline, nav, newsletter, legal. */
+const exploreLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/" },
+];
+
+/** Shared public footer — black, UMG-style: wordmark, subscribe,
+    link columns, tiny legal line. */
 export default function Footer({
   footerText = "A music-focused organization and connected music ecosystem.",
   tagline = "Independent Culture. Major Sound.",
@@ -19,67 +23,68 @@ export default function Footer({
   tagline?: string;
 }) {
   return (
-    <footer className="border-t border-white/10 bg-[#050505]">
-      <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-8">
-        {/* Giant outlined wordmark */}
-        <div
-          aria-hidden="true"
-          className="select-none overflow-hidden border-b border-white/10 pb-10"
-        >
-          <p className="font-display text-[22vw] uppercase leading-[0.85] tracking-[0.01em] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.28)] sm:text-[15vw] lg:text-[11rem]">
-            Amity
-          </p>
-          <p className="font-display text-[11vw] uppercase leading-[0.9] tracking-[0.01em] text-white sm:text-[7.5vw] lg:text-[5.5rem]">
-            Music Group
-          </p>
-        </div>
-
-        <div className="grid gap-12 py-12 md:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-16">
+    <footer className="bg-black text-white">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-20 lg:px-8">
+        <div className="grid gap-14 border-b border-white/10 pb-14 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
-            <Link href="/" className="flex items-center gap-3">
-              <img
-                src="/amity-logo.jpg"
-                alt="Amity Music Group logo"
-                className="h-10 w-10 object-cover"
-              />
-              <span className="font-display text-sm uppercase tracking-[0.2em]">
-                Amity Music Group
-              </span>
-            </Link>
-            <p className="mt-5 max-w-sm text-sm leading-7 text-white/50">
+            <p className="text-6xl font-light leading-none tracking-tight sm:text-7xl lg:text-8xl">
+              Amity
+            </p>
+            <p className="mt-2 text-3xl font-light leading-none tracking-tight text-white/50 sm:text-4xl">
+              Music Group
+            </p>
+            <p className="mt-8 max-w-sm text-sm leading-7 text-white/60">
               {footerText}
             </p>
-            <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#D7FF38]">
-              {tagline}
-            </p>
+            <p className="mt-3 text-sm text-white/60">{tagline}</p>
           </div>
 
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-col items-start gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60"
-          >
-            {footerLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition hover:text-[#D7FF38]"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div>
+          <div className="w-full max-w-md">
             <NewsletterSignup />
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-white/10 py-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="grid gap-10 py-12 sm:grid-cols-2">
+          <div>
+            <p className="text-base text-white">Company</p>
+            <nav
+              aria-label="Footer company links"
+              className="mt-4 flex flex-col items-start gap-3 text-sm text-white/60"
+            >
+              {companyLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div>
+            <p className="text-base text-white">Explore</p>
+            <nav
+              aria-label="Footer explore links"
+              className="mt-4 flex flex-col items-start gap-3 text-sm text-white/60"
+            >
+              {exploreLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 Amity Music Group. All rights reserved.</p>
-          <p className="flex items-center gap-2 uppercase tracking-[0.2em]">
-            <span className="h-1.5 w-1.5 bg-[#F32991]" />
-            Independent Culture. Major Sound.
-          </p>
+          <p>{tagline}</p>
         </div>
       </div>
     </footer>
