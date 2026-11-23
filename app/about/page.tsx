@@ -48,7 +48,7 @@ export default async function AboutPage() {
 
             <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
               <Link
-                href="/companies"
+                href="/labels"
                 className="inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
               >
                 Explore our companies <span aria-hidden="true">→</span>
@@ -149,7 +149,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Ecosystem CTA — the Global Territories call to action: the
-          territories themselves live on /companies. */}
+          territories themselves live on /labels. */}
       <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-28 sm:pb-36 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
         <div className="lg:sticky lg:top-36 lg:self-start">
           <p className="text-lg text-neutral-500">The Amity ecosystem</p>
@@ -163,7 +163,7 @@ export default async function AboutPage() {
             that make up the Amity vision.
           </p>
           <Link
-            href="/companies"
+            href="/labels"
             className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
           >
             Explore our companies <span aria-hidden="true">→</span>

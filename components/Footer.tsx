@@ -3,7 +3,7 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 
 const companyLinks = [
   { label: "About", href: "/about" },
-  { label: "Companies", href: "/companies" },
+  { label: "Companies", href: "/labels" },
   { label: "Artists", href: "/artists" },
 ];
 

@@ -80,7 +80,7 @@ export default async function Home() {
               Discover Amity <span aria-hidden="true">→</span>
             </Link>
             <Link
-              href="/companies"
+              href="/labels"
               className="inline-flex items-center gap-2 text-base font-medium transition hover:text-neutral-500"
             >
               Explore our companies <span aria-hidden="true">→</span>
@@ -254,7 +254,7 @@ export default async function Home() {
               management, international music, and live music.
             </p>
             <Link
-              href="/companies"
+              href="/labels"
               className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
               Explore our companies <span aria-hidden="true">→</span>
