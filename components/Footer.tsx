@@ -13,6 +13,11 @@ const exploreLinks = [
   { label: "Home", href: "/" },
 ];
 
+const contactLinks = [
+  { label: "Contact Amity", href: "/contact" },
+  { label: "info@amitymusicgroup.com", href: "mailto:info@amitymusicgroup.com" },
+];
+
 /** Shared public footer — black, UMG-style: wordmark, subscribe,
     link columns, tiny legal line. */
 export default function Footer({
@@ -44,7 +49,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="grid gap-10 py-12 sm:grid-cols-2">
+        <div className="grid gap-10 py-12 sm:grid-cols-3">
           <div>
             <p className="text-base text-white">Company</p>
             <nav
@@ -77,6 +82,24 @@ export default function Footer({
                 >
                   {item.label}
                 </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div>
+            <p className="text-base text-white">Contact</p>
+            <nav
+              aria-label="Footer contact links"
+              className="mt-4 flex flex-col items-start gap-3 text-sm text-white/60"
+            >
+              {contactLinks.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="transition hover:text-white"
+                >
+                  {item.label}
+                </a>
               ))}
             </nav>
           </div>
