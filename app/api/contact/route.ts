@@ -5,8 +5,6 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -38,6 +36,20 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // The Resend client is built inside the handler, not at module
+    // scope: constructing it at import time crashes the build on any
+    // environment without RESEND_API_KEY (e.g. preview deployments).
+    // A missing key fails this send at runtime instead, never the build.
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("Contact email delivery failed: RESEND_API_KEY is not set.");
+      return NextResponse.json(
+        { error: "Email delivery failed." },
+        { status: 502 }
+      );
+    }
+    const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
       from: "Amity Music Group Website <onboarding@resend.dev>",
