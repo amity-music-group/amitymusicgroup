@@ -4,6 +4,7 @@ import type {
   Company,
   ServiceItem,
   SiteSettings,
+  Territory,
 } from "@/lib/types";
 
 /**
@@ -12,7 +13,7 @@ import type {
  * Two keys, two very different jobs:
  *
  * - The ANON key (NEXT_PUBLIC_SUPABASE_ANON_KEY) is safe to expose. It
- *   can only SELECT the four public content tables, because Row Level
+ *   can only SELECT the five public content tables, because Row Level
  *   Security has a "Public read" policy for anon on those tables and
  *   no policy at all on the rest (see
  *   supabase/amity-admin-migration.sql). The public site reads
@@ -198,6 +199,31 @@ export function serviceToRow(service: ServiceItem, sortOrder: number): Row {
     description: service.description,
     offerings: service.offerings,
     visible: service.visible,
+    sort_order: sortOrder,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function territoryFromRow(row: Row): Territory {
+  return {
+    id: str(row.id),
+    slug: str(row.slug),
+    name: str(row.name),
+    region: str(row.region),
+    website: optStr(row.website),
+    visible: bool(row.visible, true),
+    sortOrder: num(row.sort_order),
+  };
+}
+
+export function territoryToRow(territory: Territory, sortOrder: number): Row {
+  return {
+    id: territory.id,
+    slug: territory.slug,
+    name: territory.name,
+    region: territory.region,
+    website: territory.website ?? null,
+    visible: territory.visible,
     sort_order: sortOrder,
     updated_at: new Date().toISOString(),
   };

@@ -5,6 +5,7 @@ import type {
   Company,
   ServiceItem,
   SiteSettings,
+  Territory,
 } from "@/lib/types";
 import {
   artistFromRow,
@@ -13,6 +14,7 @@ import {
   isSupabaseConfigured,
   serviceFromRow,
   siteFromRow,
+  territoryFromRow,
 } from "@/lib/supabase";
 
 /**
@@ -307,6 +309,11 @@ export const staticHomeFocus: { number: string; title: string; description: stri
 export const staticArtists: Artist[] = [];
 export const staticCompanies: Company[] = [];
 
+/** No territories are recorded yet, so the fallback is an empty list
+ * — never invented rows. The Global Territories section stays hidden
+ * until the first territory is added in /admin. */
+export const staticTerritories: Territory[] = [];
+
 // ---------------------------------------------------------------------------
 // Getters
 // ---------------------------------------------------------------------------
@@ -394,6 +401,14 @@ export const getServices = cache(async (): Promise<ServiceItem[]> =>
 
 export const getAllServices = cache(async (): Promise<ServiceItem[]> =>
   readTable("services", serviceFromRow, staticServices),
+);
+
+export const getTerritories = cache(async (): Promise<Territory[]> =>
+  (await getAllTerritories()).filter((t) => t.visible),
+);
+
+export const getAllTerritories = cache(async (): Promise<Territory[]> =>
+  readTable("territories", territoryFromRow, staticTerritories),
 );
 
 /** Homepage focus areas: the first six visible services when the

@@ -49,6 +49,16 @@ export interface ServiceItem {
   sortOrder: number;
 }
 
+export interface Territory {
+  id: string;
+  slug: string;
+  name: string;
+  region: string;
+  website?: string;
+  visible: boolean;
+  sortOrder: number;
+}
+
 export interface SiteSettings {
   tagline: string;
   heroImage: string;
