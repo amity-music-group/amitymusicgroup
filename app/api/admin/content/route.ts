@@ -6,13 +6,14 @@ import {
   companyToRow,
   getSupabaseAdmin,
   serviceToRow,
+  territoryToRow,
 } from "@/lib/supabase";
-import type { Artist, Company, ServiceItem } from "@/lib/types";
+import type { Artist, Company, ServiceItem, Territory } from "@/lib/types";
 
 /**
  * POST /api/admin/content — bulk-replace one content table.
  *
- * Body: { table: "artists" | "companies" | "services", rows: [...] }
+ * Body: { table: "artists" | "companies" | "services" | "territories", rows: [...] }
  * The editor sends the table's full set; the route deletes every row
  * and inserts the new set, in order. An empty rows array empties the
  * table — the public pages then fall back to their static copy, so
@@ -23,11 +24,15 @@ import type { Artist, Company, ServiceItem } from "@/lib/types";
  * yet, the route answers 503 and names the file instead of crashing.
  */
 
-const TABLES = ["artists", "companies", "services"] as const;
+const TABLES = ["artists", "companies", "services", "territories"] as const;
 type TableName = (typeof TABLES)[number];
 
-const MIGRATION_ERROR =
-  "The admin tables do not exist yet. Run supabase/amity-admin-migration.sql in the Supabase SQL Editor, then try again.";
+function migrationError(table: string): string {
+  if (table === "territories") {
+    return "The territories table does not exist yet. Run supabase/amity-territories-migration.sql in the Supabase SQL Editor, then try again.";
+  }
+  return "The admin tables do not exist yet. Run supabase/amity-admin-migration.sql in the Supabase SQL Editor, then try again.";
+}
 
 function missingTableError(message: string): boolean {
   return (
@@ -105,6 +110,15 @@ export async function POST(request: NextRequest) {
         );
       }
       mapped.push(companyToRow(company, i));
+    } else if (table === "territories") {
+      const territory = row as unknown as Territory;
+      if (!territory.name) {
+        return NextResponse.json(
+          { error: `Row ${i + 1} needs a name.` },
+          { status: 400 },
+        );
+      }
+      mapped.push(territoryToRow(territory, i));
     } else {
       const service = row as unknown as ServiceItem;
       if (!service.title) {
@@ -125,7 +139,10 @@ export async function POST(request: NextRequest) {
     .neq("id", "00000000-0000-0000-0000-000000000000");
   if (deleteError) {
     if (missingTableError(deleteError.message)) {
-      return NextResponse.json({ error: MIGRATION_ERROR }, { status: 503 });
+      return NextResponse.json(
+        { error: migrationError(table) },
+        { status: 503 },
+      );
     }
     console.warn("[admin/content] delete failed:", deleteError.message);
     return NextResponse.json(
