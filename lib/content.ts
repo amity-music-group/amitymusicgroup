@@ -123,6 +123,8 @@ export const staticSiteSettings: SiteSettings = {
   facebook: "",
   tiktok: "",
   youtube: "",
+  seoTitle: "",
+  seoDescription: "",
 };
 
 export const staticServices: ServiceItem[] = [

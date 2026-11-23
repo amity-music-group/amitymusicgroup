@@ -2,14 +2,13 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { getSiteSettings, getSupabaseStatus } from "@/lib/content";
 import {
-  getAllArtists,
-  getAllCompanies,
-  getAllServices,
-  getSiteSettings,
-  getSupabaseStatus,
-} from "@/lib/content";
-import { getEmailLog, getInbox, getSubscribers } from "@/lib/admin-data";
+  getAdminStats,
+  getEmailLog,
+  getInbox,
+  getRecentActivity,
+} from "@/lib/admin-data";
 
 export const metadata = {
   title: "Admin | Amity Music Group",
@@ -28,30 +27,40 @@ export default async function AdminPage() {
     redirect("/admin/login?next=/admin");
   }
 
-  const [site, artists, companies, services, supabase, inbox, subscribers, emailLog] =
+  const [site, supabase, stats, inbox, emailLog, activity] =
     await Promise.all([
       getSiteSettings(),
-      getAllArtists(),
-      getAllCompanies(),
-      getAllServices(),
       getSupabaseStatus(),
+      getAdminStats(),
       getInbox(5),
-      getSubscribers(),
       getEmailLog(5),
+      getRecentActivity(10),
     ]);
 
-  const unread = inbox.filter((m) => !m.read).length;
-  const subscribedCount = subscribers.filter(
-    (s) => s.status === "subscribed",
-  ).length;
-
   const cards = [
-    { label: "Artists", count: artists.length, href: "/admin/artists" },
-    { label: "Companies", count: companies.length, href: "/admin/companies" },
-    { label: "Services", count: services.length, href: "/admin/services" },
-    { label: "Unread messages", count: unread, href: "/admin/inbox" },
-    { label: "Subscribers", count: subscribedCount, href: "/admin/newsletter" },
+    { label: "Artists", count: stats.artists, href: "/admin/artists" },
+    { label: "Companies", count: stats.companies, href: "/admin/companies" },
+    { label: "Services", count: stats.services, href: "/admin/services" },
+    { label: "Territories", count: stats.territories, href: "/admin/territories" },
+    { label: "Releases", count: stats.releases, href: "/admin/artists" },
+    { label: "Subscribers", count: stats.subscribers, href: "/admin/newsletter" },
+    { label: "Unread messages", count: stats.unreadMessages, href: "/admin/inbox" },
+    { label: "Email sends", count: stats.emailSends, href: "/admin/email-history" },
   ];
+
+  const quickActions = [
+    { label: "Artists", href: "/admin/artists" },
+    { label: "Companies", href: "/admin/companies" },
+    { label: "Media library", href: "/admin/media" },
+    { label: "Send a blast", href: "/admin/newsletter" },
+    { label: "Inbox", href: "/admin/inbox" },
+  ];
+
+  const kindLabels: Record<string, string> = {
+    edit: "Edit",
+    message: "Message",
+    subscriber: "Subscriber",
+  };
 
   return (
     <div>
@@ -100,7 +109,7 @@ export default async function AdminPage() {
         </div>
       ) : null}
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
           <Link
             key={card.label}
@@ -114,6 +123,60 @@ export default async function AdminPage() {
           </Link>
         ))}
       </div>
+
+      <section className="mt-8 rounded-xl border border-white/15 bg-[#241443] p-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold">Recent activity</h2>
+          <Link
+            href="/admin/activity"
+            className="text-xs font-bold uppercase tracking-wider text-[#D7FF38] hover:text-[#F32991]"
+          >
+            Full activity log →
+          </Link>
+        </div>
+        {activity.length === 0 ? (
+          <p className="mt-4 text-sm text-white/55">
+            No activity yet — saves, sends and new signups will show up here.
+          </p>
+        ) : (
+          <ul className="mt-4 space-y-3">
+            {activity.map((item) => (
+              <li
+                key={item.id}
+                className="border-b border-white/10 pb-3 text-sm last:border-0"
+              >
+                <p className="font-bold text-white">
+                  <span className="mr-2 rounded-full border border-white/25 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white/60">
+                    {kindLabels[item.kind] ?? item.kind}
+                  </span>
+                  {item.label}
+                </p>
+                <p className="mt-1 text-white/55">
+                  {item.detail}
+                  {item.createdAt ? (
+                    <> · {new Date(item.createdAt).toLocaleString()}</>
+                  ) : null}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-8 rounded-xl border border-white/15 bg-[#241443] p-6">
+        <h2 className="text-lg font-bold">Quick actions</h2>
+        <div className="mt-4 flex flex-wrap gap-3">
+          {quickActions.map((action) => (
+            <Link
+              key={action.href}
+              href={action.href}
+              className="rounded-md border border-white/25 px-5 py-2.5 text-sm font-bold text-white transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+            >
+              {action.label}
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <section className="rounded-xl border border-white/15 bg-[#241443] p-6">

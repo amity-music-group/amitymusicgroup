@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/activity";
 import { getSupabaseAdmin, siteToRow } from "@/lib/supabase";
 import type { SiteSettings } from "@/lib/types";
 
@@ -67,6 +68,12 @@ export async function POST(request: NextRequest) {
       typeof settings.facebook === "string" ? settings.facebook : "",
     tiktok: typeof settings.tiktok === "string" ? settings.tiktok : "",
     youtube: typeof settings.youtube === "string" ? settings.youtube : "",
+    seoTitle:
+      typeof settings.seoTitle === "string" ? settings.seoTitle : "",
+    seoDescription:
+      typeof settings.seoDescription === "string"
+        ? settings.seoDescription
+        : "",
   };
 
   const { error } = await client
@@ -92,5 +99,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  await logAdminAction("save", "site_settings", "", "Site settings saved");
   return NextResponse.json({ ok: true });
 }

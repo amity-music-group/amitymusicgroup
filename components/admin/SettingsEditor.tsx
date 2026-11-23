@@ -90,6 +90,22 @@ const GROUPS: {
       { key: "youtube", label: "YouTube" },
     ],
   },
+  {
+    title: "SEO",
+    fields: [
+      {
+        key: "seoTitle",
+        label: "SEO title",
+        hint: "Browser tab title. Leave blank to use the site name.",
+      },
+      {
+        key: "seoDescription",
+        label: "SEO description",
+        textarea: true,
+        hint: "Shown in search results. Leave blank for the default.",
+      },
+    ],
+  },
 ];
 
 export default function SettingsEditor({

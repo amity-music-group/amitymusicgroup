@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { logAdminAction } from "@/lib/activity";
 import {
   artistToRow,
   companyToRow,
@@ -162,5 +163,11 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  await logAdminAction(
+    "save",
+    table,
+    "",
+    `${mapped.length} ${table} saved`,
+  );
   return NextResponse.json({ ok: true, count: mapped.length });
 }

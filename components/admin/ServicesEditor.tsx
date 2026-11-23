@@ -28,6 +28,27 @@ export default function ServicesEditor({
     "idle",
   );
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
+  const [visibility, setVisibility] = useState<"all" | "visible" | "hidden">(
+    "all",
+  );
+  const [sort, setSort] = useState<"manual" | "name">("manual");
+
+  // View-only: search / filter / sort never change the saved order.
+  const needle = query.trim().toLowerCase();
+  const viewRows = rows
+    .filter((service) => {
+      if (visibility === "visible" && !service.visible) return false;
+      if (visibility === "hidden" && service.visible) return false;
+      if (needle === "") return true;
+      return [service.title, service.subtitle]
+        .join(" ")
+        .toLowerCase()
+        .includes(needle);
+    })
+    .sort((a, b) =>
+      sort === "name" ? a.title.localeCompare(b.title) : 0,
+    );
 
   function update(id: string, patch: Partial<ServiceItem>) {
     setRows((current) =>
@@ -80,8 +101,48 @@ export default function ServicesEditor({
         shows the first six visible services as its focus areas.
       </p>
 
+      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-white/15 bg-[#241443] p-4">
+        <input
+          className={`${inputClass} sm:max-w-xs`}
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search services…"
+          aria-label="Search services"
+        />
+        <select
+          className={`${inputClass} w-auto`}
+          value={visibility}
+          onChange={(e) =>
+            setVisibility(e.target.value as "all" | "visible" | "hidden")
+          }
+          aria-label="Filter by visibility"
+        >
+          <option value="all">All</option>
+          <option value="visible">Visible</option>
+          <option value="hidden">Hidden</option>
+        </select>
+        <select
+          className={`${inputClass} w-auto`}
+          value={sort}
+          onChange={(e) => setSort(e.target.value as "manual" | "name")}
+          aria-label="Sort services"
+        >
+          <option value="manual">Manual order</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+
+      {viewRows.length === 0 && rows.length > 0 ? (
+        <p className="rounded-xl border border-white/15 bg-[#241443] p-6 text-sm leading-7 text-white/65">
+          No services match that search or filter.
+        </p>
+      ) : null}
+
       <div className="mt-4 space-y-4">
-        {rows.map((service, index) => (
+        {viewRows.map((service) => {
+          const index = rows.findIndex((row) => row.id === service.id);
+          return (
           <section
             key={service.id}
             className="rounded-xl border border-white/15 bg-[#241443] p-6"
@@ -92,24 +153,28 @@ export default function ServicesEditor({
                 {service.title || "New service"}
               </h2>
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => move(service.id, -1)}
-                  disabled={index === 0}
-                  aria-label="Move up"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
-                >
-                  ↑
-                </button>
-                <button
-                  type="button"
-                  onClick={() => move(service.id, 1)}
-                  disabled={index === rows.length - 1}
-                  aria-label="Move down"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
-                >
-                  ↓
-                </button>
+                {sort === "manual" ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => move(service.id, -1)}
+                      disabled={index === 0}
+                      aria-label="Move up"
+                      className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => move(service.id, 1)}
+                      disabled={index === rows.length - 1}
+                      aria-label="Move down"
+                      className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
+                    >
+                      ↓
+                    </button>
+                  </>
+                ) : null}
                 <button
                   type="button"
                   onClick={() =>
@@ -172,7 +237,7 @@ export default function ServicesEditor({
             <div className="mt-4 grid gap-4">
               <Field label="Description">
                 <textarea
-                  className={`${inputClass} min-h-20 resize-y`}
+                  className={`${inputClass} min-h-32 resize-y`}
                   value={service.description}
                   onChange={(e) => update(service.id, { description: e.target.value })}
                   placeholder="What this service covers."
@@ -209,7 +274,8 @@ export default function ServicesEditor({
               </span>
             </div>
           </section>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
