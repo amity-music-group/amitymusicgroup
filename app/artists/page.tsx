@@ -16,11 +16,11 @@ export default async function ArtistsPage() {
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
-      <div className="mx-auto max-w-7xl px-6 pb-28 pt-36 lg:px-8 lg:pt-44">
+      <div className="mx-auto max-w-7xl px-6 pb-20 pt-28 sm:pb-28 sm:pt-36 lg:px-8 lg:pt-44">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Amity Music Group</p>
-            <h1 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h1 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Artists &amp; releases
             </h1>
             <div className="mt-8 h-px w-24 bg-black" />

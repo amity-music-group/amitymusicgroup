@@ -74,7 +74,7 @@ export default function TerritoriesEditor({
   return (
     <div>
       {rows.length === 0 ? (
-        <p className="rounded-xl border border-white/15 bg-[#241443] p-6 text-sm leading-7 text-white/65">
+        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
           No territories yet. Add the first one below — the Global
           Territories section on the Companies page stays hidden until at
           least one visible territory is saved.
@@ -85,7 +85,7 @@ export default function TerritoriesEditor({
         {rows.map((territory, index) => (
           <section
             key={territory.id}
-            className="rounded-xl border border-white/15 bg-[#241443] p-6"
+            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-bold">
@@ -97,7 +97,7 @@ export default function TerritoriesEditor({
                   onClick={() => move(territory.id, -1)}
                   disabled={index === 0}
                   aria-label="Move up"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
+                  className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
                 >
                   ↑
                 </button>
@@ -106,7 +106,7 @@ export default function TerritoriesEditor({
                   onClick={() => move(territory.id, 1)}
                   disabled={index === rows.length - 1}
                   aria-label="Move down"
-                  className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-[#D7FF38] hover:text-[#D7FF38] disabled:opacity-30"
+                  className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
                 >
                   ↓
                 </button>
@@ -117,7 +117,7 @@ export default function TerritoriesEditor({
                       current.filter((row) => row.id !== territory.id),
                     )
                   }
-                  className="rounded-md border border-[#F32991]/60 px-3 py-1.5 text-xs font-bold text-[#F32991] transition hover:bg-[#F32991] hover:text-white"
+                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
                 >
                   Delete
                 </button>
@@ -181,7 +181,7 @@ export default function TerritoriesEditor({
                 onChange={(visible) => update(territory.id, { visible })}
                 label="Visible on the public site"
               />
-              <span className="text-sm text-white/70">
+              <span className="text-sm text-[#111111]/70">
                 {territory.visible
                   ? "Visible on the site"
                   : "Hidden from the site"}
@@ -195,7 +195,7 @@ export default function TerritoriesEditor({
         <button
           type="button"
           onClick={() => setRows((current) => [...current, blankTerritory()])}
-          className="rounded-md border border-white/25 px-5 py-3 text-sm font-bold text-white transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+          className="rounded-md border border-black/20 px-5 py-3 text-sm font-bold text-[#111111] transition hover:border-black hover:text-black"
         >
           + Add territory
         </button>
@@ -203,17 +203,17 @@ export default function TerritoriesEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#D7FF38] px-6 py-3 text-sm font-bold text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save all territories"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#D7FF38]">
+          <p className="text-sm font-bold text-[#111111]">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#F32991]">
+          <p role="alert" className="text-sm text-[#111111]">
             {error}
           </p>
         ) : null}

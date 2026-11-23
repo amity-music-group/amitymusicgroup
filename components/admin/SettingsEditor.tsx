@@ -90,6 +90,22 @@ const GROUPS: {
       { key: "youtube", label: "YouTube" },
     ],
   },
+  {
+    title: "SEO",
+    fields: [
+      {
+        key: "seoTitle",
+        label: "SEO title",
+        hint: "Browser tab title. Leave blank to use the site name.",
+      },
+      {
+        key: "seoDescription",
+        label: "SEO description",
+        textarea: true,
+        hint: "Shown in search results. Leave blank for the default.",
+      },
+    ],
+  },
 ];
 
 export default function SettingsEditor({
@@ -138,11 +154,11 @@ export default function SettingsEditor({
         {GROUPS.map((group) => (
           <section
             key={group.title}
-            className="rounded-xl border border-white/15 bg-[#241443] p-6"
+            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
           >
             <h2 className="text-lg font-bold">{group.title}</h2>
             {group.hint ? (
-              <p className="mt-1 text-sm text-white/55">{group.hint}</p>
+              <p className="mt-1 text-sm text-neutral-500">{group.hint}</p>
             ) : null}
             <div className="mt-5 grid gap-4">
               {group.fields.map((field) => (
@@ -165,7 +181,7 @@ export default function SettingsEditor({
             </div>
             {group.title === "Homepage" ? (
               <div className="mt-4">
-                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-white/60">
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
                   Homepage hero image
                 </span>
                 <ImageUpload
@@ -174,7 +190,7 @@ export default function SettingsEditor({
                   kind="site"
                   slug="hero"
                 />
-                <span className="mt-1 block text-xs leading-5 text-white/40">
+                <span className="mt-1 block text-xs leading-5 text-neutral-400">
                   Becomes the full-bleed homepage hero background. Leave
                   blank to keep the current hero.
                 </span>
@@ -189,17 +205,17 @@ export default function SettingsEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#D7FF38] px-6 py-3 text-sm font-bold text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save settings"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#D7FF38]">
+          <p className="text-sm font-bold text-[#111111]">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#F32991]">
+          <p role="alert" className="text-sm text-[#111111]">
             {error}
           </p>
         ) : null}

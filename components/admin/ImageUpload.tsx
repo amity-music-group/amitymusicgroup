@@ -73,12 +73,12 @@ export default function ImageUpload({
           <img
             src={value}
             alt="Current image preview"
-            className="h-20 w-20 shrink-0 rounded-md border border-white/20 object-cover"
+            className="h-20 w-20 shrink-0 rounded-md border border-black/15 object-cover"
           />
           <button
             type="button"
             onClick={() => onChange("")}
-            className="rounded-md border border-[#F32991]/60 px-3 py-1.5 text-xs font-bold text-[#F32991] transition hover:bg-[#F32991] hover:text-white"
+            className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
           >
             Remove image
           </button>
@@ -90,23 +90,23 @@ export default function ImageUpload({
           type="file"
           accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
           onChange={() => setError("")}
-          className="min-w-0 flex-1 rounded-md border border-white/20 bg-white/[0.04] px-3 py-2 text-sm text-white/80 file:mr-3 file:rounded file:border-0 file:bg-white/10 file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-white"
+          className="min-w-0 flex-1 rounded-md border border-black/15 bg-white px-3 py-2 text-sm text-[#111111]/80 file:mr-3 file:rounded file:border-0 file:bg-white/10 file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-[#111111]"
         />
         <button
           type="button"
           onClick={upload}
           disabled={uploading}
-          className="shrink-0 rounded-md bg-[#D7FF38] px-4 py-2.5 text-xs font-bold text-[#160D2C] transition hover:bg-[#F32991] hover:text-white disabled:opacity-50"
+          className="shrink-0 rounded-md bg-[#111111] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
         >
           {uploading ? "Uploading…" : "Upload"}
         </button>
       </div>
-      <p className="mt-1 text-xs leading-5 text-white/40">
+      <p className="mt-1 text-xs leading-5 text-neutral-400">
         JPEG, PNG, WebP, GIF or AVIF, 5 MB max. Uploading fills the image
         URL — remember to save.
       </p>
       {error ? (
-        <p role="alert" className="mt-1 text-xs text-[#F32991]">
+        <p role="alert" className="mt-1 text-xs text-[#111111]">
           {error}
         </p>
       ) : null}

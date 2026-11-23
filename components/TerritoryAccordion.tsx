@@ -25,7 +25,7 @@ export default function TerritoryAccordion({
               type="button"
               onClick={() => setOpenIndex(open ? null : index)}
               aria-expanded={open}
-              className="flex w-full items-center justify-between gap-6 py-7 text-left"
+              className="flex w-full items-center justify-between gap-6 min-h-14 py-4 text-left sm:py-7"
             >
               <span className="text-2xl font-light text-black">
                 {region.name}

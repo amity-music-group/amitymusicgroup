@@ -29,13 +29,13 @@ export default function Footer({
 }) {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 pb-10 pt-20 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-10 pt-14 sm:pt-20 lg:px-8">
         <div className="grid gap-14 border-b border-white/10 pb-14 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
-            <p className="text-6xl font-light leading-none tracking-tight sm:text-7xl lg:text-8xl">
+            <p className="text-5xl font-light leading-none tracking-tight sm:text-7xl lg:text-8xl">
               Amity
             </p>
-            <p className="mt-2 text-3xl font-light leading-none tracking-tight text-white/50 sm:text-4xl">
+            <p className="mt-2 text-2xl font-light leading-none tracking-tight text-white/50 sm:text-4xl">
               Music Group
             </p>
             <p className="mt-8 max-w-sm text-sm leading-7 text-white/60">
@@ -60,7 +60,7 @@ export default function Footer({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="transition hover:text-white"
+                  className="flex min-h-11 items-center transition hover:text-white"
                 >
                   {item.label}
                 </Link>
@@ -78,7 +78,7 @@ export default function Footer({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="transition hover:text-white"
+                  className="flex min-h-11 items-center transition hover:text-white"
                 >
                   {item.label}
                 </Link>
@@ -96,7 +96,7 @@ export default function Footer({
                 <a
                   key={item.href}
                   href={item.href}
-                  className="transition hover:text-white"
+                  className="flex min-h-11 items-center transition hover:text-white"
                 >
                   {item.label}
                 </a>

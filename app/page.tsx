@@ -64,9 +64,9 @@ export default async function Home() {
           /admin is shown below the text as a rounded image on white,
           never as a dark full-bleed photo with an overlay. */}
       <section>
-        <div className="mx-auto w-full max-w-7xl px-6 pb-24 pt-40 lg:px-8">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-20 pt-28 sm:pb-24 sm:pt-40 lg:px-8">
           <p className="text-lg text-neutral-500">Amity Music Group</p>
-          <h1 className="mt-5 max-w-4xl text-[56px] font-light leading-[1.05] tracking-tight sm:text-7xl">
+          <h1 className="mt-5 max-w-4xl text-[40px] font-light leading-[1.05] tracking-tight sm:text-7xl">
             The music group behind the music.
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-neutral-600">
@@ -114,7 +114,7 @@ export default async function Home() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="max-w-3xl">
               <p className="text-lg text-neutral-500">Artists</p>
-              <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+              <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
                 Artists from across the Amity ecosystem.
               </h2>
               <Link
@@ -163,7 +163,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">About</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Music is the center.
             </h2>
           </div>
@@ -198,7 +198,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">What we do</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Everything music.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
@@ -243,7 +243,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">The Amity ecosystem</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Different companies. One music ecosystem.
             </h2>
           </div>
@@ -268,7 +268,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Our approach</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Built for what&apos;s next.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-8 text-neutral-600">
@@ -320,7 +320,7 @@ export default async function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-8">
           <div className="lg:sticky lg:top-36 lg:self-start">
             <p className="text-lg text-neutral-500">Contact</p>
-            <h2 className="mt-5 text-[56px] font-light leading-[1.05] tracking-tight">
+            <h2 className="mt-5 text-[40px] font-light sm:text-[56px] leading-[1.05] tracking-tight">
               Let&apos;s talk music.
             </h2>
           </div>
