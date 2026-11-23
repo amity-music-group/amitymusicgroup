@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        // The public Companies page moved to /labels, like UMG.
+        // The old URL keeps working permanently.
+        source: "/companies",
+        destination: "/labels",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

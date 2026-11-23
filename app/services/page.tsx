@@ -157,7 +157,7 @@ export default async function ServicesPage() {
               contribute to its broader music and creative objectives.
             </p>
             <Link
-              href="/companies"
+              href="/labels"
               className="mt-8 inline-flex items-center gap-2 text-base font-medium text-black transition hover:text-neutral-500"
             >
               Explore companies <span aria-hidden="true">→</span>
