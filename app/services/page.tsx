@@ -89,7 +89,7 @@ export default async function ServicesPage() {
             </a>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center border border-white/20 px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] transition hover:border-[#D7FF38] hover:text-[#D7FF38]"
+              className="inline-flex items-center justify-center border border-white/40 bg-white/[0.05] px-7 py-4 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:border-[#D7FF38] hover:bg-white/[0.08] hover:text-[#D7FF38]"
             >
               Discuss an opportunity <span className="ml-3">↗</span>
             </Link>
