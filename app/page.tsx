@@ -86,7 +86,7 @@ export default async function Home() {
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+                  className="inline-flex items-center justify-center bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
                 >
                   Discover Amity <span className="ml-3 text-base">↗</span>
                 </Link>
@@ -252,7 +252,7 @@ export default async function Home() {
 
           <Link
             href="/services"
-            className="mt-10 inline-flex items-center gap-3 bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+            className="mt-10 inline-flex items-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
           >
             Explore all services <span aria-hidden="true">↗</span>
           </Link>
@@ -393,7 +393,7 @@ export default async function Home() {
 
               <Link
                 href="/contact"
-                className="relative inline-flex items-center justify-center gap-3 bg-white px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-black transition hover:bg-white/85"
+                className="relative inline-flex items-center justify-center gap-3 bg-[#D7FF38] px-7 py-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#160D2C] transition hover:bg-[#F32991] hover:text-white"
               >
                 Contact Amity <span aria-hidden="true">↗</span>
               </Link>
