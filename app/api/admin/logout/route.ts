@@ -1,14 +1,8 @@
 import { NextResponse } from "next/server";
-import { ADMIN_COOKIE } from "@/lib/auth";
+import { signOutServer } from "@/lib/supabase-auth";
 
-/** POST /api/admin/logout — clears the admin session cookie. */
+/** POST /api/admin/logout — signs the admin out of Supabase Auth. */
 export async function POST() {
-  const response = NextResponse.json({ ok: true });
-  response.cookies.set(ADMIN_COOKIE, "", {
-    httpOnly: true,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 0,
-  });
-  return response;
+  await signOutServer();
+  return NextResponse.json({ ok: true });
 }

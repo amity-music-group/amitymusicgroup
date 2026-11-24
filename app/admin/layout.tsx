@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { getAdminUser } from "@/lib/supabase-auth";
 import AdminNav from "@/components/admin/AdminNav";
 
 export const metadata: Metadata = {
@@ -19,12 +18,11 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  const session = getAdminSession(token);
+  const user = await getAdminUser();
 
   return (
     <div className="min-h-screen bg-white text-[#111111]">
-      {session ? <AdminNav sessionName={session.name} /> : null}
+      {user ? <AdminNav sessionName={user.email} /> : null}
       {/* Phone bottom nav is fixed, so the page needs bottom
           padding on phones (none on desktop) so it never covers
           content or the save buttons. */}
