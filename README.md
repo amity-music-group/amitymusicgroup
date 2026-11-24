@@ -74,18 +74,20 @@ are managed. Saves go live on the site within seconds — no redeploy.
    - `NEXT_PUBLIC_SITE_URL` — optional. Base URL used in email links;
      defaults to `https://amitymusicgroup.com`.
 3. **Sign in** at `https://amitymusicgroup.com/admin` with an
-   email link or Google (Supabase Auth). Only the email addresses
-   on the allowlist can get in — the `admin_users` table, managed
-   from the /admin/admins page, or the `ADMIN_EMAILS` env var.
+   email address and password (Supabase Auth). Only the email
+   addresses on the allowlist can get in — the `admin_users` table,
+   managed from the /admin/admins page, or the `ADMIN_EMAILS` env
+   var. First time, use “Create a password” on the sign-in page:
+   Supabase emails a confirmation link, and clicking it finishes
+   the setup. “Forgot password?” emails a link to set a new one.
    Run `supabase/amity-admin-users-migration.sql` in the Supabase
    SQL Editor to create that table (it seeds the two current
    admins). In the Supabase dashboard, under Authentication → URL
    Configuration, add this redirect URL (and the preview pattern
    for Vercel previews):
-   `https://www.amitymusicgroup.com/auth/callback`. Google sign-in
-   also needs the Google provider switched on in the Supabase
-   dashboard (Authentication → Providers → Google) with a Google
-   Cloud OAuth client ID and secret.
+   `https://www.amitymusicgroup.com/auth/callback`. The
+   confirmation and password-reset emails will not land on the
+   site until it is added.
 
 ### What the admin edits
 

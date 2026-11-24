@@ -7,8 +7,9 @@ import {
 } from "@/lib/supabase-auth";
 
 /**
- * GET /auth/callback — finishes a Supabase Auth sign-in (email link
- * or Google). Swaps the code for a session, then:
+ * GET /auth/callback — finishes a Supabase Auth email flow
+ * (password setup confirmation or password reset). Swaps the code
+ * for a session, then:
  * - allowlisted email (admin_users table, or ADMIN_EMAILS) → the
  *   page they were going to
  * - anyone else → signed straight back out, to /admin/login with an

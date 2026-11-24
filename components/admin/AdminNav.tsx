@@ -68,6 +68,12 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
               >
                 View site ↗
               </Link>
+              <Link
+                href="/admin/set-password"
+                className="text-neutral-600 transition hover:text-black"
+              >
+                Change password
+              </Link>
               <span className="text-xs text-neutral-500">{sessionName}</span>
               <button
                 type="button"
