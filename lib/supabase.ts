@@ -5,6 +5,7 @@ import type {
   Release,
   ServiceItem,
   SiteSettings,
+  StripItem,
   Territory,
 } from "@/lib/types";
 
@@ -189,6 +190,31 @@ export function companyToRow(company: Company, sortOrder: number): Row {
   };
 }
 
+export function stripFromRow(row: Row): StripItem {
+  return {
+    id: str(row.id),
+    slug: str(row.slug),
+    name: str(row.name),
+    image: str(row.image),
+    heightPx: typeof row.height_px === "number" ? row.height_px : 90,
+    visible: bool(row.visible, true),
+    sortOrder: num(row.sort_order),
+  };
+}
+
+export function stripToRow(item: StripItem, sortOrder: number): Row {
+  return {
+    id: item.id,
+    slug: item.slug,
+    name: item.name,
+    image: item.image,
+    height_px: item.heightPx,
+    visible: item.visible,
+    sort_order: sortOrder,
+    updated_at: new Date().toISOString(),
+  };
+}
+
 export function releaseFromRow(row: Row): Release {
   return {
     id: str(row.id),
@@ -290,6 +316,10 @@ export function siteFromRow(row: Row): SiteSettings {
     youtube: str(row.youtube),
     seoTitle: str(row.seo_title),
     seoDescription: str(row.seo_description),
+    stripSpeedPxPerSec:
+      typeof row.strip_speed_px_per_sec === "number"
+        ? row.strip_speed_px_per_sec
+        : 67,
   };
 }
 
@@ -314,6 +344,7 @@ export function siteToRow(site: SiteSettings): Row {
     youtube: site.youtube,
     seo_title: site.seoTitle,
     seo_description: site.seoDescription,
+    strip_speed_px_per_sec: site.stripSpeedPxPerSec,
     updated_at: new Date().toISOString(),
   };
 }

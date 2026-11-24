@@ -43,6 +43,17 @@ export interface Company {
   sortOrder: number;
 }
 
+export interface StripItem {
+  id: string;
+  slug: string;
+  name: string;
+  image: string;
+  /** Logo height in px on desktop (about 71% of this on phones). */
+  heightPx: number;
+  visible: boolean;
+  sortOrder: number;
+}
+
 export interface Release {
   id: string;
   artistId: string;
@@ -131,6 +142,8 @@ export interface SiteSettings {
   youtube: string;
   seoTitle: string;
   seoDescription: string;
+  /** Speed of the /labels logo strip in px per second (default 67). */
+  stripSpeedPxPerSec: number;
 }
 
 export interface ContactSubmission {

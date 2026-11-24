@@ -19,7 +19,7 @@ export default function ImageUpload({
 }: {
   value: string;
   onChange: (url: string) => void;
-  kind: "artists" | "companies" | "site";
+  kind: "artists" | "companies" | "site" | "strip";
   slug: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);

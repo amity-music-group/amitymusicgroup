@@ -57,10 +57,24 @@ img {
   color: #ffffff;
 }
 
-/* Companies logo strip — a continuous leftward marquee at
-   ~67 px/s, faster than UMG's measured ~44 px/s (duration is set
-   inline on the strip from its item count). Linear, infinite, no
-   pause on hover. Motion stops under prefers-reduced-motion. */
+/* Companies logo strip — a continuous leftward marquee. Its speed
+   is set inline on the strip from the /admin/strip setting, in px/s
+   (default 67). Linear, infinite, no pause on hover. Each logo's
+   height comes from --strip-h (set per logo): about 71% of it on
+   phones, full height on computers. Motion stops under
+   prefers-reduced-motion. */
+.strip-logo {
+  height: calc(var(--strip-h, 90px) * 0.71);
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+@media (min-width: 640px) {
+  .strip-logo {
+    height: var(--strip-h, 90px);
+    max-width: 180px;
+  }
+}
 @keyframes hero-marquee {
   from {
     transform: translateX(0);
