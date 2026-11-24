@@ -1,11 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { User } from "@supabase/supabase-js";
+import {
+  adminEmails,
+  isAllowedEmail,
+} from "@/lib/admin-allowlist";
 
 /**
  * Admin sign-in with Supabase Auth (SSO) — replaces the old shared
  * password. Anyone can request a sign-in link, but only the email
- * addresses in ADMIN_EMAILS can actually get into /admin.
+ * addresses on the allowlist can actually get into /admin.
  *
  * How it works:
  * - The login page (/admin/login) sends a magic link by email, or
@@ -14,32 +18,21 @@ import type { User } from "@supabase/supabase-js";
  *   swaps the code for a session stored in Supabase Auth cookies.
  * - Every admin page and API route calls getAdminUser() below. It
  *   validates the session with Supabase (getUser) and checks the
- *   email against ADMIN_EMAILS. Anything else is turned away.
- * - No Supabase Auth session, no ADMIN_EMAILS set, or an email that
- *   is not on the list: no admin access. Fail closed, always.
+ *   email against the allowlist (lib/admin-allowlist.ts): the
+ *   admin_users table, managed from /admin/admins, or the
+ *   ADMIN_EMAILS env var as a fallback. Anything else is turned away.
+ * - No Supabase Auth session, or an email that is not on the list:
+ *   no admin access. Fail closed, always.
  *
  * Env vars (already set for the site's content, except ADMIN_EMAILS):
  * - NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
- * - ADMIN_EMAILS — comma-separated, e.g.
+ * - ADMIN_EMAILS — comma-separated fallback allowlist, e.g.
  *   "theodore@amitymusicgroup.com, manager@amitymusicgroup.com"
  */
 
 export interface AdminUser {
   email: string;
   name: string;
-}
-
-/** The allowlist, lower-cased and trimmed. Empty when unset. */
-export function adminEmails(): string[] {
-  return (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
-    .filter((e) => e.length > 0);
-}
-
-function isAdminEmail(email: string | undefined | null): boolean {
-  if (!email) return false;
-  return adminEmails().includes(email.toLowerCase());
 }
 
 /** Server client for Server Components and Route Handlers. */
@@ -81,7 +74,7 @@ export async function getAdminUser(): Promise<AdminUser | null> {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user || !isAdminEmail(user.email)) return null;
+  if (!user || !(await isAllowedEmail(supabase, user.email))) return null;
   return { email: user.email ?? "", name: user.email ?? "" };
 }
 
@@ -104,4 +97,4 @@ export async function signOutServer(): Promise<void> {
   await supabase.auth.signOut();
 }
 
-export { isAdminEmail };
+export { adminEmails, isAllowedEmail };

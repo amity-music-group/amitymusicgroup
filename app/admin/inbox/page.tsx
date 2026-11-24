@@ -14,7 +14,7 @@ export default async function AdminInboxPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Inbox</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         Every message sent through the contact form. Messages are also
         emailed to the general contact address — this is the stored copy.
       </p>

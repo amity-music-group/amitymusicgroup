@@ -96,12 +96,12 @@ export default function ServicesEditor({
 
   return (
     <div>
-      <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+      <p className="rounded-xl border border-white/10 bg-[#171717] p-6 text-sm leading-7 text-neutral-400">
         These are the service cards on the Services page. The homepage
         shows the first six visible services as its focus areas.
       </p>
 
-      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-black/10 bg-[#f5f5f5] p-4">
+      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-white/10 bg-[#171717] p-4">
         <input
           className={`${inputClass} sm:max-w-xs`}
           type="search"
@@ -134,7 +134,7 @@ export default function ServicesEditor({
       </div>
 
       {viewRows.length === 0 && rows.length > 0 ? (
-        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+        <p className="rounded-xl border border-white/10 bg-[#171717] p-6 text-sm leading-7 text-neutral-400">
           No services match that search or filter.
         </p>
       ) : null}
@@ -145,7 +145,7 @@ export default function ServicesEditor({
           return (
           <section
             key={service.id}
-            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
+            className="rounded-xl border border-white/10 bg-[#171717] p-6"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-bold">
@@ -160,7 +160,7 @@ export default function ServicesEditor({
                       onClick={() => move(service.id, -1)}
                       disabled={index === 0}
                       aria-label="Move up"
-                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                      className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-white hover:text-white disabled:opacity-30"
                     >
                       ↑
                     </button>
@@ -169,7 +169,7 @@ export default function ServicesEditor({
                       onClick={() => move(service.id, 1)}
                       disabled={index === rows.length - 1}
                       aria-label="Move down"
-                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                      className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-white hover:text-white disabled:opacity-30"
                     >
                       ↓
                     </button>
@@ -182,7 +182,7 @@ export default function ServicesEditor({
                       current.filter((row) => row.id !== service.id),
                     )
                   }
-                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
+                  className="rounded-md border border-white/60 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-white hover:text-black"
                 >
                   Delete
                 </button>
@@ -269,7 +269,7 @@ export default function ServicesEditor({
                 onChange={(visible) => update(service.id, { visible })}
                 label="Visible on the public site"
               />
-              <span className="text-sm text-[#111111]/70">
+              <span className="text-sm text-white/70">
                 {service.visible ? "Visible on the site" : "Hidden from the site"}
               </span>
             </div>
@@ -284,7 +284,7 @@ export default function ServicesEditor({
           onClick={() =>
             setRows((current) => [...current, blankService(current.length)])
           }
-          className="rounded-md border border-black/20 px-5 py-3 text-sm font-bold text-[#111111] transition hover:border-black hover:text-black"
+          className="rounded-md border border-white/20 px-5 py-3 text-sm font-bold text-white transition hover:border-white hover:text-white"
         >
           + Add service
         </button>
@@ -292,17 +292,17 @@ export default function ServicesEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#171717] px-6 py-3 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save all services"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#111111]">
+          <p className="text-sm font-bold text-white">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#111111]">
+          <p role="alert" className="text-sm text-white">
             {error}
           </p>
         ) : null}

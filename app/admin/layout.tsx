@@ -21,7 +21,7 @@ export default async function AdminLayout({
   const user = await getAdminUser();
 
   return (
-    <div className="min-h-screen bg-white text-[#111111]">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
       {user ? <AdminNav sessionName={user.email} /> : null}
       {/* Phone bottom nav is fixed, so the page needs bottom
           padding on phones (none on desktop) so it never covers

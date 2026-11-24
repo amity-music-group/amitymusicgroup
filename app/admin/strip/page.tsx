@@ -17,7 +17,7 @@ export default async function AdminStripPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Logo strip</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         The moving logos at the top of the public /labels page. Add a
         logo, change one, hide one, reorder them, and set how fast they
         move. Hidden logos stay here so they can be shown again — hiding

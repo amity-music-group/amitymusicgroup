@@ -14,7 +14,7 @@ export default async function AdminTerritoriesPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Territories</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         The places Amity Music Group works, shown as the Global Territories
         section on the public Companies page, grouped by region. The
         section stays hidden on the site until at least one visible

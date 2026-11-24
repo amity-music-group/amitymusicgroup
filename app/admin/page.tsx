@@ -36,22 +36,63 @@ export default async function AdminPage() {
     ]);
 
   const cards = [
-    { label: "Artists", count: stats.artists, href: "/admin/artists" },
-    { label: "Companies", count: stats.companies, href: "/admin/companies" },
-    { label: "Services", count: stats.services, href: "/admin/services" },
-    { label: "Territories", count: stats.territories, href: "/admin/territories" },
-    { label: "Releases", count: stats.releases, href: "/admin/artists" },
-    { label: "Subscribers", count: stats.subscribers, href: "/admin/newsletter" },
-    { label: "Unread messages", count: stats.unreadMessages, href: "/admin/inbox" },
-    { label: "Email sends", count: stats.emailSends, href: "/admin/email-history" },
+    {
+      label: "Artists",
+      count: stats.artists,
+      href: "/admin/artists",
+      description: "The roster on the Artists page.",
+    },
+    {
+      label: "Companies",
+      count: stats.companies,
+      href: "/admin/companies",
+      description: "The companies on the /labels page.",
+    },
+    {
+      label: "Services",
+      count: stats.services,
+      href: "/admin/services",
+      description: "The service cards on the Services page.",
+    },
+    {
+      label: "Territories",
+      count: stats.territories,
+      href: "/admin/territories",
+      description: "The places in the Global Territories section.",
+    },
+    {
+      label: "Releases",
+      count: stats.releases,
+      href: "/admin/artists",
+      description: "Releases listed under each artist.",
+    },
+    {
+      label: "Subscribers",
+      count: stats.subscribers,
+      href: "/admin/newsletter",
+      description: "People signed up in the site footer.",
+    },
+    {
+      label: "Unread messages",
+      count: stats.unreadMessages,
+      href: "/admin/inbox",
+      description: "Contact form messages waiting to be read.",
+    },
+    {
+      label: "Email sends",
+      count: stats.emailSends,
+      href: "/admin/email-history",
+      description: "Newsletter blasts and welcome emails sent.",
+    },
   ];
 
-  const quickActions = [
-    { label: "Artists", href: "/admin/artists" },
-    { label: "Companies", href: "/admin/companies" },
-    { label: "Media library", href: "/admin/media" },
+  const quickLinks = [
+    { label: "Add an artist", href: "/admin/artists" },
+    { label: "Add a company", href: "/admin/companies" },
+    { label: "Upload media", href: "/admin/media" },
     { label: "Send a blast", href: "/admin/newsletter" },
-    { label: "Inbox", href: "/admin/inbox" },
+    { label: "Edit site settings", href: "/admin/settings" },
+    { label: "Manage admins", href: "/admin/admins" },
   ];
 
   const kindLabels: Record<string, string> = {
@@ -65,14 +106,14 @@ export default async function AdminPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#111111]">
-            Amity Music Group
+            Amity Music Group <span className="text-neutral-500">Admin</span>
           </p>
           <h1 className="mt-3 text-4xl font-black tracking-tight">
             Admin dashboard
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
-            Edit the artists, companies, services and site copy. Saves go
-            live on the site within seconds — no redeploy.
+            Signed in as {user.email}. Changes go live on
+            amitymusicgroup.com as soon as you save.
           </p>
         </div>
 
@@ -107,30 +148,57 @@ export default async function AdminPage() {
         </div>
       ) : null}
 
-      {/* Phone: stacked single-column cards. Desktop: 2, then 4 across. */}
-      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-        {cards.map((card) => (
-          <Link
-            key={card.label}
-            href={card.href}
-            className="flex min-h-20 items-center justify-between rounded-xl border border-black/10 bg-[#f5f5f5] p-5 transition hover:border-black/40 sm:block"
-          >
-            <p className="text-3xl font-black text-[#111111]">{card.count}</p>
-            <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-neutral-600">
-              {card.label}
-            </p>
-          </Link>
-        ))}
-      </div>
+      <section className="mt-10">
+        <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">
+          Quick links
+        </h2>
+        <div className="mt-4 flex flex-wrap gap-3">
+          {quickLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-md bg-[#111111] px-5 py-3 text-sm font-bold text-white transition hover:bg-black"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </section>
 
-      <section className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+      <section className="mt-10">
+        <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">
+          On the site
+        </h2>
+        {/* Phone: stacked single-column cards. Desktop: 2, then 4 across. */}
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
+          {cards.map((card) => (
+            <Link
+              key={card.label}
+              href={card.href}
+              className="rounded-xl border border-black/10 bg-[#f5f5f5] p-5 transition hover:border-black/40"
+            >
+              <p className="text-3xl font-black text-[#111111]">{card.count}</p>
+              <p className="mt-2 text-sm font-bold text-[#111111]">
+                {card.label}
+              </p>
+              <p className="mt-1 text-sm leading-6 text-neutral-600">
+                {card.description}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold">Recent activity</h2>
+          <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">
+            Recent changes
+          </h2>
           <Link
             href="/admin/activity"
             className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
           >
-            Full activity log →
+            See all →
           </Link>
         </div>
         {activity.length === 0 ? (
@@ -162,25 +230,10 @@ export default async function AdminPage() {
         )}
       </section>
 
-      <section className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
-        <h2 className="text-lg font-bold">Quick actions</h2>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          {quickActions.map((action) => (
-            <Link
-              key={action.href}
-              href={action.href}
-              className="flex min-h-12 items-center justify-center rounded-md border border-black/20 px-5 py-2.5 text-sm font-bold text-[#111111] transition hover:border-black hover:text-black sm:w-auto"
-            >
-              {action.label}
-            </Link>
-          ))}
-        </div>
-      </section>
-
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold">Latest messages</h2>
+            <h2 className="text-lg font-bold text-[#111111]">Latest messages</h2>
             <Link
               href="/admin/inbox"
               className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
@@ -218,7 +271,9 @@ export default async function AdminPage() {
 
         <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold">Recent email sends</h2>
+            <h2 className="text-lg font-bold text-[#111111]">
+              Recent email sends
+            </h2>
             <Link
               href="/admin/newsletter"
               className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
@@ -251,11 +306,12 @@ export default async function AdminPage() {
       </div>
 
       <section className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
-        <h2 className="text-lg font-bold">Site settings</h2>
+        <h2 className="text-lg font-bold text-[#111111]">Site settings</h2>
         <p className="mt-2 text-sm leading-7 text-neutral-600">
           Tagline: <span className="text-[#111111]">{site.tagline}</span>
           <br />
-          Contact email: <span className="text-[#111111]">{site.emailGeneral}</span>
+          Contact email:{" "}
+          <span className="text-[#111111]">{site.emailGeneral}</span>
         </p>
         <Link
           href="/admin/settings"

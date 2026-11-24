@@ -189,7 +189,7 @@ export default function ArtistsEditor({
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-black/10 bg-[#f5f5f5] p-4">
+      <div className="mb-4 flex flex-wrap items-center gap-3 rounded-xl border border-white/10 bg-[#171717] p-4">
         <input
           className={`${inputClass} sm:max-w-xs`}
           type="search"
@@ -222,13 +222,13 @@ export default function ArtistsEditor({
       </div>
 
       {rows.length === 0 ? (
-        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+        <p className="rounded-xl border border-white/10 bg-[#171717] p-6 text-sm leading-7 text-neutral-400">
           No artists yet. Add the first one below — it will appear on the
           Artists &amp; Releases page as soon as you save.
         </p>
       ) : null}
       {viewRows.length === 0 && rows.length > 0 ? (
-        <p className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+        <p className="rounded-xl border border-white/10 bg-[#171717] p-6 text-sm leading-7 text-neutral-400">
           No artists match that search or filter.
         </p>
       ) : null}
@@ -240,7 +240,7 @@ export default function ArtistsEditor({
           return (
           <section
             key={artist.id}
-            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
+            className="rounded-xl border border-white/10 bg-[#171717] p-6"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-bold">
@@ -254,7 +254,7 @@ export default function ArtistsEditor({
                       onClick={() => move(artist.id, -1)}
                       disabled={index === 0}
                       aria-label="Move up"
-                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                      className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-white hover:text-white disabled:opacity-30"
                     >
                       ↑
                     </button>
@@ -263,7 +263,7 @@ export default function ArtistsEditor({
                       onClick={() => move(artist.id, 1)}
                       disabled={index === rows.length - 1}
                       aria-label="Move down"
-                      className="rounded-md border border-black/15 px-3 py-1.5 text-xs font-bold text-[#111111]/70 transition hover:border-black hover:text-black disabled:opacity-30"
+                      className="rounded-md border border-white/15 px-3 py-1.5 text-xs font-bold text-white/70 transition hover:border-white hover:text-white disabled:opacity-30"
                     >
                       ↓
                     </button>
@@ -276,7 +276,7 @@ export default function ArtistsEditor({
                       current.filter((row) => row.id !== artist.id),
                     )
                   }
-                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
+                  className="rounded-md border border-white/60 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-white hover:text-black"
                 >
                   Delete
                 </button>
@@ -343,7 +343,7 @@ export default function ArtistsEditor({
                 />
               </Field>
               <div>
-                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">
                   Upload photo
                 </span>
                 <ImageUpload
@@ -406,8 +406,8 @@ export default function ArtistsEditor({
               </Field>
             </div>
 
-            <div className="mt-6 border-t border-black/10 pt-5">
-              <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#111111]/70">
+            <div className="mt-6 border-t border-white/10 pt-5">
+              <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-white/70">
                 Releases
               </h3>
               {releases.length === 0 ? (
@@ -420,7 +420,7 @@ export default function ArtistsEditor({
                   {releases.map((release) => (
                     <div
                       key={release.id}
-                      className="rounded-lg border border-black/10 bg-white/[0.03] p-4"
+                      className="rounded-lg border border-white/10 bg-white/[0.03] p-4"
                     >
                       <div className="grid gap-4 sm:grid-cols-2">
                         <Field label="Title">
@@ -480,13 +480,13 @@ export default function ArtistsEditor({
                           }
                           label="Release visible"
                         />
-                        <span className="text-sm text-[#111111]/70">
+                        <span className="text-sm text-white/70">
                           {release.visible ? "Visible" : "Hidden"}
                         </span>
                         <button
                           type="button"
                           onClick={() => deleteRelease(artist.id, release.id)}
-                          className="ml-auto rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
+                          className="ml-auto rounded-md border border-white/60 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-white hover:text-black"
                         >
                           Delete
                         </button>
@@ -498,7 +498,7 @@ export default function ArtistsEditor({
               <button
                 type="button"
                 onClick={() => addRelease(artist.id)}
-                className="mt-4 rounded-md border border-black/20 px-4 py-2 text-xs font-bold text-[#111111] transition hover:border-black hover:text-black"
+                className="mt-4 rounded-md border border-white/20 px-4 py-2 text-xs font-bold text-white transition hover:border-white hover:text-white"
               >
                 + Add release
               </button>
@@ -510,7 +510,7 @@ export default function ArtistsEditor({
                 onChange={(visible) => update(artist.id, { visible })}
                 label="Visible on the public site"
               />
-              <span className="text-sm text-[#111111]/70">
+              <span className="text-sm text-white/70">
                 {artist.visible ? "Visible on the site" : "Hidden from the site"}
               </span>
             </div>
@@ -523,7 +523,7 @@ export default function ArtistsEditor({
         <button
           type="button"
           onClick={() => setRows((current) => [...current, blankArtist()])}
-          className="rounded-md border border-black/20 px-5 py-3 text-sm font-bold text-[#111111] transition hover:border-black hover:text-black"
+          className="rounded-md border border-white/20 px-5 py-3 text-sm font-bold text-white transition hover:border-white hover:text-white"
         >
           + Add artist
         </button>
@@ -531,17 +531,17 @@ export default function ArtistsEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#171717] px-6 py-3 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save all artists"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#111111]">
+          <p className="text-sm font-bold text-white">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#111111]">
+          <p role="alert" className="text-sm text-white">
             {error}
           </p>
         ) : null}

@@ -1,14 +1,17 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isAllowedEmail } from "@/lib/admin-allowlist";
 
 /**
  * Staff-only gate for the Amity admin portal (Next.js 16 "proxy",
  * formerly middleware).
  *
  * Sign-in is Supabase Auth (SSO): a magic link by email, or Google.
- * Only the email addresses in ADMIN_EMAILS can get in — see
- * lib/supabase-auth.ts. The proxy validates the session with
- * Supabase and checks the allowlist on every admin request.
+ * Only the email addresses on the allowlist can get in — the
+ * admin_users table (managed from /admin/admins) or the ADMIN_EMAILS
+ * env var as a fallback; see lib/admin-allowlist.ts. The proxy
+ * validates the session with Supabase and checks the allowlist on
+ * every admin request.
  *
  * /admin and /api/admin/* require a signed-in, allowlisted admin.
  * The login page, the /auth/callback route that finishes sign-in,
@@ -66,13 +69,7 @@ export async function proxy(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const allowed =
-    user?.email &&
-    (process.env.ADMIN_EMAILS ?? "")
-      .split(",")
-      .map((e) => e.trim().toLowerCase())
-      .includes(user.email.toLowerCase());
-  if (allowed) {
+  if (user?.email && (await isAllowedEmail(supabase, user.email))) {
     return response;
   }
 
