@@ -25,8 +25,8 @@ const LINKS = [
  *
  * Desktop (md and up): two rows. Row one is the wordmark on the
  * left and View site / account / Sign out on the right. Row two is
- * a horizontal pill nav — the current section is a white pill with
- * black text, the rest grey text on black.
+ * a horizontal pill nav — the current section is a black pill with
+ * white text, the rest grey text on white.
  *
  * Phone: a compact top bar (brand + log out only) and a fixed
  * bottom navigation bar — thumb-reachable, horizontally
@@ -50,12 +50,12 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
   return (
     <>
       {/* Desktop header — two rows */}
-      <header className="hidden border-b border-white/10 bg-[#0a0a0a] md:block">
+      <header className="hidden border-b border-black/10 bg-white md:block">
         <div className="mx-auto max-w-6xl px-6 pt-5 pb-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Link
               href="/admin"
-              className="text-sm font-bold tracking-[0.2em] text-white"
+              className="text-sm font-bold tracking-[0.2em] text-[#111111]"
             >
               AMITY MUSIC GROUP{" "}
               <span className="text-neutral-500">ADMIN</span>
@@ -64,15 +64,15 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
             <div className="flex flex-wrap items-center gap-5 text-sm">
               <Link
                 href="/"
-                className="text-neutral-400 transition hover:text-white"
+                className="text-neutral-600 transition hover:text-black"
               >
                 View site ↗
               </Link>
-              <span className="text-xs text-neutral-400">{sessionName}</span>
+              <span className="text-xs text-neutral-500">{sessionName}</span>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="min-h-11 rounded-full border border-white/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition hover:border-white"
+                className="min-h-11 rounded-full border border-black/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#111111] transition hover:border-black"
               >
                 Sign out
               </button>
@@ -90,8 +90,8 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
                 aria-current={isActive(link.href) ? "page" : undefined}
                 className={`rounded-full px-4 py-2 text-sm transition ${
                   isActive(link.href)
-                    ? "bg-white font-bold text-black"
-                    : "text-neutral-400 hover:text-white"
+                    ? "bg-[#111111] font-bold text-white"
+                    : "text-neutral-600 hover:text-black"
                 }`}
               >
                 {link.label}
@@ -102,23 +102,23 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
       </header>
 
       {/* Phone top bar — brand and log out only */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0a0a0a] md:hidden">
+      <header className="sticky top-0 z-40 border-b border-black/10 bg-white md:hidden">
         <div className="flex min-h-14 items-center justify-between gap-4 px-4">
           <Link
             href="/admin"
-            className="text-sm font-bold tracking-[0.2em] text-white"
+            className="text-sm font-bold tracking-[0.2em] text-[#111111]"
           >
             AMITY MUSIC GROUP{" "}
             <span className="text-neutral-500">ADMIN</span>
           </Link>
           <div className="flex items-center gap-3">
-            <span className="max-w-32 truncate text-xs text-neutral-400">
+            <span className="max-w-32 truncate text-xs text-neutral-500">
               {sessionName}
             </span>
             <button
               type="button"
               onClick={handleLogout}
-              className="flex min-h-11 items-center rounded-full border border-white/20 px-4 text-xs font-bold uppercase tracking-wider text-white"
+              className="flex min-h-11 items-center rounded-full border border-black/20 px-4 text-xs font-bold uppercase tracking-wider text-[#111111]"
             >
               Sign out
             </button>
@@ -129,7 +129,7 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
       {/* Phone bottom navigation */}
       <nav
         aria-label="Admin navigation"
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#0a0a0a] md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white md:hidden"
       >
         <div className="flex overflow-x-auto">
           {LINKS.map((link) => (
@@ -139,8 +139,8 @@ export default function AdminNav({ sessionName }: { sessionName: string }) {
               aria-current={isActive(link.href) ? "page" : undefined}
               className={`flex min-h-14 shrink-0 items-center border-t-2 px-4 text-sm whitespace-nowrap ${
                 isActive(link.href)
-                  ? "border-white font-bold text-white"
-                  : "border-transparent text-neutral-400"
+                  ? "border-black font-bold text-black"
+                  : "border-transparent text-neutral-500"
               }`}
             >
               {link.label}

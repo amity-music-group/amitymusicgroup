@@ -105,13 +105,13 @@ export default async function AdminPage() {
     <div>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-white">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#111111]">
             Amity Music Group <span className="text-neutral-500">Admin</span>
           </p>
-          <h1 className="mt-3 text-4xl font-black tracking-tight text-white">
+          <h1 className="mt-3 text-4xl font-black tracking-tight">
             Admin dashboard
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-400">
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
             Signed in as {user.email}. Changes go live on
             amitymusicgroup.com as soon as you save.
           </p>
@@ -120,8 +120,8 @@ export default async function AdminPage() {
         <div
           className={`rounded-full border px-4 py-2 text-xs font-bold ${
             supabase.connected
-              ? "border-white/30 text-white"
-              : "border-white/20 text-neutral-400"
+              ? "border-black/30 text-[#111111]"
+              : "border-black/20 text-neutral-600"
           }`}
         >
           {supabase.connected
@@ -133,8 +133,8 @@ export default async function AdminPage() {
       </div>
 
       {!supabase.configured ? (
-        <div className="mt-8 rounded-xl border border-white/30 bg-[#171717] p-6 text-sm leading-7 text-white/85">
-          <p className="font-bold text-white">
+        <div className="mt-8 rounded-xl border border-black/30 bg-[#f5f5f5] p-6 text-sm leading-7 text-[#111111]/85">
+          <p className="font-bold text-[#111111]">
             Finish the setup: set the Supabase keys in Vercel.
           </p>
           <p className="mt-2">
@@ -157,7 +157,7 @@ export default async function AdminPage() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md bg-white px-5 py-3 text-sm font-bold text-black transition hover:bg-neutral-200"
+              className="rounded-md bg-[#111111] px-5 py-3 text-sm font-bold text-white transition hover:bg-black"
             >
               {link.label}
             </Link>
@@ -175,13 +175,13 @@ export default async function AdminPage() {
             <Link
               key={card.label}
               href={card.href}
-              className="rounded-xl border border-white/10 bg-[#171717] p-5 transition hover:border-white/40"
+              className="rounded-xl border border-black/10 bg-[#f5f5f5] p-5 transition hover:border-black/40"
             >
-              <p className="text-3xl font-black text-white">{card.count}</p>
-              <p className="mt-2 text-sm font-bold text-white">
+              <p className="text-3xl font-black text-[#111111]">{card.count}</p>
+              <p className="mt-2 text-sm font-bold text-[#111111]">
                 {card.label}
               </p>
-              <p className="mt-1 text-sm leading-6 text-neutral-400">
+              <p className="mt-1 text-sm leading-6 text-neutral-600">
                 {card.description}
               </p>
             </Link>
@@ -189,20 +189,20 @@ export default async function AdminPage() {
         </div>
       </section>
 
-      <section className="mt-10 rounded-xl border border-white/10 bg-[#171717] p-6">
+      <section className="mt-10 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
         <div className="flex items-center justify-between">
           <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">
             Recent changes
           </h2>
           <Link
             href="/admin/activity"
-            className="text-xs font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+            className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
           >
             See all →
           </Link>
         </div>
         {activity.length === 0 ? (
-          <p className="mt-4 text-sm text-neutral-400">
+          <p className="mt-4 text-sm text-neutral-500">
             No activity yet — saves, sends and new signups will show up here.
           </p>
         ) : (
@@ -210,15 +210,15 @@ export default async function AdminPage() {
             {activity.map((item) => (
               <li
                 key={item.id}
-                className="border-b border-white/10 pb-3 text-sm last:border-0"
+                className="border-b border-black/10 pb-3 text-sm last:border-0"
               >
-                <p className="font-bold text-white">
-                  <span className="mr-2 rounded-full border border-white/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                <p className="font-bold text-[#111111]">
+                  <span className="mr-2 rounded-full border border-black/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-neutral-600">
                     {kindLabels[item.kind] ?? item.kind}
                   </span>
                   {item.label}
                 </p>
-                <p className="mt-1 text-neutral-400">
+                <p className="mt-1 text-neutral-500">
                   {item.detail}
                   {item.createdAt ? (
                     <> · {new Date(item.createdAt).toLocaleString()}</>
@@ -231,18 +231,18 @@ export default async function AdminPage() {
       </section>
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <section className="rounded-xl border border-white/10 bg-[#171717] p-6">
+        <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-white">Latest messages</h2>
+            <h2 className="text-lg font-bold text-[#111111]">Latest messages</h2>
             <Link
               href="/admin/inbox"
-              className="text-xs font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+              className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
             >
               Open inbox →
             </Link>
           </div>
           {inbox.length === 0 ? (
-            <p className="mt-4 text-sm text-neutral-400">
+            <p className="mt-4 text-sm text-neutral-500">
               No messages yet. Contact form submissions will appear here.
             </p>
           ) : (
@@ -250,17 +250,17 @@ export default async function AdminPage() {
               {inbox.map((message) => (
                 <li
                   key={message.id}
-                  className="border-b border-white/10 pb-3 text-sm last:border-0"
+                  className="border-b border-black/10 pb-3 text-sm last:border-0"
                 >
-                  <p className="font-bold text-white">
+                  <p className="font-bold text-[#111111]">
                     {message.subject}{" "}
                     {!message.read ? (
-                      <span className="ml-2 rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-black">
+                      <span className="ml-2 rounded-full bg-[#111111] px-2 py-0.5 text-[10px] font-bold text-white">
                         NEW
                       </span>
                     ) : null}
                   </p>
-                  <p className="mt-1 text-neutral-400">
+                  <p className="mt-1 text-neutral-500">
                     {message.name} · {message.email}
                   </p>
                 </li>
@@ -269,20 +269,20 @@ export default async function AdminPage() {
           )}
         </section>
 
-        <section className="rounded-xl border border-white/10 bg-[#171717] p-6">
+        <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-white">
+            <h2 className="text-lg font-bold text-[#111111]">
               Recent email sends
             </h2>
             <Link
               href="/admin/newsletter"
-              className="text-xs font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+              className="text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
             >
               Newsletter →
             </Link>
           </div>
           {emailLog.length === 0 ? (
-            <p className="mt-4 text-sm text-neutral-400">
+            <p className="mt-4 text-sm text-neutral-500">
               No emails sent yet. Blasts sent from the newsletter section
               are logged here.
             </p>
@@ -291,10 +291,10 @@ export default async function AdminPage() {
               {emailLog.map((entry) => (
                 <li
                   key={entry.id}
-                  className="border-b border-white/10 pb-3 text-sm last:border-0"
+                  className="border-b border-black/10 pb-3 text-sm last:border-0"
                 >
-                  <p className="font-bold text-white">{entry.subject}</p>
-                  <p className="mt-1 text-neutral-400">
+                  <p className="font-bold text-[#111111]">{entry.subject}</p>
+                  <p className="mt-1 text-neutral-500">
                     {entry.kind} · {entry.recipientCount} recipients ·{" "}
                     {entry.status}
                   </p>
@@ -305,17 +305,17 @@ export default async function AdminPage() {
         </section>
       </div>
 
-      <section className="mt-8 rounded-xl border border-white/10 bg-[#171717] p-6">
-        <h2 className="text-lg font-bold text-white">Site settings</h2>
-        <p className="mt-2 text-sm leading-7 text-neutral-400">
-          Tagline: <span className="text-white">{site.tagline}</span>
+      <section className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+        <h2 className="text-lg font-bold text-[#111111]">Site settings</h2>
+        <p className="mt-2 text-sm leading-7 text-neutral-600">
+          Tagline: <span className="text-[#111111]">{site.tagline}</span>
           <br />
           Contact email:{" "}
-          <span className="text-white">{site.emailGeneral}</span>
+          <span className="text-[#111111]">{site.emailGeneral}</span>
         </p>
         <Link
           href="/admin/settings"
-          className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white hover:text-neutral-300"
+          className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#111111] hover:text-black"
         >
           Edit site settings →
         </Link>

@@ -28,13 +28,13 @@ export default function AdminsEditor({
 
   if (initial === null) {
     return (
-      <div className="mt-8 rounded-xl border border-white/10 bg-[#171717] p-6">
-        <p className="text-sm font-bold text-white">
+      <div className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+        <p className="text-sm font-bold text-[#111111]">
           The admin list is not set up yet.
         </p>
-        <p className="mt-2 text-sm leading-7 text-neutral-400">
+        <p className="mt-2 text-sm leading-7 text-neutral-600">
           Run{" "}
-          <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-white">
+          <code className="rounded bg-black/10 px-1.5 py-0.5 text-xs text-[#111111]">
             supabase/amity-admin-users-migration.sql
           </code>{" "}
           in the Supabase SQL Editor, then come back here. Until then,
@@ -126,9 +126,9 @@ export default function AdminsEditor({
     <div className="mt-8">
       <form
         onSubmit={handleAdd}
-        className="rounded-xl border border-white/10 bg-[#171717] p-6"
+        className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
       >
-        <label htmlFor="email" className="mb-2 block text-sm text-white/80">
+        <label htmlFor="email" className="mb-2 block text-sm text-[#111111]">
           Add an admin
         </label>
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -140,28 +140,28 @@ export default function AdminsEditor({
             required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="w-full flex-1 rounded-md border border-white/15 bg-[#171717] px-4 py-3 text-sm text-white placeholder:text-neutral-400 outline-none transition focus:border-white"
+            className="w-full flex-1 rounded-md border border-black/15 bg-white px-4 py-3 text-sm text-[#111111] placeholder:text-neutral-400 outline-none transition focus:border-black"
             placeholder="name@example.com"
           />
           <button
             type="submit"
             disabled={saving}
-            className="rounded-md bg-white px-6 py-3 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? "Adding…" : "Add admin"}
           </button>
         </div>
         {error ? (
-          <p role="alert" className="mt-4 text-sm text-white">
+          <p role="alert" className="mt-4 text-sm text-red-600">
             {error}
           </p>
         ) : null}
-        {info ? <p className="mt-4 text-sm text-white">{info}</p> : null}
+        {info ? <p className="mt-4 text-sm text-[#111111]">{info}</p> : null}
       </form>
 
-      <ul className="mt-6 overflow-hidden rounded-xl border border-white/10">
+      <ul className="mt-6 overflow-hidden rounded-xl border border-black/10">
         {admins.length === 0 ? (
-          <li className="bg-[#171717] px-5 py-4 text-sm text-neutral-400">
+          <li className="bg-[#f5f5f5] px-5 py-4 text-sm text-neutral-500">
             No admins in the list yet. The ADMIN_EMAILS env var still
             decides who can sign in.
           </li>
@@ -173,13 +173,13 @@ export default function AdminsEditor({
             return (
               <li
                 key={admin.id}
-                className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#171717] px-5 py-4 last:border-b-0"
+                className="flex flex-wrap items-center justify-between gap-3 border-b border-black/10 bg-[#f5f5f5] px-5 py-4 last:border-b-0"
               >
                 <div>
-                  <p className="text-sm font-bold text-white">
+                  <p className="text-sm font-bold text-[#111111]">
                     {admin.email}
                     {isYou ? (
-                      <span className="ml-2 rounded-full bg-[#171717] px-2 py-0.5 text-[11px] font-bold text-black">
+                      <span className="ml-2 rounded-full bg-[#111111] px-2 py-0.5 text-[11px] font-bold text-white">
                         You
                       </span>
                     ) : null}
@@ -204,8 +204,8 @@ export default function AdminsEditor({
                     disabled={removing === admin.email}
                     className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition disabled:cursor-not-allowed disabled:opacity-50 ${
                       isConfirming
-                        ? "border-white bg-[#171717] text-black"
-                        : "border-white/20 text-white hover:border-white"
+                        ? "border-black bg-[#111111] text-white"
+                        : "border-black/20 text-[#111111] hover:border-black"
                     }`}
                   >
                     {removing === admin.email

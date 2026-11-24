@@ -100,20 +100,20 @@ export default function AdminLoginPage() {
 
   return (
     <div className="mx-auto max-w-md py-16">
-      <p className="text-xs font-bold uppercase tracking-[0.3em] text-white">
+      <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#111111]">
         Amity Music Group <span className="text-neutral-500">Admin</span>
       </p>
-      <h1 className="mt-4 text-3xl font-black tracking-tight text-white">
+      <h1 className="mt-4 text-3xl font-black tracking-tight">
         Admin sign in
       </h1>
-      <p className="mt-3 text-sm leading-7 text-neutral-400">
+      <p className="mt-3 text-sm leading-7 text-neutral-600">
         Welcome back. Sign in with your work email to manage the site.
         Only approved email addresses can get in.
       </p>
 
-      <div className="mt-8 rounded-xl border border-white/10 bg-[#171717] p-6">
+      <div className="mt-8 rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
         <form onSubmit={handleEmailLink}>
-          <label htmlFor="email" className="mb-2 block text-sm text-white/80">
+          <label htmlFor="email" className="mb-2 block text-sm text-[#111111]">
             Email address
           </label>
           <input
@@ -124,44 +124,44 @@ export default function AdminLoginPage() {
             required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            className="w-full rounded-md border border-white/15 bg-[#0a0a0a] px-4 py-3 text-sm text-white placeholder:text-neutral-500 outline-none transition focus:border-white"
+            className="w-full rounded-md border border-black/15 bg-white px-4 py-3 text-sm text-[#111111] placeholder:text-neutral-400 outline-none transition focus:border-black"
             placeholder="you@amitymusicgroup.com"
           />
 
           {error ? (
-            <p role="alert" className="mt-4 text-sm text-white">
+            <p role="alert" className="mt-4 text-sm text-red-600">
               {error}
             </p>
           ) : null}
-          {info ? <p className="mt-4 text-sm text-white">{info}</p> : null}
+          {info ? <p className="mt-4 text-sm text-[#111111]">{info}</p> : null}
 
           <button
             type="submit"
             disabled={loading}
-            className="mt-6 w-full rounded-md bg-white px-6 py-3.5 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-6 w-full rounded-md bg-[#111111] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "Sending…" : "Email me a sign-in link"}
           </button>
         </form>
 
         <div className="my-6 flex items-center gap-3 text-xs text-neutral-500">
-          <span className="h-px flex-1 bg-white/10" />
+          <span className="h-px flex-1 bg-black/10" />
           or
-          <span className="h-px flex-1 bg-white/10" />
+          <span className="h-px flex-1 bg-black/10" />
         </div>
 
         <button
           type="button"
           onClick={handleGoogle}
           disabled={googleLoading}
-          className="w-full rounded-md border border-white/20 bg-transparent px-6 py-3.5 text-sm font-bold text-white transition hover:border-white disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-md border border-black/20 bg-white px-6 py-3.5 text-sm font-bold text-[#111111] transition hover:border-black disabled:cursor-not-allowed disabled:opacity-50"
         >
           {googleLoading ? "Redirecting…" : "Continue with Google"}
         </button>
       </div>
 
       <p className="mt-6 text-center text-sm">
-        <Link href="/" className="text-neutral-400 transition hover:text-white">
+        <Link href="/" className="text-neutral-600 transition hover:text-black">
           Back to Amity Music Group ↗
         </Link>
       </p>
