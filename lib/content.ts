@@ -5,6 +5,7 @@ import type {
   Company,
   ServiceItem,
   SiteSettings,
+  StripItem,
   Territory,
 } from "@/lib/types";
 import {
@@ -14,6 +15,7 @@ import {
   isSupabaseConfigured,
   serviceFromRow,
   siteFromRow,
+  stripFromRow,
   territoryFromRow,
 } from "@/lib/supabase";
 
@@ -125,6 +127,7 @@ export const staticSiteSettings: SiteSettings = {
   youtube: "",
   seoTitle: "",
   seoDescription: "",
+  stripSpeedPxPerSec: 67,
 };
 
 export const staticServices: ServiceItem[] = [
@@ -311,6 +314,60 @@ export const staticHomeFocus: { number: string; title: string; description: stri
 export const staticArtists: Artist[] = [];
 export const staticCompanies: Company[] = [];
 
+/**
+ * The /labels logo strip's fallback — the five real graphic logos
+ * Theodore approved, at the heights the strip uses today. Used when
+ * the strip_items table does not exist yet (migration not run) or is
+ * empty, so the strip never disappears.
+ */
+export const staticStripItems: StripItem[] = [
+  {
+    id: "static-is",
+    slug: "iron-stage-touring",
+    name: "Iron Stage Touring",
+    image: "/logos/is-logo.png",
+    heightPx: 90,
+    visible: true,
+    sortOrder: 0,
+  },
+  {
+    id: "static-ar",
+    slug: "arden-row",
+    name: "Arden Row",
+    image: "/logos/ar-logo.png",
+    heightPx: 70,
+    visible: true,
+    sortOrder: 1,
+  },
+  {
+    id: "static-a-cross",
+    slug: "amity-christian-music-group",
+    name: "Amity Christian Music Group",
+    image: "/logos/a-cross-logo.png",
+    heightPx: 90,
+    visible: true,
+    sortOrder: 2,
+  },
+  {
+    id: "static-dial",
+    slug: "dial-recordings-america",
+    name: "Dial Recordings America",
+    image: "/logos/dial-recordings-america.png",
+    heightPx: 60,
+    visible: true,
+    sortOrder: 3,
+  },
+  {
+    id: "static-melted",
+    slug: "melted-mindz-records",
+    name: "Melted Mindz Records",
+    image: "/logos/melted-mindz-records.png",
+    heightPx: 90,
+    visible: true,
+    sortOrder: 4,
+  },
+];
+
 /** No territories are recorded yet, so the fallback is an empty list
  * — never invented rows. The Global Territories section stays hidden
  * until the first territory is added in /admin. */
@@ -411,6 +468,19 @@ export const getTerritories = cache(async (): Promise<Territory[]> =>
 
 export const getAllTerritories = cache(async (): Promise<Territory[]> =>
   readTable("territories", territoryFromRow, staticTerritories),
+);
+
+export const getStripItems = cache(async (): Promise<StripItem[]> =>
+  (await getAllStripItems()).filter((s) => s.visible),
+);
+
+/**
+ * Every strip logo, hidden ones included — for /admin only, same
+ * reason as getAllCompanies: a hidden logo must stay in the editor
+ * instead of vanishing the moment it is hidden.
+ */
+export const getAllStripItems = cache(async (): Promise<StripItem[]> =>
+  readTable("strip_items", stripFromRow, staticStripItems),
 );
 
 /** Homepage focus areas: the first six visible services when the

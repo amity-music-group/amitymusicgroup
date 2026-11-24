@@ -74,6 +74,11 @@ export async function POST(request: NextRequest) {
       typeof settings.seoDescription === "string"
         ? settings.seoDescription
         : "",
+    stripSpeedPxPerSec:
+      typeof settings.stripSpeedPxPerSec === "number" &&
+      Number.isFinite(settings.stripSpeedPxPerSec)
+        ? settings.stripSpeedPxPerSec
+        : 67,
   };
 
   const { error } = await client
