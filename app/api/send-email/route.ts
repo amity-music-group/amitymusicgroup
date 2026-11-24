@@ -1,7 +1,6 @@
-import { cookies } from "next/headers";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { getAdminUser } from "@/lib/supabase-auth";
 
 /**
  * POST /api/send-email — send a single email via Resend.
@@ -12,8 +11,7 @@ import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
  * sends through lib/email.ts instead).
  */
 export async function POST(request: Request) {
-  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  if (!getAdminSession(token)) {
+  if (!(await getAdminUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

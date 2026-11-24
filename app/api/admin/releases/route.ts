@@ -1,6 +1,5 @@
-import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
-import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { getAdminUser } from "@/lib/supabase-auth";
 import { logAdminAction } from "@/lib/activity";
 import { getSupabaseAdmin, releaseToRow } from "@/lib/supabase";
 import type { Release } from "@/lib/types";
@@ -23,8 +22,7 @@ import type { Release } from "@/lib/types";
  * and names the beefy-admin migration instead of crashing.
  */
 export async function POST(request: NextRequest) {
-  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  if (!getAdminSession(token)) {
+  if (!(await getAdminUser())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

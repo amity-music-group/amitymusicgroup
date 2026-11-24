@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 import Link from "next/link";
-import { ADMIN_COOKIE, getAdminSession } from "@/lib/auth";
+import { getAdminUser } from "@/lib/supabase-auth";
 import { getSiteSettings, getSupabaseStatus } from "@/lib/content";
 import {
   getAdminStats,
@@ -21,9 +20,8 @@ export const metadata = {
  * renders without a valid session, even if the proxy is bypassed.
  */
 export default async function AdminPage() {
-  const token = (await cookies()).get(ADMIN_COOKIE)?.value;
-  const session = getAdminSession(token);
-  if (!session) {
+  const user = await getAdminUser();
+  if (!user) {
     redirect("/admin/login?next=/admin");
   }
 
