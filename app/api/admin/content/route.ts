@@ -7,14 +7,21 @@ import {
   companyToRow,
   getSupabaseAdmin,
   serviceToRow,
+  stripToRow,
   territoryToRow,
 } from "@/lib/supabase";
-import type { Artist, Company, ServiceItem, Territory } from "@/lib/types";
+import type {
+  Artist,
+  Company,
+  ServiceItem,
+  StripItem,
+  Territory,
+} from "@/lib/types";
 
 /**
  * POST /api/admin/content — bulk-replace one content table.
  *
- * Body: { table: "artists" | "companies" | "services" | "territories", rows: [...] }
+ * Body: { table: "artists" | "companies" | "services" | "territories" | "strip_items", rows: [...] }
  * The editor sends the table's full set; the route deletes every row
  * and inserts the new set, in order. An empty rows array empties the
  * table — the public pages then fall back to their static copy, so
@@ -25,10 +32,19 @@ import type { Artist, Company, ServiceItem, Territory } from "@/lib/types";
  * yet, the route answers 503 and names the file instead of crashing.
  */
 
-const TABLES = ["artists", "companies", "services", "territories"] as const;
+const TABLES = [
+  "artists",
+  "companies",
+  "services",
+  "territories",
+  "strip_items",
+] as const;
 type TableName = (typeof TABLES)[number];
 
 function migrationError(table: string): string {
+  if (table === "strip_items") {
+    return "The logo strip table does not exist yet. Run supabase/amity-strip-migration.sql in the Supabase SQL Editor, then try again.";
+  }
   if (table === "territories") {
     return "The territories table does not exist yet. Run supabase/amity-territories-migration.sql in the Supabase SQL Editor, then try again.";
   }
@@ -120,6 +136,21 @@ export async function POST(request: NextRequest) {
         );
       }
       mapped.push(territoryToRow(territory, i));
+    } else if (table === "strip_items") {
+      const item = row as unknown as StripItem;
+      if (!item.name) {
+        return NextResponse.json(
+          { error: `Row ${i + 1} needs a name.` },
+          { status: 400 },
+        );
+      }
+      if (!item.image) {
+        return NextResponse.json(
+          { error: `Row ${i + 1} needs a logo image.` },
+          { status: 400 },
+        );
+      }
+      mapped.push(stripToRow(item, i));
     } else {
       const service = row as unknown as ServiceItem;
       if (!service.title) {

@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/artists", label: "Artists" },
   { href: "/admin/companies", label: "Companies" },
+  { href: "/admin/strip", label: "Logo Strip" },
   { href: "/admin/territories", label: "Territories" },
   { href: "/admin/services", label: "Services" },
   { href: "/admin/media", label: "Media" },

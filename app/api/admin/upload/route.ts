@@ -8,7 +8,7 @@ import { getSupabaseAdmin, supabaseUrl } from "@/lib/supabase";
  * `site-images` Storage bucket.
  *
  * Multipart form fields: file (the image), kind ("artists" |
- * "companies" | "site"), slug (used in the storage path).
+ * "companies" | "site" | "strip"), slug (used in the storage path).
  *
  * Stored at <kind>/<slug>-<timestamp>.<ext>. Returns
  * { url } — the bucket's public URL — which the admin editor puts
@@ -32,7 +32,7 @@ const ALLOWED_TYPES: Record<string, string> = {
   "image/avif": "avif",
 };
 
-const KINDS = ["artists", "companies", "site"] as const;
+const KINDS = ["artists", "companies", "site", "strip"] as const;
 type Kind = (typeof KINDS)[number];
 
 function cleanSlug(value: unknown): string {
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
   const kindValue = form.get("kind");
   if (typeof kindValue !== "string" || !KINDS.includes(kindValue as Kind)) {
     return NextResponse.json(
-      { error: "kind must be artists, companies or site." },
+      { error: "kind must be artists, companies, site or strip." },
       { status: 400 },
     );
   }
