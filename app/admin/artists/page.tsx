@@ -20,7 +20,7 @@ export default async function AdminArtistsPage() {
       <h1 className="text-3xl font-black tracking-tight">
         Artists &amp; Releases
       </h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         Artists listed on the public Artists page. Hidden artists stay here
         so they can be edited or shown again — hiding never deletes.
       </p>

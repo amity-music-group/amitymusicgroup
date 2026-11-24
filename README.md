@@ -60,11 +60,12 @@ are managed. Saves go live on the site within seconds — no redeploy.
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — the Supabase anon (public) key
    - `SUPABASE_SERVICE_ROLE_KEY` — the Supabase service-role key
      (server only, never `NEXT_PUBLIC_`)
-   - `ADMIN_EMAILS` — comma-separated list of the email addresses
-     allowed into the admin portal (Supabase Auth sign-in). Anyone
-     not on this list is turned away, even if they can sign in to
-     Supabase. **Set this before the SSO code goes live — with it
-     empty, nobody can sign in.**
+   - `ADMIN_EMAILS` — comma-separated fallback list of the email
+     addresses allowed into the admin portal (Supabase Auth
+     sign-in). The list itself is now managed from the /admin/admins
+     page in the portal (see the migration below); this env var is
+     kept as a fallback, and an address listed here stays allowed
+     even if it is removed on that page.
    - `RESEND_API_KEY` — already set (production). Needed for the
      contact form, the welcome email and newsletter blasts.
    - `UNSUBSCRIBE_SECRET` — optional. Signs the one-click
@@ -74,9 +75,13 @@ are managed. Saves go live on the site within seconds — no redeploy.
      defaults to `https://amitymusicgroup.com`.
 3. **Sign in** at `https://amitymusicgroup.com/admin` with an
    email link or Google (Supabase Auth). Only the email addresses
-   in `ADMIN_EMAILS` can get in. In the Supabase dashboard, under
-   Authentication → URL Configuration, add this redirect URL (and
-   the preview pattern for Vercel previews):
+   on the allowlist can get in — the `admin_users` table, managed
+   from the /admin/admins page, or the `ADMIN_EMAILS` env var.
+   Run `supabase/amity-admin-users-migration.sql` in the Supabase
+   SQL Editor to create that table (it seeds the two current
+   admins). In the Supabase dashboard, under Authentication → URL
+   Configuration, add this redirect URL (and the preview pattern
+   for Vercel previews):
    `https://www.amitymusicgroup.com/auth/callback`. Google sign-in
    also needs the Google provider switched on in the Supabase
    dashboard (Authentication → Providers → Google) with a Google

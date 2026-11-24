@@ -1,8 +1,9 @@
 /**
- * Shared form controls for the /admin editors. UMG monochrome:
- * white, black, mid-grey, pale grey, hairline borders — no colour
- * accents. Inputs are at least 48px tall so they are comfortable
- * touch targets on phones.
+ * Shared form controls for the /admin editors. Dark admin, Amity
+ * monochrome: near-black surfaces, white text, muted grey
+ * secondary text, hairline white borders — no colour accents.
+ * Inputs are at least 48px tall so they are comfortable touch
+ * targets on phones.
  */
 
 export function Field({
@@ -16,7 +17,7 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
+      <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">
         {label}
       </span>
       {children}
@@ -30,7 +31,7 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-md border border-black/15 bg-white px-3 py-3 text-base text-[#111111] placeholder:text-neutral-400 outline-none transition focus:border-black sm:text-sm";
+  "w-full rounded-md border border-white/15 bg-[#0a0a0a] px-3 py-3 text-base text-white placeholder:text-neutral-500 outline-none transition focus:border-white sm:text-sm";
 
 export function Toggle({
   checked,
@@ -49,12 +50,12 @@ export function Toggle({
       aria-label={label}
       onClick={() => onChange(!checked)}
       className={`relative h-6 w-11 shrink-0 rounded-full transition ${
-        checked ? "bg-[#111111]" : "bg-black/20"
+        checked ? "bg-white" : "bg-white/20"
       }`}
     >
       <span
-        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${
-          checked ? "left-[22px]" : "left-0.5"
+        className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${
+          checked ? "left-[22px] bg-black" : "left-0.5 bg-white"
         }`}
       />
     </button>

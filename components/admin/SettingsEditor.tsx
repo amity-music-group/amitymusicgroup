@@ -154,7 +154,7 @@ export default function SettingsEditor({
         {GROUPS.map((group) => (
           <section
             key={group.title}
-            className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6"
+            className="rounded-xl border border-white/10 bg-[#171717] p-6"
           >
             <h2 className="text-lg font-bold">{group.title}</h2>
             {group.hint ? (
@@ -181,7 +181,7 @@ export default function SettingsEditor({
             </div>
             {group.title === "Homepage" ? (
               <div className="mt-4">
-                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-600">
+                <span className="mb-1.5 block text-xs font-bold uppercase tracking-[0.14em] text-neutral-400">
                   Homepage hero image
                 </span>
                 <ImageUpload
@@ -205,17 +205,17 @@ export default function SettingsEditor({
           type="button"
           onClick={save}
           disabled={status === "saving"}
-          className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
+          className="rounded-md bg-[#171717] px-6 py-3 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:opacity-50"
         >
           {status === "saving" ? "Saving…" : "Save settings"}
         </button>
         {status === "saved" ? (
-          <p className="text-sm font-bold text-[#111111]">
+          <p className="text-sm font-bold text-white">
             Saved — live on the site now.
           </p>
         ) : null}
         {status === "error" ? (
-          <p role="alert" className="text-sm text-[#111111]">
+          <p role="alert" className="text-sm text-white">
             {error}
           </p>
         ) : null}

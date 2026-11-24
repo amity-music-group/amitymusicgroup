@@ -83,7 +83,7 @@ export default function NewsletterPanel({
 
   return (
     <div className="space-y-8">
-      <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+      <section className="rounded-xl border border-white/10 bg-[#171717] p-6">
         <h2 className="text-lg font-bold">Send a blast</h2>
         <p className="mt-1 text-sm text-neutral-500">
           Sends to {subscribed.length} subscribed{" "}
@@ -116,7 +116,7 @@ export default function NewsletterPanel({
             <button
               type="submit"
               disabled={sendStatus === "sending" || subscribed.length === 0}
-              className="rounded-md bg-[#111111] px-6 py-3 text-sm font-bold text-white transition hover:bg-black hover:text-white disabled:opacity-50"
+              className="rounded-md bg-[#171717] px-6 py-3 text-sm font-bold text-black transition hover:bg-neutral-200 disabled:opacity-50"
             >
               {sendStatus === "sending"
                 ? "Sending…"
@@ -128,16 +128,16 @@ export default function NewsletterPanel({
               <button
                 type="button"
                 onClick={() => setConfirming(false)}
-                className="text-sm font-bold text-neutral-600 hover:text-[#111111]"
+                className="text-sm font-bold text-neutral-400 hover:text-white"
               >
                 Cancel
               </button>
             ) : null}
             {sendStatus === "sent" ? (
-              <p className="text-sm font-bold text-[#111111]">{sendResult}</p>
+              <p className="text-sm font-bold text-white">{sendResult}</p>
             ) : null}
             {sendStatus === "error" ? (
-              <p role="alert" className="text-sm text-[#111111]">
+              <p role="alert" className="text-sm text-white">
                 {error}
               </p>
             ) : null}
@@ -145,7 +145,7 @@ export default function NewsletterPanel({
         </form>
       </section>
 
-      <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+      <section className="rounded-xl border border-white/10 bg-[#171717] p-6">
         <h2 className="text-lg font-bold">
           Subscribers ({subscribed.length} subscribed, {subscribers.length}{" "}
           total)
@@ -163,12 +163,12 @@ export default function NewsletterPanel({
                 className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm"
               >
                 <span>
-                  <span className="text-[#111111]">{subscriber.email}</span>{" "}
+                  <span className="text-white">{subscriber.email}</span>{" "}
                   <span
                     className={
                       subscriber.status === "subscribed"
-                        ? "text-[#111111]"
-                        : "text-[#111111]/45"
+                        ? "text-white"
+                        : "text-white/45"
                     }
                   >
                     · {subscriber.status}
@@ -180,7 +180,7 @@ export default function NewsletterPanel({
                 <button
                   type="button"
                   onClick={() => removeSubscriber(subscriber.id)}
-                  className="rounded-md border border-black/60 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:bg-black hover:text-[#111111]"
+                  className="rounded-md border border-white/60 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-white hover:text-black"
                 >
                   Delete
                 </button>
@@ -190,7 +190,7 @@ export default function NewsletterPanel({
         )}
       </section>
 
-      <section className="rounded-xl border border-black/10 bg-[#f5f5f5] p-6">
+      <section className="rounded-xl border border-white/10 bg-[#171717] p-6">
         <h2 className="text-lg font-bold">Recent sends</h2>
         {initialLog.length === 0 ? (
           <p className="mt-4 text-sm text-neutral-500">No emails sent yet.</p>
@@ -198,7 +198,7 @@ export default function NewsletterPanel({
           <ul className="mt-4 divide-y divide-white/10">
             {initialLog.map((entry) => (
               <li key={entry.id} className="py-3 text-sm">
-                <p className="font-bold text-[#111111]">{entry.subject}</p>
+                <p className="font-bold text-white">{entry.subject}</p>
                 <p className="mt-1 text-neutral-500">
                   {entry.kind} · {entry.recipientCount} recipients ·{" "}
                   {entry.status} ·{" "}

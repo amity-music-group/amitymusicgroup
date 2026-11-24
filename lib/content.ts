@@ -11,6 +11,7 @@ import type {
 import {
   artistFromRow,
   companyFromRow,
+  getSupabaseAdmin,
   getSupabasePublic,
   isSupabaseConfigured,
   serviceFromRow,
@@ -482,6 +483,44 @@ export const getStripItems = cache(async (): Promise<StripItem[]> =>
 export const getAllStripItems = cache(async (): Promise<StripItem[]> =>
   readTable("strip_items", stripFromRow, staticStripItems),
 );
+
+export interface AdminUserRow {
+  id: string;
+  email: string;
+  createdAt: string;
+}
+
+/**
+ * Every email on the admin allowlist — for /admin/admins only.
+ * Reads with the service-role key: the admin_users table has no
+ * public policy by design, so the anon client cannot read it.
+ * Returns null when Supabase is not configured or the table does
+ * not exist yet (the migration has not run), so the page can say
+ * so instead of showing an empty list.
+ */
+export const getAdminUsers = cache(async (): Promise<AdminUserRow[] | null> => {
+  await connection();
+  let client;
+  try {
+    client = getSupabaseAdmin();
+  } catch {
+    return null;
+  }
+  try {
+    const { data, error } = await client
+      .from("admin_users")
+      .select("id, email, created_at")
+      .order("email", { ascending: true });
+    if (error) return null;
+    return (data ?? []).map((row) => ({
+      id: String(row.id),
+      email: String(row.email),
+      createdAt: String(row.created_at),
+    }));
+  } catch {
+    return null;
+  }
+});
 
 /** Homepage focus areas: the first six visible services when the
  * services table has rows, otherwise the site's current six. This

@@ -100,13 +100,13 @@ export default function MediaLibrary({
       />
 
       {error ? (
-        <p role="alert" className="mt-4 text-sm text-[#111111]">
+        <p role="alert" className="mt-4 text-sm text-white">
           {error}
         </p>
       ) : null}
 
       {visible.length === 0 ? (
-        <p className="mt-6 rounded-xl border border-black/10 bg-[#f5f5f5] p-6 text-sm leading-7 text-neutral-600">
+        <p className="mt-6 rounded-xl border border-white/10 bg-[#171717] p-6 text-sm leading-7 text-neutral-400">
           {files.length === 0
             ? "No images uploaded yet. Uploads happen inside the artist, company and settings editors."
             : "No files match that search."}
@@ -116,9 +116,9 @@ export default function MediaLibrary({
           {visible.map((file) => (
             <article
               key={file.path}
-              className="overflow-hidden rounded-xl border border-black/10 bg-[#f5f5f5]"
+              className="overflow-hidden rounded-xl border border-white/10 bg-[#171717]"
             >
-              <div className="flex h-40 items-center justify-center bg-[#eeeeee]">
+              <div className="flex h-40 items-center justify-center bg-[#0a0a0a]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={file.url}
@@ -127,7 +127,7 @@ export default function MediaLibrary({
                 />
               </div>
               <div className="p-4">
-                <p className="break-all text-sm font-bold text-[#111111]">
+                <p className="break-all text-sm font-bold text-white">
                   {file.name}
                 </p>
                 <p className="mt-1 break-all text-xs text-neutral-500">
@@ -140,7 +140,7 @@ export default function MediaLibrary({
                   <button
                     type="button"
                     onClick={() => copyUrl(file)}
-                    className="rounded-md border border-black/20 px-3 py-1.5 text-xs font-bold text-[#111111] transition hover:border-black hover:text-black"
+                    className="rounded-md border border-white/20 px-3 py-1.5 text-xs font-bold text-white transition hover:border-white hover:text-white"
                   >
                     {copiedPath === file.path ? "Copied" : "Copy URL"}
                   </button>
@@ -150,8 +150,8 @@ export default function MediaLibrary({
                     disabled={deletingPath === file.path}
                     className={`rounded-md border px-3 py-1.5 text-xs font-bold transition disabled:opacity-50 ${
                       confirmPath === file.path
-                        ? "border-black bg-[#111111] text-white"
-                        : "border-black/60 text-[#111111] hover:bg-black hover:text-[#111111]"
+                        ? "border-white bg-[#171717] text-black"
+                        : "border-white/60 text-white hover:bg-white hover:text-black"
                     }`}
                   >
                     {deletingPath === file.path

@@ -14,7 +14,7 @@ export default async function AdminServicesPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Services</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         The service cards on the public Services page. The homepage shows
         the first six visible services as its focus areas.
       </p>

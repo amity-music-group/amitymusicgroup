@@ -14,7 +14,7 @@ export default async function AdminMediaPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Media library</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         Every image uploaded to the site-images bucket. Deleting a file does
         not rewrite any record that references its URL — an artist or
         company still pointing at a deleted image shows no image until its

@@ -14,7 +14,7 @@ export default async function AdminSettingsPage() {
   return (
     <div>
       <h1 className="text-3xl font-black tracking-tight">Site settings</h1>
-      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-600">
+      <p className="mt-2 max-w-2xl text-sm leading-7 text-neutral-400">
         The words on the homepage, About page and contact section, plus the
         contact email and social links. Leave a social link blank to hide
         it.

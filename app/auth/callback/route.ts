@@ -2,14 +2,15 @@ import { NextResponse, type NextRequest } from "next/server";
 import {
   createSupabaseServerClient,
   getSupabaseUser,
-  isAdminEmail,
+  isAllowedEmail,
   signOutServer,
 } from "@/lib/supabase-auth";
 
 /**
  * GET /auth/callback — finishes a Supabase Auth sign-in (email link
  * or Google). Swaps the code for a session, then:
- * - allowlisted email (ADMIN_EMAILS) → the page they were going to
+ * - allowlisted email (admin_users table, or ADMIN_EMAILS) → the
+ *   page they were going to
  * - anyone else → signed straight back out, to /admin/login with an
  *   explanation. Being able to sign in to Supabase is not enough;
  *   only approved emails can reach /admin.
@@ -38,7 +39,7 @@ export async function GET(request: NextRequest) {
   }
 
   const user = await getSupabaseUser();
-  if (!user || !isAdminEmail(user.email)) {
+  if (!user || !(await isAllowedEmail(supabase, user.email))) {
     // Not on the allowlist — drop the session entirely.
     await signOutServer();
     loginUrl.searchParams.set("error", "not-allowed");
