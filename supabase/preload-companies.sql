@@ -17,9 +17,14 @@
 --          Dial Recordings America, not touched; it is under Amity
 --          Music Group and is the parent company of DIAL Distribution)
 --
--- NOT included here: Iron Stage Touring, Arden Row and Amity Christian
--- Music Group — they are not under Amity Music Group (Iron Stage is a
--- strategic partner, Arden Row is 550, Amity Christian is 400).
+-- NOT included here: Arden Row and Amity Christian Music Group —
+-- they are not under Amity Music Group (Arden Row is 550, Amity
+-- Christian is 400) and stay in the logo strip only for now.
+--
+-- Iron Stage Touring IS included below, even though it is not
+-- under Amity Music Group: it is a Strategic Partner (950), and
+-- /labels groups tiles under their category heading, so it shows
+-- under a "Strategic Partner" heading.
 --
 -- Taglines and descriptions are left blank on purpose — nothing is
 -- invented. Fill them in in /admin when ready. Companies with no logo
@@ -51,5 +56,9 @@ values
   ('dial-distribution', 'DIAL Distribution', '', 'Distribution',
    '', null, null,
    null, '', null, null, null, null,
-   true, 4)
+   true, 4),
+  ('iron-stage-touring', 'Iron Stage Touring', '', 'Strategic Partner',
+   '', null, '/logos/is-logo.png',
+   null, '', null, null, null, null,
+   true, 5)
 on conflict (slug) do nothing;

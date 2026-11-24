@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import TerritoryAccordion from "@/components/TerritoryAccordion";
 import { getCompanies, getTerritories } from "@/lib/content";
-import type { Territory } from "@/lib/types";
+import type { Company, Territory } from "@/lib/types";
 
 // The rolling strip is a fixed list of real graphic logos on
 // transparent backgrounds, like UMG's /labels strip — never the
@@ -63,8 +63,19 @@ export default async function CompaniesPage() {
     getTerritories(),
   ]);
 
-  // Group visible territories by region, keeping sort order. Regions
-  // appear in the order their first territory is listed.
+  // Group visible companies by their category, in the order the
+  // first company of each category appears. The category chosen in
+  // /admin becomes the heading of its own section — a company
+  // marked "Strategic Partner" goes under a "Strategic Partner"
+  // heading, a "Record Label" under "Record Label", and so on.
+  // Companies with no category yet go under "Other".
+  const companyGroups: { category: string; items: Company[] }[] = [];
+  for (const company of companies) {
+    const category = company.category.trim() || "Other";
+    const group = companyGroups.find((g) => g.category === category);
+    if (group) group.items.push(company);
+    else companyGroups.push({ category, items: [company] });
+  }
   const regions: { name: string; items: Territory[] }[] = [];
   for (const territory of territories) {
     const region = territory.region || "Worldwide";
@@ -147,14 +158,20 @@ export default async function CompaniesPage() {
       {/* Company tiles — UMG's Labels grid under a second heading:
           light-grey rounded tiles, logo centered, name in small black
           text below the tile, left-aligned, diagonal arrow on linked
-          tiles. */}
+          tiles. Companies are grouped by the category chosen in
+          /admin, each group under its category as a heading. */}
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-28 lg:px-8">
         <h2 className="text-[40px] font-light leading-tight tracking-tight">
           Our companies
         </h2>
-        {companies.length > 0 ? (
-          <div className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
-            {companies.map((company) => {
+        {companyGroups.length > 0 ? (
+          companyGroups.map((group) => (
+            <section key={group.category} className="mt-12 sm:mt-16">
+              <h3 className="text-[26px] font-light leading-tight tracking-tight sm:text-[32px]">
+                {group.category}
+              </h3>
+              <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
+                {group.items.map((company) => {
               const tile = (
                 <>
                   <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-[#eee] p-8">
@@ -197,7 +214,9 @@ export default async function CompaniesPage() {
                 <article key={company.slug}>{tile}</article>
               );
             })}
-          </div>
+              </div>
+            </section>
+          ))
         ) : (
           <p className="mt-12 text-lg text-neutral-500">
             No companies published yet.
